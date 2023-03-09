@@ -4,7 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.phamtruong.bepngon.di.ViewModelFactory
 import com.phamtruong.bepngon.di.key.ViewModelKey
+import com.phamtruong.bepngon.ui.home.HomeViewModel
 import com.phamtruong.bepngon.ui.main.MainViewModel
+import com.phamtruong.bepngon.ui.note.NoteViewModel
 import com.phamtruong.bepngon.ui.splash.SplashActivity
 import com.phamtruong.bepngon.ui.splash.SplashViewModel
 import dagger.Binds
@@ -26,6 +28,16 @@ abstract class ViewModelModule {
     @Binds
     @ViewModelKey(SplashViewModel::class)
     abstract fun provideSplashViewModel(splashViewModel: SplashViewModel): ViewModel
+
+    @IntoMap
+    @Binds
+    @ViewModelKey(NoteViewModel::class)
+    abstract fun provideNoteViewModel(noteViewModel: NoteViewModel): ViewModel
+
+    @IntoMap
+    @Binds
+    @ViewModelKey(HomeViewModel::class)
+    abstract fun provideHomeViewModel(homeViewModel: HomeViewModel): ViewModel
 
 
 }
