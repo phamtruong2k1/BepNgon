@@ -1,0 +1,31 @@
+package com.phamtruong.bepngon.di.module
+
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import com.phamtruong.bepngon.di.ViewModelFactory
+import com.phamtruong.bepngon.di.key.ViewModelKey
+import com.phamtruong.bepngon.ui.main.MainViewModel
+import com.phamtruong.bepngon.ui.splash.SplashActivity
+import com.phamtruong.bepngon.ui.splash.SplashViewModel
+import dagger.Binds
+import dagger.Module
+import dagger.multibindings.IntoMap
+
+@Module
+abstract class ViewModelModule {
+
+    @Binds
+    abstract fun bindViewModelFactory(viewModelFactory: ViewModelFactory): ViewModelProvider.Factory
+
+    @IntoMap
+    @Binds
+    @ViewModelKey(MainViewModel::class)
+    abstract fun provideMainViewModel(mainViewModel: MainViewModel): ViewModel
+
+    @IntoMap
+    @Binds
+    @ViewModelKey(SplashViewModel::class)
+    abstract fun provideSplashViewModel(splashViewModel: SplashViewModel): ViewModel
+
+
+}
