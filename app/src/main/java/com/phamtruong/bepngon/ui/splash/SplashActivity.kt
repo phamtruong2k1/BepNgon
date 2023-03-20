@@ -22,6 +22,7 @@ class SplashActivity : BaseActivity<SplashViewModel, ActivitySplashBinding>(Spla
     private fun startMain(timeDelay : Long = 0L) {
         Handler(Looper.getMainLooper()).postDelayed({
             startActivity(Intent(this@SplashActivity, MainActivity::class.java))
+            finish()
         }, timeDelay)
     }
 

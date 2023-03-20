@@ -12,33 +12,36 @@
         android:layout_height="match_parent"
         tools:context=".ui.main.MainActivity">
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabLayoutMain"
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/btNaviMain"
             android:layout_width="match_parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tabTextColor="@color/color_primary"
-            app:tabIndicatorColor="@color/color_primary"
-            android:layout_height="@dimen/_45sdp"/>
+            android:background="@color/white"
+            android:layout_height="@dimen/_45sdp"
+            app:itemIconTint="@color/navi_main"
+            app:itemTextColor="@color/navi_main"
+            app:menu="@menu/menu_main"/>
 
         <View
             android:id="@+id/lineTabMain"
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
-            android:background="@color/black"
+            android:background="#80000000"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tabLayoutMain"/>
+            app:layout_constraintBottom_toTopOf="@+id/btNaviMain"/>
 
         <com.phamtruong.bepngon.customview.NonSwipeableViewPager
             android:id="@+id/viewPagerMain"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/lineTabMain"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lineTabMain"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -11,12 +11,12 @@ class TabViewMainAdapter (private val myContext: Context, fm: FragmentManager) :
 
     override fun getItem(position: Int): Fragment {
         return when (position) {
-            0 -> NoteFragment()
+            0 -> HomeFragment()
             else -> HomeFragment()
         }
     }
 
     override fun getCount(): Int {
-        return 6
+        return 5
     }
 }

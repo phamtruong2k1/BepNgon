@@ -3,10 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/BepNgon/app/src/main/res/layout/activity_main.xml" value="0.25" />
-        <entry key="..\:/BepNgon/app/src/main/res/layout/activity_splash.xml" value="0.10989583333333333" />
+        <entry key="..\:/BepNgon/app/src/main/res/drawable/ic_menu.xml" value="0.1635" />
+        <entry key="..\:/BepNgon/app/src/main/res/layout/activity_main.xml" value="0.176" />
+        <entry key="..\:/BepNgon/app/src/main/res/layout/activity_splash.xml" value="0.2" />
         <entry key="..\:/BepNgon/app/src/main/res/layout/fragment_home.xml" value="0.18072916666666666" />
         <entry key="..\:/BepNgon/app/src/main/res/layout/fragment_note.xml" value="0.18072916666666666" />
+        <entry key="..\:/BepNgon/app/src/main/res/menu/menu_congdong_dangnhap.xml" value="0.1296875" />
       </map>
     </option>
   </component>
