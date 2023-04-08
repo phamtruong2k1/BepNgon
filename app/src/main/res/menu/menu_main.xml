@@ -6,7 +6,7 @@
         android:title="Trang chủ" />
     <item
         android:id="@+id/menu_da_luu"
-        android:icon="@drawable/ic_menu"
+        android:icon="@drawable/ic_thich"
         android:title="Thích" />
     <item
         android:id="@+id/menu_friend"
