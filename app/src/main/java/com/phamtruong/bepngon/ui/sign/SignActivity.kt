@@ -1,24 +1,27 @@
 package com.phamtruong.bepngon.ui.sign
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.LayoutInflater
 import com.phamtruong.bepngon.R
 import com.phamtruong.bepngon.base.BaseActivity
+import com.phamtruong.bepngon.databinding.ActivityMainBinding
 import com.phamtruong.bepngon.databinding.ActivitySignBinding
-import com.phamtruong.bepngon.databinding.ActivitySplashBinding
-import com.phamtruong.bepngon.ui.splash.SplashViewModel
 
-class SignActivity : BaseActivity<SignViewModel, ActivitySignBinding>(SignViewModel::class.java) {
+class SignActivity : BaseActivity<ActivitySignBinding>() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
+    override fun initView() {
 
     }
 
-    override fun getLayoutRes(): Int {
-        return R.layout.activity_sign
+    override fun initData() {
+
     }
 
-    override fun initViewModel(viewModel: SignViewModel) {}
+    override fun initListener() {
+
+    }
+
+    override fun inflateViewBinding(inflater: LayoutInflater): ActivitySignBinding {
+        return ActivitySignBinding.inflate(inflater)
+    }
 }

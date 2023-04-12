@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "739312645778",
+    "project_id": "bepngon-63eb8",
+    "storage_bucket": "bepngon-63eb8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:739312645778:android:3d9d1cab4de78ebfd4d84b",
+        "android_client_info": {
+          "package_name": "com.phamtruong.bepngon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "739312645778-aos3j36ssiake6ullehqucoed5h86rhr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.phamtruong.bepngon",
+            "certificate_hash": "bbf77bdca960bbba9f2032732dee1ecc5e3b166c"
+          }
+        },
+        {
+          "client_id": "739312645778-563sr8nv8ju3pnu6vnl0iufkcrgl2sbl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAq56KJ40u6QCQPEup4X8UmnlIRJGotm3Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "739312645778-563sr8nv8ju3pnu6vnl0iufkcrgl2sbl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

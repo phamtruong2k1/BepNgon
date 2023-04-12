@@ -2,20 +2,17 @@ package com.phamtruong.bepngon.ui.main
 
 import android.os.Bundle
 import android.os.Handler
+import android.view.LayoutInflater
 import android.widget.Toast
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.phamtruong.bepngon.R
 import com.phamtruong.bepngon.base.BaseActivity
 import com.phamtruong.bepngon.databinding.ActivityMainBinding
 
-class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(MainViewModel::class.java) {
+class MainActivity : BaseActivity<ActivityMainBinding>() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        initView()
-    }
 
-    private fun initView() {
+    override fun initView() {
         val adapter = TabViewMainAdapter(this@MainActivity, supportFragmentManager)
         binding.viewPagerMain.adapter = adapter
         binding.btNaviMain.setOnNavigationItemSelectedListener(BottomNavigationView.OnNavigationItemSelectedListener { item ->
@@ -44,9 +41,15 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(MainViewMo
         }
     }
 
-    override fun getLayoutRes(): Int {
-        return R.layout.activity_main
+    override fun initData() {
+
     }
 
-    override fun initViewModel(viewModel: MainViewModel) {}
+    override fun initListener() {
+
+    }
+
+    override fun inflateViewBinding(inflater: LayoutInflater): ActivityMainBinding {
+        return ActivityMainBinding.inflate(inflater)
+    }
 }

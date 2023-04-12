@@ -2,18 +2,17 @@ package com.phamtruong.bepngon.ui.splash
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.LayoutInflater
 import com.phamtruong.bepngon.R
 import com.phamtruong.bepngon.base.BaseActivity
 import com.phamtruong.bepngon.databinding.ActivitySplashBinding
 import com.phamtruong.bepngon.ui.main.MainActivity
-import kotlinx.coroutines.MainScope
 
 @SuppressLint("CustomSplashScreen")
-class SplashActivity : BaseActivity<SplashViewModel, ActivitySplashBinding>(SplashViewModel::class.java) {
+class SplashActivity : BaseActivity<ActivitySplashBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         startMain(1500L)
@@ -25,10 +24,19 @@ class SplashActivity : BaseActivity<SplashViewModel, ActivitySplashBinding>(Spla
             finish()
         }, timeDelay)
     }
+    override fun initView() {
 
-    override fun getLayoutRes(): Int {
-        return R.layout.activity_splash
     }
 
-    override fun initViewModel(viewModel: SplashViewModel) {}
+    override fun initData() {
+
+    }
+
+    override fun initListener() {
+
+    }
+
+    override fun inflateViewBinding(inflater: LayoutInflater): ActivitySplashBinding {
+        return ActivitySplashBinding.inflate(inflater)
+    }
 }

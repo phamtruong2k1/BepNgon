@@ -1,63 +1,85 @@
 package com.phamtruong.bepngon.base
 
 import android.Manifest
+import android.annotation.SuppressLint
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
+import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
+import android.location.Location
+import android.location.LocationManager
+import android.net.ConnectivityManager
+import android.os.Build
 import android.os.Bundle
-import android.os.Environment
-import androidx.annotation.LayoutRes
+import android.provider.Settings
+import android.util.Log
+import android.view.LayoutInflater
+import android.view.WindowManager
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
-import androidx.lifecycle.ViewModelProvider
-import com.facebook.drawee.backends.pipeline.Fresco
-import dagger.android.AndroidInjection
-import dagger.android.support.DaggerAppCompatActivity
-import javax.inject.Inject
+import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
+import androidx.viewbinding.BuildConfig
+import androidx.viewbinding.ViewBinding
+import com.phamtruong.bepngon.util.Constant
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
+import kotlinx.coroutines.launch
 
-abstract class BaseActivity<VM : BaseViewModel, DB : ViewDataBinding>(private val mViewModelClass: Class<VM>) :
-    DaggerAppCompatActivity() {
+abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
 
-    companion object{
-        val BASE_FOLDER = Environment.getExternalStorageDirectory().toString() + "/" + Environment.DIRECTORY_DOCUMENTS + "/Meme Sound"
-    }
+    private var _binding: VB? = null
+    protected lateinit var binding: VB
 
-
-    @Inject
-    internal lateinit var viewModelProviderFactory: ViewModelProvider.Factory
-
-    @LayoutRes
-    abstract fun getLayoutRes(): Int
-
-    val binding by lazy {
-        DataBindingUtil.setContentView(this, getLayoutRes()) as DB
-    }
-
-    val viewModel by lazy {
-        ViewModelProvider(this, viewModelProviderFactory).get(mViewModelClass)
-    }
-
-    open fun onInject() {}
-
+    @SuppressLint("SourceLockedOrientationActivity")
     override fun onCreate(savedInstanceState: Bundle?) {
-        AndroidInjection.inject(this)
-        //LanguageUtils.loadLocale(this)
         super.onCreate(savedInstanceState)
-        Fresco.initialize(this)
-        initViewModel(viewModel)
-        onInject()
-        setupBindingLifecycleOwner()
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+        _binding = inflateViewBinding(layoutInflater)
+        binding = inflateViewBinding(layoutInflater)
+        setContentView(binding.root)
+        //lifecycle.addObserver(this)
+        setBackgroundStatusBar()
+
+        initView()
+        initData()
+        initListener()
+        lifecycleScope.launchWhenResumed {
+            if (BuildConfig.DEBUG) {
+                println("${Constant.TAG} SCREEN_APP ${this@BaseActivity::class.java.name}")
+            }
+        }
     }
 
-    /**
-     *
-     *  You need override this method.
-     *  And you need to set viewModel to binding: binding.viewModel = viewModel
-     *
-     */
+    abstract fun initView()
+    abstract fun initData()
+    abstract fun initListener()
 
-    abstract fun initViewModel(viewModel: VM)
 
-    private fun setupBindingLifecycleOwner() {
-        binding.lifecycleOwner = this
+    /**override it and inflate your view binding, demo in MainActivity*/
+    abstract fun inflateViewBinding(inflater: LayoutInflater): VB
+
+    override fun onDestroy() {
+        _binding = null
+        //lifecycle.removeObserver(this)
+        super.onDestroy()
+    }
+
+    private fun setBackgroundStatusBar() {
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+        window.statusBarColor = ContextCompat.getColor(this, android.R.color.black)
+        window.navigationBarColor = ContextCompat.getColor(this, android.R.color.transparent)
+    }
+
+    fun isNetworkAvailable(): Boolean {
+        val connectivityManager =
+            getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val activeNetworkInfo = connectivityManager.activeNetworkInfo
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected
     }
 }
