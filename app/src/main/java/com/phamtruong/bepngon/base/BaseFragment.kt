@@ -29,14 +29,10 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment(), LifecycleObserver {
             }
         }
         viewLifecycleOwner.lifecycle.addObserver(this)
-        initView()
-        initData()
-        initListener()
+        initViewCreated()
     }
 
-    abstract fun initView()
-    abstract fun initData()
-    abstract fun initListener()
+    abstract fun initViewCreated()
 
     /**override it and inflate your view binding, demo in HomeFragment*/
     abstract fun inflateLayout(inflater: LayoutInflater, container: ViewGroup?): VB

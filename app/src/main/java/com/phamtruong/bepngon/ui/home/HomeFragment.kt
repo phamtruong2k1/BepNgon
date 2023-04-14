@@ -8,15 +8,9 @@ import com.phamtruong.bepngon.base.BaseFragment
 import com.phamtruong.bepngon.databinding.FragmentHomeBinding
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
-    override fun initView() {
 
-    }
 
-    override fun initData() {
-
-    }
-
-    override fun initListener() {
+    override fun initViewCreated() {
 
     }
 

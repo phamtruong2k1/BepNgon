@@ -20,6 +20,7 @@ import com.phamtruong.bepngon.base.BaseActivity
 import com.phamtruong.bepngon.databinding.ActivityMainBinding
 import com.phamtruong.bepngon.databinding.ActivitySignBinding
 import com.phamtruong.bepngon.util.Constant
+import com.phamtruong.bepngon.util.FirebaseDatabaseUtil
 import com.phamtruong.bepngon.util.showToast
 import com.phamtruong.bepngon.view.setOnSafeClick
 
@@ -43,7 +44,6 @@ class SignActivity : BaseActivity<ActivitySignBinding>() {
         auth = Firebase.auth
         oneTapClient = Identity.getSignInClient(this)
         signInRequest = getBeginSignInRequest(true)
-
     }
 
 

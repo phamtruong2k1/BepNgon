@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "739312645778",
+    "firebase_url": "https://bepngon-63eb8-default-rtdb.asia-southeast1.firebasedatabase.app",
     "project_id": "bepngon-63eb8",
     "storage_bucket": "bepngon-63eb8.appspot.com"
   },
@@ -22,7 +23,7 @@
           }
         },
         {
-          "client_id": "739312645778-563sr8nv8ju3pnu6vnl0iufkcrgl2sbl.apps.googleusercontent.com",
+          "client_id": "739312645778-8sgks97m1rum3mh1i1j5hshjuog5ule0.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
