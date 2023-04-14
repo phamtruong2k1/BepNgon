@@ -6,18 +6,43 @@
     android:layout_height="match_parent"
     tools:context=".ui.sign.SignActivity">
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/containerFragment"
-        android:name="androidx.navigation.fragment.NavHostFragment"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:fillViewport="false"
-        android:orientation="horizontal"
-        app:defaultNavHost="true"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <ImageView
+        android:id="@+id/imgApp"
+        android:layout_width="@dimen/_120sdp"
+        android:layout_height="@dimen/_120sdp"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/_100sdp"
+        android:src="@drawable/logo_splash"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:navGraph="@navigation/sign_navigation" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/llSignIn"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_45sdp"
+        android:layout_marginHorizontal="@dimen/_18sdp"
+        android:layout_marginTop="@dimen/_60sdp"
+        android:background="@drawable/bg_btn_color_app"
+        android:gravity="center"
+        android:text="Đăng nhập"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_16ssp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgApp" >
+
+        <TextView
+            android:id="@+id/txtSignIn"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_45sdp"
+            android:layout_marginHorizontal="@dimen/_18sdp"
+            android:gravity="center"
+            android:text="Đăng nhập"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_16ssp" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

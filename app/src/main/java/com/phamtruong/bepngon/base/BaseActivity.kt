@@ -44,8 +44,6 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
         binding = inflateViewBinding(layoutInflater)
         setContentView(binding.root)
         //lifecycle.addObserver(this)
-        setBackgroundStatusBar()
-
         initView()
         initData()
         initListener()
@@ -70,16 +68,4 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
         super.onDestroy()
     }
 
-    private fun setBackgroundStatusBar() {
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-        window.statusBarColor = ContextCompat.getColor(this, android.R.color.black)
-        window.navigationBarColor = ContextCompat.getColor(this, android.R.color.transparent)
-    }
-
-    fun isNetworkAvailable(): Boolean {
-        val connectivityManager =
-            getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val activeNetworkInfo = connectivityManager.activeNetworkInfo
-        return activeNetworkInfo != null && activeNetworkInfo.isConnected
-    }
 }
