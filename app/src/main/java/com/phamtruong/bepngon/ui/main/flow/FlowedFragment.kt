@@ -1,4 +1,4 @@
-package com.phamtruong.bepngon.ui.flow
+package com.phamtruong.bepngon.ui.main.flow
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

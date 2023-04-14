@@ -2,12 +2,8 @@ package com.phamtruong.bepngon.ui.sign
 
 import android.content.Intent
 import android.content.IntentSender
-import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
-import androidx.navigation.NavController
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
 import com.google.android.gms.auth.api.identity.BeginSignInRequest
 import com.google.android.gms.auth.api.identity.Identity
 import com.google.android.gms.auth.api.identity.SignInClient
@@ -17,8 +13,9 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.phamtruong.bepngon.R
 import com.phamtruong.bepngon.base.BaseActivity
-import com.phamtruong.bepngon.databinding.ActivityMainBinding
 import com.phamtruong.bepngon.databinding.ActivitySignBinding
+import com.phamtruong.bepngon.model.AccountModel
+import com.phamtruong.bepngon.ui.main.MainActivity
 import com.phamtruong.bepngon.util.Constant
 import com.phamtruong.bepngon.util.FirebaseDatabaseUtil
 import com.phamtruong.bepngon.util.showToast
@@ -36,16 +33,13 @@ class SignActivity : BaseActivity<ActivitySignBinding>() {
     private lateinit var signInRequest: BeginSignInRequest
 
 
-    override fun initView() {
-
-    }
-
-    override fun initData() {
+    override fun initCreate() {
         auth = Firebase.auth
         oneTapClient = Identity.getSignInClient(this)
         signInRequest = getBeginSignInRequest(true)
-    }
 
+        initListener()
+    }
 
     private fun getBeginSignInRequest(isFilterByAuthorizedAccount: Boolean = false) =
         BeginSignInRequest.builder()
@@ -72,8 +66,6 @@ class SignActivity : BaseActivity<ActivitySignBinding>() {
                 val idToken = googleCredential.googleIdToken
                 when {
                     idToken != null -> {
-                        // Got an ID token from Google. Use it to authenticate
-                        // with Firebase.
                         val firebaseCredential = GoogleAuthProvider.getCredential(idToken, null)
                         auth.signInWithCredential(firebaseCredential)
                             .addOnCompleteListener(this) { task ->
@@ -83,8 +75,24 @@ class SignActivity : BaseActivity<ActivitySignBinding>() {
                                         Constant.TAG,
                                         "signInWithCredential:success - ${auth.currentUser.toString()}"
                                     )
-                                    showToast("Login success with: ${auth.currentUser?.email}")
-//                                    updateUI(auth.currentUser)
+                                    //showToast("Login success with: ${auth.currentUser?.email}")
+                                    if (FirebaseDatabaseUtil.getAccount() != null) {
+                                        startActivity(Intent(this@SignActivity, MainActivity::class.java))
+                                        finish()
+                                    } else {
+                                        FirebaseDatabaseUtil.addNewAccount(
+                                            AccountModel(
+                                                FirebaseDatabaseUtil.ConvertToMD5(Firebase.auth.currentUser?.email ?: ""),
+                                                "",
+                                                "",
+                                                Firebase.auth.currentUser?.email ?: "",
+                                                "",
+                                                false
+                                            )
+                                        )
+                                        startActivity(Intent(this@SignActivity, MainActivity::class.java))
+                                        finish()
+                                    }
                                 } else {
                                     // If sign in fails, display a message to the user.
                                     showToast("signInWithCredential:failure")
@@ -106,7 +114,7 @@ class SignActivity : BaseActivity<ActivitySignBinding>() {
         }
     }
 
-    override fun initListener() {
+    fun initListener() {
         binding.llSignIn.setOnSafeClick {
             signInGoogle()
         }

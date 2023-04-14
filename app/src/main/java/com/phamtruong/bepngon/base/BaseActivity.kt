@@ -43,28 +43,21 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
         _binding = inflateViewBinding(layoutInflater)
         binding = inflateViewBinding(layoutInflater)
         setContentView(binding.root)
-        //lifecycle.addObserver(this)
-        initView()
-        initData()
-        initListener()
         lifecycleScope.launchWhenResumed {
             if (BuildConfig.DEBUG) {
                 println("${Constant.TAG} SCREEN_APP ${this@BaseActivity::class.java.name}")
             }
         }
+        initCreate()
     }
 
-    abstract fun initView()
-    abstract fun initData()
-    abstract fun initListener()
+    abstract fun initCreate()
 
 
-    /**override it and inflate your view binding, demo in MainActivity*/
     abstract fun inflateViewBinding(inflater: LayoutInflater): VB
 
     override fun onDestroy() {
         _binding = null
-        //lifecycle.removeObserver(this)
         super.onDestroy()
     }
 

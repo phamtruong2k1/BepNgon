@@ -12,7 +12,7 @@ import com.phamtruong.bepngon.databinding.ActivityMainBinding
 class MainActivity : BaseActivity<ActivityMainBinding>() {
 
 
-    override fun initView() {
+    override fun initCreate() {
         val adapter = TabViewMainAdapter(this@MainActivity, supportFragmentManager)
         binding.viewPagerMain.adapter = adapter
         binding.btNaviMain.setOnNavigationItemSelectedListener(BottomNavigationView.OnNavigationItemSelectedListener { item ->
@@ -39,14 +39,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                 isClichBack = false
             }, 1000L)
         }
-    }
-
-    override fun initData() {
-
-    }
-
-    override fun initListener() {
-
     }
 
     override fun inflateViewBinding(inflater: LayoutInflater): ActivityMainBinding {

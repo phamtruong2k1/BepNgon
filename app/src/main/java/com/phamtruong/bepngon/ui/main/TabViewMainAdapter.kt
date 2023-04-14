@@ -1,16 +1,14 @@
 package com.phamtruong.bepngon.ui.main
 
-import android.app.Notification
 import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import com.phamtruong.bepngon.ui.flow.FlowedFragment
-import com.phamtruong.bepngon.ui.friend.FriendFragment
-import com.phamtruong.bepngon.ui.home.HomeFragment
-import com.phamtruong.bepngon.ui.menu.MenuFragment
-import com.phamtruong.bepngon.ui.note.NoteFragment
-import com.phamtruong.bepngon.ui.noti.NotificationFragment
+import com.phamtruong.bepngon.ui.main.flow.FlowedFragment
+import com.phamtruong.bepngon.ui.main.friend.FriendFragment
+import com.phamtruong.bepngon.ui.main.home.HomeFragment
+import com.phamtruong.bepngon.ui.main.menu.MenuFragment
+import com.phamtruong.bepngon.ui.main.noti.NotificationFragment
 
 class TabViewMainAdapter (private val myContext: Context, fm: FragmentManager) : FragmentPagerAdapter(fm) {
 

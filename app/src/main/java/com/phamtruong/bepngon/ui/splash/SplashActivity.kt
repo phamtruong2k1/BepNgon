@@ -20,8 +20,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
 
     private lateinit var auth: FirebaseAuth
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun initCreate() {
         auth = Firebase.auth
         checkLogin()
     }
@@ -49,20 +48,6 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
             finish()
         }, timeDelay)
     }
-
-    override fun initView() {
-
-    }
-
-    override fun initData() {
-
-    }
-
-    override fun initListener() {
-
-    }
-
-
 
     override fun inflateViewBinding(inflater: LayoutInflater): ActivitySplashBinding {
         return ActivitySplashBinding.inflate(inflater)

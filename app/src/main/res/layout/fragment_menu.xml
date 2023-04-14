@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    tools:context=".ui.menu.MenuFragment">
+    tools:context=".ui.main.menu.MenuFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,10 +12,13 @@
         android:orientation="vertical">
 
         <ImageView
+            android:layout_marginTop="@dimen/_25sdp"
             android:id="@+id/userAvatar"
             android:layout_width="@dimen/_120sdp"
             android:layout_height="@dimen/_120sdp"
             android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_default_profile"
             android:background="@color/black"/>
 
         <TextView
@@ -23,32 +26,146 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Trường"
+            android:textSize="@dimen/_18sdp"
+            android:paddingVertical="@dimen/_2sdp"
             android:textColor="@color/black"
             android:fontFamily="@font/inter_700"
             android:gravity="center"/>
 
-        <TextView
-            android:id="@+id/userGmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Trường"
-            android:textColor="@color/black"
-            android:fontFamily="@font/inter_400"
-            android:gravity="center"/>
-
         <LinearLayout
             android:id="@+id/llProfile"
+            android:layout_marginTop="@dimen/_12sdp"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_60sdp"
+            android:layout_height="@dimen/_36sdp"
             android:orientation="vertical"
+            android:layout_marginBottom="@dimen/_12sdp"
+            android:layout_marginHorizontal="@dimen/_16sdp"
+            android:background="@drawable/bg_btn_ll_profile"
             >
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="Trang cá nhân"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:fontFamily="@font/inter_600"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp"/>
 
         </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_5sdp"
+            android:background="#A39F9F"
+            android:layout_marginBottom="@dimen/_12sdp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_marginHorizontal="@dimen/_16sdp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent">
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent">
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_marginHorizontal="@dimen/_16sdp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent">
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent">
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_5sdp"
+            android:background="#A39F9F"
+            android:layout_marginVertical="@dimen/_12sdp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_marginHorizontal="@dimen/_16sdp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text="Thiết lập tài khoản"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_marginHorizontal="@dimen/_16sdp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text="Cài đặt"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_marginHorizontal="@dimen/_16sdp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text="Trợ giúp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_marginHorizontal="@dimen/_16sdp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text="Đóng góp ý kiến"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/btnLogout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_50sdp"
+            android:gravity="center"
+            android:layout_marginHorizontal="@dimen/_16sdp"
+            android:text="Đăng xuất"/>
 
     </LinearLayout>
 
