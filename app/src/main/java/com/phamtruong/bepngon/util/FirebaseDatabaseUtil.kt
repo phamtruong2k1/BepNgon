@@ -11,17 +11,22 @@ import java.math.BigInteger
 import java.security.MessageDigest
 
 object FirebaseDatabaseUtil {
+
     const val ROOT = "root"
     const val PROFILE = "profile"
-    fun md5(input: String): String {
+    const val ACCOUNT = "account"
+
+    val mDatabase = FirebaseDatabase.getInstance().getReference(ROOT)
+
+    private fun ConvertToMD5(input: String): String {
         val md = MessageDigest.getInstance("MD5")
         return BigInteger(1, md.digest(input.toByteArray())).toString(16).padStart(32, '0')
     }
 
     fun getProfile(): UserProfile? {
         val id = Firebase.auth.currentUser?.email ?: ""
-        val mDatabase = FirebaseDatabase.getInstance().getReference(ROOT)
-        mDatabase.child(PROFILE).child(md5(id)).get().addOnCompleteListener { task ->
+
+        mDatabase.child(PROFILE).child(ConvertToMD5(id)).get().addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 val result = task.result
                 val userProfile = result.getValue<UserProfile>()
@@ -35,7 +40,6 @@ object FirebaseDatabaseUtil {
 
     fun addNewProfile(newProfile: UserProfile) {
         val id = Firebase.auth.currentUser?.email ?: ""
-        val mDatabase = FirebaseDatabase.getInstance().getReference(ROOT)
-        mDatabase.child(PROFILE).child(md5(id)).setValue(newProfile)
+        mDatabase.child(PROFILE).child(ConvertToMD5(id)).setValue(newProfile)
     }
 }
