@@ -7,93 +7,19 @@
     android:background="@color/white"
     tools:context=".ui.sign.SignActivity">
 
-    <LinearLayout
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/containerFragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:paddingHorizontal="42dp"
-        android:layout_marginTop="@dimen/_60sdp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="false"
+        app:defaultNavHost="true"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/imgApp"
-            android:layout_width="@dimen/_120sdp"
-            android:layout_height="@dimen/_120sdp"
-            android:layout_gravity="center"
-            android:src="@drawable/logo_splash"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Đăng nhập"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:layout_marginTop="@dimen/_12sdp"
-            android:layout_marginBottom="28dp"
-            android:textSize="38dp"/>
-
-        <EditText
-            android:id="@+id/edtTaiKhoan"
-            android:layout_width="match_parent"
-            android:hint="Tài khoản"
-            android:textSize="22dp"
-            android:layout_marginBottom="18dp"
-            android:textColor="@color/black"
-            android:layout_height="wrap_content"/>
-
-        <EditText
-            android:id="@+id/edtMatKhau"
-            android:layout_width="match_parent"
-            android:hint="Mật khẩu"
-            android:textSize="22dp"
-            android:inputType="textPassword"
-            android:textColor="@color/black"
-            android:layout_height="wrap_content"/>
-
-        <TextView
-            android:id="@+id/llSignIn"
-            android:layout_width="@dimen/_180sdp"
-            android:layout_height="@dimen/_45sdp"
-            android:layout_marginTop="@dimen/_40sdp"
-            android:background="@drawable/bg_btn_color_app"
-            android:gravity="center"
-            android:text="Đăng nhập"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_16ssp" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:gravity="center"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="@dimen/_12sdp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Bạn chưa có tài khoản?" />
-
-            <TextView
-                android:id="@+id/txtSignUp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Đăng ký"
-                android:textColor="@color/color_blue"
-                android:paddingVertical="@dimen/_5sdp"
-                android:paddingStart="@dimen/_5sdp"
-                android:paddingLeft="@dimen/_5sdp"/>
-
-        </LinearLayout>
-
-    </LinearLayout>
+        app:layout_constraintTop_toTopOf="parent"
+        app:navGraph="@navigation/mobile_navigation" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -52,4 +52,8 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
     override fun inflateViewBinding(inflater: LayoutInflater): ActivitySplashBinding {
         return ActivitySplashBinding.inflate(inflater)
     }
+
+    override fun onBackPressed() {
+
+    }
 }
