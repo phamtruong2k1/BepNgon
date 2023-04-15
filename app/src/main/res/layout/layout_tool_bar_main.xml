@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_40sdp"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <TextView
+            android:id="@+id/txtTitle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/_8sdp"
+            android:text="Trang chủ"
+            android:textColor="@color/black"
+            android:fontFamily="@font/inter_700"
+            android:textSize="@dimen/_16sdp"/>
+
+        <ImageView
+            android:id="@+id/imgSearch"
+            android:layout_width="57dp"
+            android:layout_height="match_parent"
+            android:padding="@dimen/_8sdp"
+            android:src="@drawable/ic_search"
+            android:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/imgChat"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_messes"
+            android:padding="@dimen/_8sdp"
+            android:visibility="visible"/>
+    </LinearLayout>
+
+    <View
+        android:id="@+id/lineBottom"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_1sdp"
+        android:background="#EAE7E7"
+        android:visibility="gone"/>
+
+</LinearLayout>

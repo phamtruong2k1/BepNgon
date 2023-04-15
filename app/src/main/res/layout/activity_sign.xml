@@ -11,17 +11,31 @@
         android:layout_width="@dimen/_120sdp"
         android:layout_height="@dimen/_120sdp"
         android:layout_gravity="center"
-        android:layout_marginTop="@dimen/_100sdp"
+        android:layout_marginTop="@dimen/_80sdp"
         android:src="@drawable/logo_splash"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/txtWelcome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/title_welcome_sign"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_12sdp"
+        android:fontFamily="@font/inter_400"
+        android:paddingVertical="@dimen/_14sdp"
+        android:paddingHorizontal="@dimen/_30sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgApp" />
+
     <LinearLayout
         android:id="@+id/llSignIn"
         android:layout_width="0dp"
         android:layout_height="@dimen/_45sdp"
-        android:layout_marginHorizontal="@dimen/_18sdp"
+        android:layout_marginHorizontal="@dimen/_60sdp"
         android:layout_marginTop="@dimen/_60sdp"
         android:background="@drawable/bg_btn_color_app"
         android:gravity="center"
@@ -29,9 +43,14 @@
         android:textColor="@color/white"
         android:textSize="@dimen/_16ssp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgApp" >
+        app:layout_constraintTop_toBottomOf="@+id/txtWelcome" >
+        
+        <ImageView
+            android:layout_width="@dimen/_45sdp"
+            android:layout_height="@dimen/_45sdp"
+            android:src="@drawable/logo_google"
+            android:padding="@dimen/_4sdp"/>
 
         <TextView
             android:id="@+id/txtSignIn"
@@ -42,6 +61,21 @@
             android:text="Đăng nhập"
             android:textColor="@color/white"
             android:textSize="@dimen/_16ssp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="@dimen/_12sdp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cần trợ giúp: " />
 
     </LinearLayout>
 

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/layoutTop"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/imgAvatar"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="match_parent"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+
+        </LinearLayout>
+
+
+        <ImageView
+            android:id="@+id/imgAvatar"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutImage"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_200sdp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/image01"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@color/black"/>
+
+        <LinearLayout
+            android:id="@+id/llImage02"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_marginStart="@dimen/_2sdp">
+
+            <ImageView
+                android:id="@+id/image02"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:src="@color/black"/>
+
+            <ImageView
+                android:id="@+id/image03"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:src="@color/black"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="@dimen/_4sdp">
+
+        <ImageView
+            android:id="@+id/imgLike"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_like"
+            android:padding="@dimen/_5sdp"/>
+
+        <TextView
+            android:id="@+id/numberLike"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="match_parent"
+            android:text="10000"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12sdp"
+            android:fontFamily="@font/inter_400"
+            android:gravity="center_vertical"/>
+
+        <ImageView
+            android:id="@+id/imgDislike"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_dislike"
+            android:padding="@dimen/_5sdp"/>
+
+        <TextView
+            android:id="@+id/numberDislike"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="match_parent"
+            android:text="10000"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12sdp"
+            android:fontFamily="@font/inter_400"
+            android:gravity="center_vertical"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/imgComment"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_comment"
+            android:padding="@dimen/_5sdp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Bình luận"
+            android:paddingEnd="@dimen/_12sdp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12sdp"
+            android:fontFamily="@font/inter_400"
+            android:gravity="center_vertical"/>
+
+    </LinearLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_5sdp"
+        android:background="@color/color_line_bg"
+        android:layout_marginBottom="@dimen/_12sdp"/>
+
+</LinearLayout>

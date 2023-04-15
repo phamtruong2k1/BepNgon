@@ -10,4 +10,5 @@
 
     <color name="color_primary">#FF5722</color>
     <color name="color_app">#FF5722</color>
+    <color name="color_line_bg">#D8D3D3</color>
 </resources>
