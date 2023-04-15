@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@color/white">
+        android:background="@color/color_line_bg">
 
         <include
             android:id="@+id/toolBar"
@@ -19,7 +19,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_45sdp">
+            android:layout_height="@dimen/_45sdp"
+            android:background="@color/white">
 
             <ImageView
                 android:id="@+id/imgAvt"
@@ -44,14 +45,8 @@
 
         </LinearLayout>
 
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_5sdp"
-            android:background="@color/color_line_bg"
-            android:layout_marginBottom="@dimen/_12sdp"/>
-
         <androidx.recyclerview.widget.RecyclerView
+            android:layout_marginTop="@dimen/_5sdp"
             android:id="@+id/rcyBaiDang"
             android:layout_width="match_parent"
             android:layout_height="0dp"

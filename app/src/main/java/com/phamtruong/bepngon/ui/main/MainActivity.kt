@@ -1,8 +1,11 @@
 package com.phamtruong.bepngon.ui.main
 
+import android.annotation.SuppressLint
+import android.app.Notification
 import android.os.Bundle
 import android.os.Handler
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.widget.Toast
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.phamtruong.bepngon.R
@@ -12,6 +15,7 @@ import com.phamtruong.bepngon.databinding.ActivityMainBinding
 class MainActivity : BaseActivity<ActivityMainBinding>() {
 
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun initCreate() {
         val adapter = TabViewMainAdapter(this@MainActivity, supportFragmentManager)
         binding.viewPagerMain.adapter = adapter
@@ -26,6 +30,27 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             }
             true
         })
+
+        binding.viewPagerMain.setOnTouchListener { view, motionEvent ->
+            when(motionEvent.action) {
+                MotionEvent.ACTION_DOWN -> {
+
+                }
+
+                MotionEvent.ACTION_MOVE -> {
+
+                }
+
+                MotionEvent.ACTION_UP -> {
+
+                }
+
+                MotionEvent.ACTION_CANCEL -> {
+
+                }
+            }
+            true
+        }
     }
 
     private var isClichBack = false

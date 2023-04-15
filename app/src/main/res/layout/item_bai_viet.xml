@@ -2,6 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/_5sdp"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <LinearLayout
@@ -13,13 +15,37 @@
         <ImageView
             android:id="@+id/imgAvatar"
             android:layout_width="@dimen/_50sdp"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:padding="@dimen/_5sdp"
+            android:src="@drawable/ic_account_setup"/>
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:weightSum="2.5">
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="Phạm Ánh TRường"
+                android:gravity="center_vertical"
+                android:textSize="@dimen/_12sdp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/inter_600"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.8"
+                android:text="17h:33p"
+                android:gravity="center_vertical"
+                android:textSize="@dimen/_10sdp"
+                android:textColor="#373434"
+                android:fontFamily="@font/inter_600"/>
 
         </LinearLayout>
 
@@ -153,12 +179,5 @@
             android:gravity="center_vertical"/>
 
     </LinearLayout>
-
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_5sdp"
-        android:background="@color/color_line_bg"
-        android:layout_marginBottom="@dimen/_12sdp"/>
 
 </LinearLayout>
