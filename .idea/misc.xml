@@ -13,12 +13,14 @@
         <entry key="..\:/BepNgon/app/src/main/res/layout/activity_main.xml" value="0.4" />
         <entry key="..\:/BepNgon/app/src/main/res/layout/activity_sign.xml" value="0.264" />
         <entry key="..\:/BepNgon/app/src/main/res/layout/activity_splash.xml" value="0.2" />
+        <entry key="..\:/BepNgon/app/src/main/res/layout/fragment_flowed.xml" value="0.1847879083373964" />
         <entry key="..\:/BepNgon/app/src/main/res/layout/fragment_home.xml" value="0.13816988698505286" />
         <entry key="..\:/BepNgon/app/src/main/res/layout/fragment_menu.xml" value="0.152" />
         <entry key="..\:/BepNgon/app/src/main/res/layout/fragment_note.xml" value="0.18072916666666666" />
+        <entry key="..\:/BepNgon/app/src/main/res/layout/fragment_notification.xml" value="0.19739583333333333" />
         <entry key="..\:/BepNgon/app/src/main/res/layout/fragment_sign_in.xml" value="0.2" />
         <entry key="..\:/BepNgon/app/src/main/res/layout/fragment_sign_up.xml" value="0.19270833333333334" />
-        <entry key="..\:/BepNgon/app/src/main/res/layout/item_bai_viet.xml" value="0.264" />
+        <entry key="..\:/BepNgon/app/src/main/res/layout/item_bai_viet.xml" value="0.176" />
         <entry key="..\:/BepNgon/app/src/main/res/layout/layout_tool_bar_main.xml" value="0.31614583333333335" />
         <entry key="..\:/BepNgon/app/src/main/res/menu/menu_congdong_dangnhap.xml" value="0.1296875" />
         <entry key="..\:/BepNgon/app/src/main/res/menu/menu_main.xml" value="0.3223958333333333" />
