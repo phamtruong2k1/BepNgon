@@ -3,7 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.phamtruong.bepngon">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".MyApplication"
@@ -16,6 +19,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BepNgon"
         tools:targetApi="31">
+        <activity
+            android:name=".ui.baidang.DangBaiActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.chat.ChatActivity"
             android:exported="false"

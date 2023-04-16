@@ -6,7 +6,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import com.phamtruong.bepngon.model.AccountModel
-import com.phamtruong.bepngon.model.UserProfile
+import com.phamtruong.bepngon.model.ProfileModel
 import java.math.BigInteger
 import java.security.MessageDigest
 
@@ -42,14 +42,14 @@ object FirebaseDatabaseUtil {
         mDatabase.child(ACCOUNT).child(ConvertToMD5(account.account_id)).setValue(account)
     }
 
-    fun getProfile(): UserProfile? {
+    fun getProfile(): ProfileModel? {
         val id = Firebase.auth.currentUser?.email ?: ""
 
         mDatabase.child(PROFILE).child(ConvertToMD5(id)).get().addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 val result = task.result
-                val userProfile = result.getValue<UserProfile>()
-                Log.d("dddd", "getProfile: $userProfile")
+                val profileModel = result.getValue<ProfileModel>()
+                Log.d("dddd", "getProfile: $profileModel")
             } else {
                 Log.d("dddd", "getProfile: failed")
             }
@@ -57,7 +57,7 @@ object FirebaseDatabaseUtil {
         return null
     }
 
-    fun addNewProfile(newProfile: UserProfile) {
+    fun addNewProfile(newProfile: ProfileModel) {
         val id = Firebase.auth.currentUser?.email ?: ""
         mDatabase.child(PROFILE).child(ConvertToMD5(id)).setValue(newProfile)
     }

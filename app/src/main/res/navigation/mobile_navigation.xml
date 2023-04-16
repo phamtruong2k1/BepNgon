@@ -21,7 +21,16 @@
         android:id="@+id/logUpFragment"
         android:name="com.phamtruong.bepngon.ui.sign.logout.LogUpFragment"
         android:label="fragment_log_up"
-        tools:layout="@layout/fragment_log_up" />
+        tools:layout="@layout/fragment_log_up" >
+        <action
+            android:id="@+id/action_logUpFragment_to_createInfoFragment"
+            app:destination="@id/createInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createInfoFragment"
+        android:name="com.phamtruong.bepngon.ui.sign.createinfo.CreateInfoFragment"
+        android:label="fragment_create_info"
+        tools:layout="@layout/fragment_create_info" />
 
 
 </navigation>

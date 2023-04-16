@@ -5,17 +5,57 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.phamtruong.bepngon.R
+import com.phamtruong.bepngon.databinding.FragmentLogUpBinding
+import com.phamtruong.bepngon.databinding.FragmentLoginBinding
+import com.phamtruong.bepngon.sever.account.AccountFirebaseUtil
+import com.phamtruong.bepngon.ui.main.MainActivity
+import com.phamtruong.bepngon.util.showToast
+import com.phamtruong.bepngon.view.openActivity
+import com.phamtruong.bepngon.view.setOnSafeClick
 
 
 class LogUpFragment : Fragment() {
 
+    lateinit var binding : FragmentLogUpBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_log_up, container, false)
+    ): View {
+
+        binding = FragmentLogUpBinding.inflate(inflater, container, false)
+
+        initListener()
+
+        return binding.root
+    }
+
+    private fun initListener() {
+        binding.llSignup.setOnSafeClick {
+            if (binding.edtTaiKhoan.text.toString().trim().isEmpty()){
+                requireContext().showToast("Tài khoản trống!")
+            } else if (binding.edtMatKhau.text.toString().trim().isEmpty()){
+                requireContext().showToast("Mật khẩu khoản trống!")
+            } else if (binding.edtXacNhan.text.toString().trim().isEmpty()){
+                requireContext().showToast("Xác nhận mật khẩu khoản trống!")
+            } else if (binding.edtXacNhan.text.toString().trim() != binding.edtMatKhau.text.toString().trim()){
+                requireContext().showToast("Xác nhận mật khẩu không đúng!")
+            } else {
+                AccountFirebaseUtil.logUp(
+                    requireContext(),
+                    binding.edtTaiKhoan.text.toString().trim(),
+                    binding.edtMatKhau.text.toString().trim()
+                ) {
+                    //requireContext().openActivity(MainActivity::class.java)
+                    findNavController().navigate(R.id.action_logUpFragment_to_createInfoFragment)
+                }
+            }
+        }
+
+        binding.txtSignIn.setOnSafeClick {
+            findNavController().popBackStack()
+        }
     }
 }

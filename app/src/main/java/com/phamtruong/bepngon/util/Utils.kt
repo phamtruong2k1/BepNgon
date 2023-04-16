@@ -5,6 +5,8 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import java.math.BigInteger
+import java.security.MessageDigest
 import kotlin.math.pow
 import kotlin.math.roundToInt
 
@@ -29,4 +31,9 @@ fun String.upperFirstCase(): String {
 fun Double.roundTo(numFractionDigits: Int): Double {
     val factor = 10.0.pow(numFractionDigits.toDouble())
     return (this * factor).roundToInt() / factor
+}
+
+fun String.convertToMD5(): String {
+    val md = MessageDigest.getInstance("MD5")
+    return BigInteger(1, md.digest(this.toByteArray())).toString(16).padStart(32, '0')
 }

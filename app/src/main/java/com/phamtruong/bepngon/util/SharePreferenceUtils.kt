@@ -14,11 +14,27 @@ object SharePreferenceUtils {
     }
 
     fun getAccountID() : String {
-        return pre.getString("account_id", "").toString()
+        return pre.getString("account_id", null).toString()
     }
 
-    fun setAccountID(data: String) {
+    fun setAccountID(data: String?) {
         pre.edit().putString("account_id", data).apply()
+    }
+
+    fun getUserName() : String {
+        return pre.getString("account_username", null).toString()
+    }
+
+    fun setUserName(data: String?) {
+        pre.edit().putString("account_username", data).apply()
+    }
+
+    fun getPassword() : String {
+        return pre.getString("account_password", null).toString()
+    }
+
+    fun setPassword(data: String?) {
+        pre.edit().putString("account_password", data).apply()
     }
 
 }
