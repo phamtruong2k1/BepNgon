@@ -2,6 +2,7 @@ package com.phamtruong.bepngon.model
 
 import android.os.Parcelable
 import com.google.firebase.database.Exclude
+import com.phamtruong.bepngon.util.Constant
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
@@ -16,7 +17,7 @@ data class ProfileModel(
     var note: String,
 ) : Parcelable {
 
-    constructor() : this("", "", "", "", true, "", "", "") {}
+    constructor() : this("", "", "", "", true, Constant.URL_AVATAR_DEFAUT, "", "") {}
 
     @Exclude
     fun toMap(): Map<String, Any?> {

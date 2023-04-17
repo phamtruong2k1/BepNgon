@@ -12,8 +12,13 @@ import com.phamtruong.bepngon.model.RecipeModel
 import com.phamtruong.bepngon.ui.adapter.EventClickRecipeAdapterListener
 import com.phamtruong.bepngon.ui.adapter.RecipeAdapter
 import com.phamtruong.bepngon.ui.baidang.DangBaiActivity
+import com.phamtruong.bepngon.ui.chat.ChatActivity
+import com.phamtruong.bepngon.ui.personalpage.PersonalPageActivity
+import com.phamtruong.bepngon.util.DataHelper
 import com.phamtruong.bepngon.view.openActivity
 import com.phamtruong.bepngon.view.setOnSafeClick
+import com.phamtruong.bepngon.view.show
+import com.squareup.picasso.Picasso
 
 class HomeFragment : Fragment() , EventClickRecipeAdapterListener {
 
@@ -32,12 +37,29 @@ class HomeFragment : Fragment() , EventClickRecipeAdapterListener {
 
         initListener()
 
+        initView()
+
         return binding.root
+    }
+
+    private fun initView(){
+        DataHelper.profileUser.observe(viewLifecycleOwner){
+            Picasso.get().load(it.avt).into(binding.imgAvt)
+        }
+        binding.toolBar.imgChat.show()
     }
 
     private fun initListener() {
         binding.txtDangBai.setOnSafeClick {
             requireContext().openActivity(DangBaiActivity::class.java)
+        }
+
+        binding.imgAvt.setOnClickListener {
+            requireContext().openActivity(PersonalPageActivity::class.java)
+        }
+
+        binding.toolBar.imgChat.setOnClickListener {
+            requireContext().openActivity(ChatActivity::class.java)
         }
     }
 

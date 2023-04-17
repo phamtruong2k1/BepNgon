@@ -40,7 +40,7 @@ fun Context.hideKeyboard(view: View) {
 
 fun View.disableView() {
     this.isClickable = false
-    this.postDelayed({ this.isClickable = true }, 500)
+    this.postDelayed({ this.isClickable = true }, 200)
 }
 
 class SafeClickListener(val onSafeClickListener: (View) -> Unit) : View.OnClickListener {

@@ -17,8 +17,11 @@ import com.phamtruong.bepngon.model.AccountModel
 import com.phamtruong.bepngon.model.ProfileModel
 import com.phamtruong.bepngon.sever.account.AccountFirebaseUtil
 import com.phamtruong.bepngon.ui.chat.ChatActivity
+import com.phamtruong.bepngon.ui.personalpage.PersonalPageActivity
+import com.phamtruong.bepngon.ui.personalpage.ProfileActivity
 import com.phamtruong.bepngon.ui.sign.SignActivity
 import com.phamtruong.bepngon.util.Constant
+import com.phamtruong.bepngon.util.DataHelper
 import com.phamtruong.bepngon.util.SharePreferenceUtils
 import com.phamtruong.bepngon.util.showToast
 import com.phamtruong.bepngon.view.gone
@@ -42,34 +45,16 @@ class MenuFragment : BaseFragment<FragmentMenuBinding>() {
 
     override fun initViewCreated() {
         binding.toolBar.txtTitle.text = "Menu"
-        binding.toolBar.imgChat.gone()
-        binding.toolBar.imgSearch.gone()
-        binding.toolBar.imgChat.setOnSafeClick {
-            requireContext().openActivity(ChatActivity::class.java)
-        }
-
         initView()
+        DataHelper.profileUser.observe(viewLifecycleOwner){
+            updateUI(it)
+        }
 
         initListener()
-
     }
 
-    val mDatabase = FirebaseDatabase.getInstance().getReference(ROOT)
     private fun initView() {
-        val id = SharePreferenceUtils.getAccountID()
-        mDatabase.child(PROFILE).child(id).get().addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                val result = task.result
-                val account = result.getValue<ProfileModel>()
-                if (account != null) {
-                    updateUI(account)
-                } else {
-                    requireContext().showToast("Thông tin đăng nhập không đúng!")
-                }
-            }
-        }.addOnFailureListener {
-            requireContext().showToast("Có lỗi!")
-        }
+
     }
 
     private fun initListener() {
@@ -77,11 +62,19 @@ class MenuFragment : BaseFragment<FragmentMenuBinding>() {
             SharePreferenceUtils.setAccountID(null)
             SharePreferenceUtils.setUserName(null)
             SharePreferenceUtils.setPassword(null)
-            requireContext().openActivity(SignActivity::class.java)
-            requireActivity().finish()
+            requireContext().openActivity(SignActivity::class.java, true)
         }
         binding.llHelp.setOnClickListener { support(requireContext()) }
         binding.llFeedback.setOnClickListener { feedBack(requireContext()) }
+        binding.llPersonalPage.setOnClickListener {
+            requireContext().openActivity(PersonalPageActivity::class.java)
+        }
+        binding.llPolicy.setOnClickListener {
+            requireContext().openActivity(PersonalPageActivity::class.java)
+        }
+        binding.llProfile.setOnClickListener {
+            requireContext().openActivity(ProfileActivity::class.java)
+        }
     }
 
     private fun updateUI(profileModel: ProfileModel) {

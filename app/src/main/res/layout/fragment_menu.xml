@@ -39,7 +39,7 @@
             android:gravity="center"/>
 
         <LinearLayout
-            android:id="@+id/llProfile"
+            android:id="@+id/llPersonalPage"
             android:layout_marginTop="@dimen/_12sdp"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_36sdp"
@@ -119,6 +119,7 @@
             android:background="#EAE7E7"/>
 
         <LinearLayout
+            android:id="@+id/llProfile"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_40sdp"
             android:layout_marginHorizontal="@dimen/_16sdp">
@@ -147,6 +148,7 @@
             android:background="#EAE7E7"/>
 
         <LinearLayout
+            android:id="@+id/llPolicy"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_40sdp"
             android:layout_marginHorizontal="@dimen/_16sdp">
@@ -161,7 +163,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:text="Cài đặt"
+                android:text="Chính sách"
                 android:textColor="@color/black"
                 android:gravity="center_vertical"
                 android:textSize="@dimen/_12ssp"

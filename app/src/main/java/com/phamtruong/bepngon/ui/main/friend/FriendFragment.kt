@@ -6,15 +6,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.phamtruong.bepngon.R
+import com.phamtruong.bepngon.databinding.FragmentFriendBinding
 
 class FriendFragment : Fragment() {
 
+    private lateinit var binding : FragmentFriendBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_friend, container, false)
+    ): View {
+
+        binding = FragmentFriendBinding.inflate(inflater, container, false)
+
+        return binding.root
     }
 }

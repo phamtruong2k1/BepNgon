@@ -5,9 +5,9 @@
         android:icon="@drawable/ic_home"
         android:title="Trang chủ" />
     <item
-        android:id="@+id/menu_da_luu"
-        android:icon="@drawable/ic_thich"
-        android:title="Thích" />
+        android:id="@+id/menu_search"
+        android:icon="@drawable/ic_search"
+        android:title="Tìm kiếm" />
     <item
         android:id="@+id/menu_friend"
         android:icon="@drawable/ic_friend"

@@ -51,7 +51,6 @@ class CreateInfoFragment : Fragment() {
         binding = FragmentCreateInfoBinding.inflate(inflater, container, false)
 
         binding.toolBar.imgChat.gone()
-        binding.toolBar.imgSearch.gone()
         binding.toolBar.txtTitle.text = "Thông tin người dùng"
 
         binding.edtName.setText(profile.name)
