@@ -22,11 +22,15 @@
             android:layout_height="@dimen/_45sdp"
             android:background="@color/white">
 
-            <ImageView
+            <com.mikhaellopez.circularimageview.CircularImageView
                 android:id="@+id/imgAvt"
                 android:layout_width="@dimen/_45sdp"
                 android:layout_height="match_parent"
-                android:src="@drawable/ic_search"/>
+                android:layout_gravity="center"
+                android:scaleType="centerCrop"
+                app:civ_border_color="#595959"
+                app:civ_border_width="2dp"
+                android:src="@drawable/ic_default_profile"/>
 
             <TextView
                 android:id="@+id/txtDangBai"

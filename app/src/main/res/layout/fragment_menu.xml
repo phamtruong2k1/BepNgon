@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fillViewport="true"
     tools:context=".ui.main.menu.MenuFragment">
 
@@ -17,15 +18,16 @@
             android:orientation="horizontal"
             layout="@layout/layout_tool_bar_main"/>
 
-        <ImageView
+        <com.mikhaellopez.circularimageview.CircularImageView
             android:layout_marginTop="@dimen/_25sdp"
             android:id="@+id/userAvatar"
             android:layout_width="@dimen/_120sdp"
             android:layout_height="@dimen/_120sdp"
             android:layout_gravity="center"
             android:scaleType="centerCrop"
-            android:src="@drawable/ic_default_profile"
-            android:background="@color/black"/>
+            app:civ_border_color="#595959"
+            app:civ_border_width="3dp"
+            android:src="@drawable/ic_default_profile"/>
 
         <TextView
             android:id="@+id/userName"
