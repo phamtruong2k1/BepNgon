@@ -19,6 +19,8 @@ class FriendFragment : Fragment() {
 
         binding = FragmentFriendBinding.inflate(inflater, container, false)
 
+        binding.toolBar.txtTitle.text = "Bạn bè"
+
         return binding.root
     }
 }
