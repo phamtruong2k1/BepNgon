@@ -17,6 +17,7 @@ import com.phamtruong.bepngon.model.ProfileModel
 import com.phamtruong.bepngon.ui.main.menu.MenuFragment
 import com.phamtruong.bepngon.ui.main.search.SearchActivity
 import com.phamtruong.bepngon.util.DataHelper
+import com.phamtruong.bepngon.util.FBConstant
 import com.phamtruong.bepngon.util.SharePreferenceUtils
 import com.phamtruong.bepngon.util.showToast
 import com.phamtruong.bepngon.view.gone
@@ -105,21 +106,21 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         }
     }
 
-    private val mDatabase = FirebaseDatabase.getInstance().getReference(MenuFragment.ROOT)
+    private val mDatabase = FirebaseDatabase.getInstance().getReference(FBConstant.ROOT)
     private fun getDataProfileUser() {
         val id = SharePreferenceUtils.getAccountID()
-        mDatabase.child(MenuFragment.PROFILE).child(id).get().addOnCompleteListener { task ->
+        mDatabase.child(FBConstant.PROFILE).child(id).get().addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 val result = task.result
                 val profileModel = result.getValue<ProfileModel>()
                 if (profileModel != null) {
                     DataHelper.profileUser.postValue(profileModel)
                 } else {
-                    showToast("Lỗi kết nối!")
+                    showToast("Main 1 - Lỗi kết nối!")
                 }
             }
         }.addOnFailureListener {
-            showToast("Lỗi kết nối!")
+            showToast("Main 2 - Lỗi kết nối!")
         }
     }
 

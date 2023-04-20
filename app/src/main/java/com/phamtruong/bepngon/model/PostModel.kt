@@ -2,8 +2,8 @@ package com.phamtruong.bepngon.model
 
 import com.google.firebase.database.Exclude
 
-class RecipeModel(
-    var recipeId : String,
+class PostModel(
+    var postId : String,
     var accountId : String,
     var tag : String,
     var content : String,
@@ -18,7 +18,7 @@ class RecipeModel(
     @Exclude
     fun toMap(): Map<String, Any?> {
         return mapOf(
-            "recipeId" to recipeId,
+            "postId" to postId,
             "accountId" to accountId,
             "tag" to tag,
             "content" to content,

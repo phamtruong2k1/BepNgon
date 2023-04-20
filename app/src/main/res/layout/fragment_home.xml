@@ -24,7 +24,8 @@
 
             <com.mikhaellopez.circularimageview.CircularImageView
                 android:id="@+id/imgAvt"
-                android:layout_width="@dimen/_45sdp"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_marginStart="@dimen/_5sdp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:scaleType="centerCrop"

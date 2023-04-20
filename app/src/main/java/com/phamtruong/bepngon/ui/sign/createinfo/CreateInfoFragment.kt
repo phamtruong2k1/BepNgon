@@ -27,6 +27,7 @@ import com.phamtruong.bepngon.sever.account.AccountFirebaseUtil
 import com.phamtruong.bepngon.ui.baidang.DangBaiActivity
 import com.phamtruong.bepngon.ui.main.MainActivity
 import com.phamtruong.bepngon.util.Constant
+import com.phamtruong.bepngon.util.FBConstant
 import com.phamtruong.bepngon.util.SharePreferenceUtils
 import com.phamtruong.bepngon.view.gone
 import com.phamtruong.bepngon.view.openActivity
@@ -41,8 +42,6 @@ class CreateInfoFragment : Fragment() {
     lateinit var binding: FragmentCreateInfoBinding
 
     companion object {
-        const val ROOT = "root"
-        const val PROFILE = "profile"
         const val PICK_IMAGE_REQUEST = 12345
     }
 
@@ -55,7 +54,7 @@ class CreateInfoFragment : Fragment() {
     private var filePath: Uri? = null
 
 
-    val mDatabase = FirebaseDatabase.getInstance().getReference(ROOT)
+    val mDatabase = FirebaseDatabase.getInstance().getReference(FBConstant.ROOT)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -179,7 +178,7 @@ class CreateInfoFragment : Fragment() {
     }
 
     private fun addNewProfile(profileModel: ProfileModel) {
-        AccountFirebaseUtil.mDatabase.child(PROFILE).child(SharePreferenceUtils.getAccountID())
+        AccountFirebaseUtil.mDatabase.child(FBConstant.PROFILE).child(SharePreferenceUtils.getAccountID())
             .setValue(profileModel)
         requireContext().openActivity(MainActivity::class.java, true)
     }

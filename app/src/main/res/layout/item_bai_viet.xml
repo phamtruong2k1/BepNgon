@@ -34,6 +34,7 @@
             android:weightSum="2.5">
 
             <TextView
+                android:id="@+id/txtName"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
@@ -44,6 +45,7 @@
                 android:fontFamily="@font/inter_600"/>
 
             <TextView
+                android:id="@+id/txtTime"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="0.8"
@@ -57,6 +59,7 @@
 
 
         <ImageView
+            android:id="@+id/imgMore"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_baseline_more_vert_24"
@@ -71,9 +74,14 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/txtContent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="okla"/>
+            android:text="okla"
+            android:fontFamily="@font/inter_400"
+            android:textSize="@dimen/_12sdp"
+            android:textColor="@color/black"
+            android:paddingHorizontal="@dimen/_8sdp"/>
 
     </LinearLayout>
 
@@ -90,6 +98,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:scaleType="centerCrop"
             android:src="@color/black"/>
 
         <LinearLayout
@@ -98,6 +107,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:layout_weight="1"
+            android:visibility="gone"
             android:layout_marginStart="@dimen/_2sdp">
 
             <ImageView
@@ -105,6 +115,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
+                android:visibility="gone"
+                android:scaleType="centerCrop"
                 android:src="@color/black"/>
 
             <ImageView
@@ -112,7 +124,9 @@
                 android:layout_marginTop="@dimen/_2sdp"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:visibility="gone"
                 android:layout_weight="1"
+                android:scaleType="centerCrop"
                 android:src="@color/black"/>
 
         </LinearLayout>

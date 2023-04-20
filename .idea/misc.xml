@@ -11,11 +11,13 @@
         <entry key="..\:/BepNgon/app/src/main/res/drawable/bg_btn_white_stroke_color_app.xml" value="0.1935" />
         <entry key="..\:/BepNgon/app/src/main/res/drawable/bg_edt_input.xml" value="0.306" />
         <entry key="..\:/BepNgon/app/src/main/res/drawable/bg_edt_messe_corner.xml" value="0.261" />
+        <entry key="..\:/BepNgon/app/src/main/res/drawable/bg_edt_sign.xml" value="0.2315" />
         <entry key="..\:/BepNgon/app/src/main/res/drawable/bg_item_bai_viet.xml" value="0.2135" />
         <entry key="..\:/BepNgon/app/src/main/res/drawable/ic_cancel_x.xml" value="0.3" />
         <entry key="..\:/BepNgon/app/src/main/res/drawable/ic_dislike_ed.xml" value="0.205" />
         <entry key="..\:/BepNgon/app/src/main/res/drawable/ic_like_ed.xml" value="0.195" />
         <entry key="..\:/BepNgon/app/src/main/res/drawable/ic_menu.xml" value="0.1635" />
+        <entry key="..\:/BepNgon/app/src/main/res/drawable/ic_policy.xml" value="0.243" />
         <entry key="..\:/BepNgon/app/src/main/res/layout/activity_dang_bai.xml" value="0.33" />
         <entry key="..\:/BepNgon/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/BepNgon/app/src/main/res/layout/activity_profile.xml" value="0.3625" />
@@ -27,15 +29,16 @@
         <entry key="..\:/BepNgon/app/src/main/res/layout/fragment_flowed.xml" value="0.1847879083373964" />
         <entry key="..\:/BepNgon/app/src/main/res/layout/fragment_friend.xml" value="0.3625" />
         <entry key="..\:/BepNgon/app/src/main/res/layout/fragment_home.xml" value="0.35710620831195483" />
-        <entry key="..\:/BepNgon/app/src/main/res/layout/fragment_log_up.xml" value="0.18802083333333333" />
-        <entry key="..\:/BepNgon/app/src/main/res/layout/fragment_login.xml" value="0.20729166666666668" />
-        <entry key="..\:/BepNgon/app/src/main/res/layout/fragment_menu.xml" value="0.33" />
+        <entry key="..\:/BepNgon/app/src/main/res/layout/fragment_log_up.xml" value="0.264" />
+        <entry key="..\:/BepNgon/app/src/main/res/layout/fragment_login.xml" value="0.264" />
+        <entry key="..\:/BepNgon/app/src/main/res/layout/fragment_menu.xml" value="0.2" />
         <entry key="..\:/BepNgon/app/src/main/res/layout/fragment_note.xml" value="0.18072916666666666" />
         <entry key="..\:/BepNgon/app/src/main/res/layout/fragment_notification.xml" value="0.22" />
         <entry key="..\:/BepNgon/app/src/main/res/layout/fragment_search.xml" value="0.1921921921921922" />
         <entry key="..\:/BepNgon/app/src/main/res/layout/fragment_sign_in.xml" value="0.2" />
         <entry key="..\:/BepNgon/app/src/main/res/layout/fragment_sign_up.xml" value="0.19270833333333334" />
-        <entry key="..\:/BepNgon/app/src/main/res/layout/item_bai_viet.xml" value="0.5" />
+        <entry key="..\:/BepNgon/app/src/main/res/layout/item_bai_viet.xml" value="0.264" />
+        <entry key="..\:/BepNgon/app/src/main/res/layout/item_friend.xml" value="0.3026041666666667" />
         <entry key="..\:/BepNgon/app/src/main/res/layout/item_image_post.xml" value="0.3614583333333333" />
         <entry key="..\:/BepNgon/app/src/main/res/layout/item_notification.xml" value="0.24895833333333334" />
         <entry key="..\:/BepNgon/app/src/main/res/layout/layout_bottom_sheet_more.xml" value="0.30364583333333334" />

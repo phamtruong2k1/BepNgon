@@ -32,15 +32,9 @@ import com.squareup.picasso.Picasso
 class MenuFragment : BaseFragment<FragmentMenuBinding>() {
 
     companion object {
-        const val REQ_ONE_TAP = 1111
-
         const val EMAIL = "phamtruong28092001@gmail.com"
         const val FeedBack = "FeedBack"
         const val HELP = "Help"
-
-        const val ROOT = "root"
-        const val PROFILE = "profile"
-        const val ACCOUNT = "account"
     }
 
     override fun initViewCreated() {
@@ -65,15 +59,15 @@ class MenuFragment : BaseFragment<FragmentMenuBinding>() {
             requireContext().openActivity(SignActivity::class.java, true)
         }
         binding.llHelp.setOnClickListener { support(requireContext()) }
+
         binding.llFeedback.setOnClickListener { feedBack(requireContext()) }
+
+        binding.llPolicy.setOnClickListener {
+            /*requireContext().openActivity(PersonalPageActivity::class.java)*/
+        }
+
         binding.llPersonalPage.setOnClickListener {
             requireContext().openActivity(PersonalPageActivity::class.java)
-        }
-        binding.llPolicy.setOnClickListener {
-            requireContext().openActivity(PersonalPageActivity::class.java)
-        }
-        binding.llProfile.setOnClickListener {
-            requireContext().openActivity(ProfileActivity::class.java)
         }
     }
 
@@ -92,7 +86,7 @@ class MenuFragment : BaseFragment<FragmentMenuBinding>() {
     }
 
 
-    fun support(context: Context) {
+    private fun support(context: Context) {
         val mailIntent = Intent(Intent.ACTION_VIEW)
         val data =
             Uri.parse("mailto:?SUBJECT=$FeedBack&body=&to=$EMAIL")
@@ -100,7 +94,7 @@ class MenuFragment : BaseFragment<FragmentMenuBinding>() {
         context.startActivity(Intent.createChooser(mailIntent, "Send mail..."))
     }
 
-    fun feedBack(context: Context) {
+    private fun feedBack(context: Context) {
         val mailIntent = Intent(Intent.ACTION_VIEW)
         val data =
             Uri.parse("mailto:?SUBJECT=$FeedBack&body=&to=$EMAIL")

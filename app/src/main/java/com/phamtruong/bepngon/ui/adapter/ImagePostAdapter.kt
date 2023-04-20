@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.phamtruong.bepngon.R
-import com.phamtruong.bepngon.model.RecipeModel
 
 class ImagePostAdapter(
     var context: Context,

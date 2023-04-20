@@ -5,13 +5,13 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fillViewport="true"
-    tools:context=".ui.main.menu.MenuFragment">
+    tools:context=".ui.main.menu.MenuFragment"
+    android:background="#F6F7FA">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@color/white">
+        android:orientation="vertical">
 
         <include
             android:id="@+id/toolBar"
@@ -64,25 +64,68 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/_5sdp"
-            android:background="#D8D3D3"
             android:layout_marginBottom="@dimen/_12sdp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_50sdp"
+            android:layout_height="@dimen/_60sdp"
             android:layout_marginHorizontal="@dimen/_16sdp">
 
             <LinearLayout
+                android:id="@+id/llSaved"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginEnd="@dimen/_12sdp"
+                android:background="@drawable/bg_btn_ll_profile"
+                android:paddingVertical="@dimen/_4sdp"
+                android:paddingStart="@dimen/_12sdp"
+                android:paddingEnd="@dimen/_4sdp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/_29sdp"
+                    android:layout_weight="1"
+                    android:layout_gravity="left"
+                    android:layout_height="0dp"
+                    android:src="@drawable/ic_bookmark_ribbon"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_18sdp"
+                    android:text="Đã lưu"
+                    android:fontFamily="@font/inter_500"
+                    android:textSize="@dimen/_12sdp"
+                    android:textColor="@color/black"/>
 
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/llRandom"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:background="@drawable/bg_btn_ll_profile"
+                android:paddingVertical="@dimen/_4sdp"
+                android:paddingStart="@dimen/_12sdp"
+                android:paddingEnd="@dimen/_4sdp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/_29sdp"
+                    android:layout_weight="1"
+                    android:layout_gravity="left"
+                    android:layout_height="0dp"
+                    android:src="@drawable/ic_shuffle"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_18sdp"
+                    android:text="Random"
+                    android:fontFamily="@font/inter_500"
+                    android:textSize="@dimen/_12sdp"
+                    android:textColor="@color/black"/>
 
             </LinearLayout>
 
@@ -90,30 +133,75 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_50sdp"
+            android:layout_height="@dimen/_60sdp"
+            android:layout_marginTop="@dimen/_18sdp"
             android:layout_marginHorizontal="@dimen/_16sdp">
 
             <LinearLayout
+                android:id="@+id/llBmi"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginEnd="@dimen/_12sdp"
+                android:background="@drawable/bg_btn_ll_profile"
+                android:paddingVertical="@dimen/_4sdp"
+                android:paddingStart="@dimen/_12sdp"
+                android:paddingEnd="@dimen/_4sdp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/_29sdp"
+                    android:layout_weight="1"
+                    android:layout_gravity="left"
+                    android:layout_height="0dp"
+                    android:src="@drawable/ic_bmi"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_18sdp"
+                    android:text="Chỉ số BMI"
+                    android:fontFamily="@font/inter_500"
+                    android:textSize="@dimen/_12sdp"
+                    android:textColor="@color/black"/>
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="match_parent">
+                android:visibility="invisible"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:background="@drawable/bg_btn_ll_profile"
+                android:paddingVertical="@dimen/_4sdp"
+                android:paddingStart="@dimen/_12sdp"
+                android:paddingEnd="@dimen/_4sdp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/_29sdp"
+                    android:layout_weight="1"
+                    android:layout_gravity="left"
+                    android:layout_height="0dp"
+                    android:src="@drawable/ic_shuffle"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_18sdp"
+                    android:text="Random"
+                    android:fontFamily="@font/inter_500"
+                    android:textSize="@dimen/_12sdp"
+                    android:textColor="@color/black"/>
 
             </LinearLayout>
 
         </LinearLayout>
 
+
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/_5sdp"
-            android:layout_marginVertical="@dimen/_12sdp"
-            android:background="#D8D3D3"/>
+            android:layout_marginVertical="@dimen/_12sdp"/>
 
         <View
             android:layout_width="match_parent"
@@ -121,6 +209,7 @@
             android:background="#EAE7E7"/>
 
         <LinearLayout
+            android:visibility="gone"
             android:id="@+id/llProfile"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_40sdp"
@@ -150,35 +239,6 @@
             android:background="#EAE7E7"/>
 
         <LinearLayout
-            android:id="@+id/llPolicy"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_40sdp"
-            android:layout_marginHorizontal="@dimen/_16sdp">
-
-            <ImageView
-                android:layout_width="@dimen/_40sdp"
-                android:layout_height="match_parent"
-                android:src="@drawable/ic_setting"
-                android:padding="@dimen/_8sdp" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:text="Chính sách"
-                android:textColor="@color/black"
-                android:gravity="center_vertical"
-                android:textSize="@dimen/_12ssp"
-                android:fontFamily="@font/inter_600"/>
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_1sdp"
-            android:background="#EAE7E7"/>
-
-        <LinearLayout
             android:id="@+id/llHelp"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_40sdp"
@@ -195,6 +255,37 @@
                 android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:text="Trợ giúp"
+                android:textColor="@color/black"
+                android:gravity="center_vertical"
+                android:textSize="@dimen/_12ssp"
+                android:fontFamily="@font/inter_600"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:background="#EAE7E7"
+            android:visibility="visible"/>
+
+        <LinearLayout
+            android:id="@+id/llPolicy"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginHorizontal="@dimen/_16sdp">
+
+            <ImageView
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_policy"
+                android:padding="@dimen/_8sdp"
+                app:tint="@color/black" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text="Chính sách"
                 android:textColor="@color/black"
                 android:gravity="center_vertical"
                 android:textSize="@dimen/_12ssp"

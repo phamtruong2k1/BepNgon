@@ -14,7 +14,7 @@
         android:orientation="vertical"
         android:gravity="center"
         android:paddingHorizontal="42dp"
-        android:layout_marginTop="@dimen/_60sdp"
+        android:layout_marginTop="@dimen/_50sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -33,7 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Đăng ký"
-            android:textColor="@color/black"
+            android:textColor="@color/color_primary"
             android:textStyle="bold"
             android:layout_marginTop="@dimen/_12sdp"
             android:layout_marginBottom="28dp"
@@ -46,7 +46,9 @@
             android:textSize="22dp"
             android:layout_marginBottom="18dp"
             android:textColor="@color/black"
-            android:layout_height="wrap_content"/>
+            android:paddingStart="@dimen/_6sdp"
+            android:background="@drawable/bg_edt_sign"
+            android:layout_height="@dimen/_45sdp"/>
 
         <EditText
             android:id="@+id/edtMatKhau"
@@ -56,7 +58,9 @@
             android:layout_marginBottom="18dp"
             android:inputType="textPassword"
             android:textColor="@color/black"
-            android:layout_height="wrap_content"/>
+            android:paddingStart="@dimen/_6sdp"
+            android:background="@drawable/bg_edt_sign"
+            android:layout_height="@dimen/_45sdp"/>
 
         <EditText
             android:id="@+id/edtXacNhan"
@@ -65,7 +69,9 @@
             android:textSize="22dp"
             android:inputType="textPassword"
             android:textColor="@color/black"
-            android:layout_height="wrap_content"/>
+            android:paddingStart="@dimen/_6sdp"
+            android:background="@drawable/bg_edt_sign"
+            android:layout_height="@dimen/_45sdp"/>
 
         <TextView
             android:id="@+id/llSignup"
@@ -90,13 +96,18 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Bạn có tài khoản?" />
+                android:text="Bạn có tài khoản?"
+                android:fontFamily="@font/inter_400"
+                android:textSize="@dimen/_12sdp"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/txtSignIn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Đăng nhập"
+                android:fontFamily="@font/inter_400"
+                android:textSize="@dimen/_12sdp"
                 android:textColor="@color/color_blue"
                 android:paddingVertical="@dimen/_5sdp"
                 android:paddingStart="@dimen/_5sdp"

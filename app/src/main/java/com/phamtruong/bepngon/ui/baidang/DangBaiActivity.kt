@@ -5,7 +5,6 @@ import android.app.ProgressDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -13,9 +12,15 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.phamtruong.bepngon.databinding.ActivityDangBaiBinding
+import com.phamtruong.bepngon.model.PostModel
+import com.phamtruong.bepngon.sever.FirebaseDatabaseUtil
 import com.phamtruong.bepngon.ui.adapter.EventClickImageAdapterListener
 import com.phamtruong.bepngon.ui.adapter.ImagePostAdapter
 import com.phamtruong.bepngon.util.Constant.TAG
+import com.phamtruong.bepngon.util.DataUtil
+import com.phamtruong.bepngon.util.FBConstant
+import com.phamtruong.bepngon.util.SharePreferenceUtils
+import com.phamtruong.bepngon.util.showToast
 import com.phamtruong.bepngon.view.gone
 import com.phamtruong.bepngon.view.show
 import java.io.IOException
@@ -100,9 +105,24 @@ class DangBaiActivity : AppCompatActivity() {
         }
     }
 
+    private var listLinkImage = ArrayList<String>()
     private fun uploadImage() {
+        val time = DataUtil.getTime()
+        val post_id = FirebaseDatabaseUtil.ConvertToMD5(time)
         if (listImage.size == 0) {
-            upPost()
+            upPost(
+                PostModel(
+                    post_id,
+                    SharePreferenceUtils.getAccountID(),
+                    "",
+                    binding.edtContent.text.toString(),
+                    "",
+                    0,
+                    0,
+                    "",
+                    time
+                )
+            )
         } else {
             listImage.let { dataImage ->
                 val progressDialog = ProgressDialog(this)
@@ -113,11 +133,24 @@ class DangBaiActivity : AppCompatActivity() {
                     ref.putFile(image)
                         .addOnSuccessListener {
                             progressDialog.dismiss();
-                            Toast.makeText(this, "Uploaded", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, "Uploaded", Toast.LENGTH_SHORT).show()
                             val downloadUri: Task<Uri> = it.storage.downloadUrl
                             downloadUri.addOnSuccessListener { link ->
                                 val imageLink = link.toString()
                                 Log.d(TAG, "uploadImage: $imageLink")
+                                upPost(
+                                    PostModel(
+                                        post_id,
+                                        SharePreferenceUtils.getAccountID(),
+                                        "",
+                                        binding.edtContent.text.toString(),
+                                        imageLink,
+                                        0,
+                                        0,
+                                        "",
+                                        time
+                                    )
+                                )
                             }.addOnFailureListener {
                                 Log.d(TAG, "uploadImage: fail")
                             }
@@ -128,18 +161,24 @@ class DangBaiActivity : AppCompatActivity() {
                                 .show()
                         }
                         .addOnProgressListener { taskSnapshot ->
-                            val progress =(index *(100.0/dataImage.size)) + 100.0 * taskSnapshot.bytesTransferred / taskSnapshot.totalByteCount / dataImage.size
+                            val progress = 100.0 * taskSnapshot.bytesTransferred / taskSnapshot.totalByteCount
                             progressDialog.setMessage("Uploaded " + progress.toInt() + "%")
                         }
                 }
-                upPost()
+
             }
         }
     }
 
-    private fun upPost() {
-        Toast.makeText(this, "Post...", Toast.LENGTH_SHORT)
-        Log.d(TAG, "uploadImage: Post....")
+    private fun upPost(post : PostModel) {
+        FirebaseDatabaseUtil.mDatabase.child(FBConstant.POST_F).child(
+            post.postId
+        ).setValue(post).addOnCompleteListener{
+            finish()
+            showToast("Đăng thành công.")
+        }.addOnFailureListener {
+            showToast("Đăng thất bại.")
+        }
     }
 
     override fun onBackPressed() {
