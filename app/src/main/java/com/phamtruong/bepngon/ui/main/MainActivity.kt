@@ -1,8 +1,6 @@
 package com.phamtruong.bepngon.ui.main
 
 import android.annotation.SuppressLint
-import android.app.Notification
-import android.os.Bundle
 import android.os.Handler
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -14,10 +12,9 @@ import com.phamtruong.bepngon.R
 import com.phamtruong.bepngon.base.BaseActivity
 import com.phamtruong.bepngon.databinding.ActivityMainBinding
 import com.phamtruong.bepngon.model.ProfileModel
-import com.phamtruong.bepngon.ui.main.menu.MenuFragment
 import com.phamtruong.bepngon.ui.main.search.SearchActivity
 import com.phamtruong.bepngon.util.DataHelper
-import com.phamtruong.bepngon.util.FBConstant
+import com.phamtruong.bepngon.sever.FBConstant
 import com.phamtruong.bepngon.util.SharePreferenceUtils
 import com.phamtruong.bepngon.util.showToast
 import com.phamtruong.bepngon.view.gone
@@ -116,11 +113,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                 if (profileModel != null) {
                     DataHelper.profileUser.postValue(profileModel)
                 } else {
-                    showToast("Main 1 - Lỗi kết nối!")
+                    showToast("Có lỗi kết nối!")
                 }
             }
         }.addOnFailureListener {
-            showToast("Main 2 - Lỗi kết nối!")
+            showToast("Có lỗi kết nối!")
         }
     }
 

@@ -1,27 +1,19 @@
 package com.phamtruong.bepngon.sever.account
 
 import android.content.Context
-import android.content.SharedPreferences
-import android.util.Log
-import android.widget.Toast
-import com.google.android.gms.common.util.SharedPreferencesUtils
-import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.getValue
-import com.google.firebase.ktx.Firebase
 import com.phamtruong.bepngon.model.AccountModel
+import com.phamtruong.bepngon.sever.FBConstant
 import com.phamtruong.bepngon.util.SharePreferenceUtils
 import com.phamtruong.bepngon.util.showToast
 import java.math.BigInteger
 import java.security.MessageDigest
 
-object AccountFirebaseUtil {
+object AccountFBUtil {
 
-    const val ROOT = "root"
-    const val PROFILE = "profile"
-    const val ACCOUNT = "account"
 
-    val mDatabase = FirebaseDatabase.getInstance().getReference(ROOT)
+    val mDatabase = FirebaseDatabase.getInstance().getReference(FBConstant.ROOT)
 
     private fun convertToMD5(input: String): String {
         val md = MessageDigest.getInstance("MD5")
@@ -30,7 +22,7 @@ object AccountFirebaseUtil {
 
     fun logIn(context: Context, useName : String, password : String, actionSuccess : () -> Unit) {
         val id = convertToMD5(useName)
-        mDatabase.child(ACCOUNT).child(id).get().addOnCompleteListener { task ->
+        mDatabase.child(FBConstant.ACCOUNT).child(id).get().addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 val result = task.result
                 val account = result.getValue<AccountModel>()
@@ -54,7 +46,7 @@ object AccountFirebaseUtil {
 
     fun logUp(context: Context, useName : String, password : String, actionSuccess : () -> Unit) {
         val id = convertToMD5(useName)
-        mDatabase.child(ACCOUNT).child(id).get().addOnCompleteListener { task ->
+        mDatabase.child(FBConstant.ACCOUNT).child(id).get().addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 val result = task.result
                 val account = result.getValue<AccountModel>()
@@ -83,6 +75,22 @@ object AccountFirebaseUtil {
     }
 
     private fun addNewAccount(account: AccountModel) {
-        mDatabase.child(ACCOUNT).child(account.account_id).setValue(account)
+        mDatabase.child(FBConstant.ACCOUNT).child(account.account_id).setValue(account)
+    }
+
+    fun getAccount(idUser : String, actionSuccess : () -> Unit, actionFail : () -> Unit) {
+        mDatabase.child(FBConstant.ACCOUNT).child(idUser).get().addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val result = task.result
+                val account = result.getValue<AccountModel>()
+                if (account != null) {
+                    actionSuccess()
+                } else {
+                    actionFail()
+                }
+            }
+        }.addOnFailureListener {
+            actionFail()
+        }
     }
 }

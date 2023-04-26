@@ -2,6 +2,7 @@ package com.phamtruong.bepngon.model
 
 import android.os.Parcelable
 import com.google.firebase.database.Exclude
+import com.google.gson.Gson
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
@@ -26,5 +27,15 @@ data class AccountModel(
             "phoneNumber" to phoneNumber,
             "status" to status
         )
+    }
+
+    companion object {
+        fun toPostModel(jsonData: String): AccountModel? {
+            return Gson().fromJson(jsonData, AccountModel::class.java)
+        }
+    }
+
+    fun toJson(): String {
+        return Gson().toJson(this)
     }
 }

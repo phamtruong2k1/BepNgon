@@ -13,15 +13,11 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
-import com.phamtruong.bepngon.R
 import com.phamtruong.bepngon.databinding.FragmentFriendBinding
 import com.phamtruong.bepngon.model.ProfileModel
 import com.phamtruong.bepngon.ui.adapter.EventClickFriendAdapterListener
 import com.phamtruong.bepngon.ui.adapter.FriendAdapter
-import com.phamtruong.bepngon.ui.main.menu.MenuFragment
-import com.phamtruong.bepngon.util.DataHelper
-import com.phamtruong.bepngon.util.FBConstant
-import com.phamtruong.bepngon.util.SharePreferenceUtils
+import com.phamtruong.bepngon.sever.FBConstant
 import com.phamtruong.bepngon.util.showToast
 
 class FriendFragment : Fragment(), EventClickFriendAdapterListener {

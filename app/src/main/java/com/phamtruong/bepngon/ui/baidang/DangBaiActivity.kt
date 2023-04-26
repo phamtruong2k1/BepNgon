@@ -9,23 +9,28 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.tasks.Task
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.getValue
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.phamtruong.bepngon.databinding.ActivityDangBaiBinding
 import com.phamtruong.bepngon.model.PostModel
+import com.phamtruong.bepngon.sever.FBConstant
 import com.phamtruong.bepngon.sever.FirebaseDatabaseUtil
 import com.phamtruong.bepngon.ui.adapter.EventClickImageAdapterListener
 import com.phamtruong.bepngon.ui.adapter.ImagePostAdapter
 import com.phamtruong.bepngon.util.Constant.TAG
 import com.phamtruong.bepngon.util.DataUtil
-import com.phamtruong.bepngon.util.FBConstant
 import com.phamtruong.bepngon.util.SharePreferenceUtils
 import com.phamtruong.bepngon.util.showToast
 import com.phamtruong.bepngon.view.gone
+import com.phamtruong.bepngon.view.hide
 import com.phamtruong.bepngon.view.show
 import java.io.IOException
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 class DangBaiActivity : AppCompatActivity() {
@@ -56,6 +61,7 @@ class DangBaiActivity : AppCompatActivity() {
                 listImage.removeAt(pos)
                 if (listImage.size == 0) {
                     binding.llImage.gone()
+                    binding.imgAddImage.show()
                 }
                 adapter.notifyDataSetChanged()
             }
@@ -98,6 +104,7 @@ class DangBaiActivity : AppCompatActivity() {
                     listImage.add(it)
                     adapter.notifyDataSetChanged()
                     binding.llImage.show()
+                    binding.imgAddImage.hide()
                 }
             } catch (e: IOException) {
                 e.printStackTrace()
@@ -108,17 +115,14 @@ class DangBaiActivity : AppCompatActivity() {
     private var listLinkImage = ArrayList<String>()
     private fun uploadImage() {
         val time = DataUtil.getTime()
-        val post_id = FirebaseDatabaseUtil.ConvertToMD5(time)
+        val postId = FirebaseDatabaseUtil.ConvertToMD5(time)
         if (listImage.size == 0) {
             upPost(
                 PostModel(
-                    post_id,
+                    postId,
                     SharePreferenceUtils.getAccountID(),
                     "",
                     binding.edtContent.text.toString(),
-                    "",
-                    0,
-                    0,
                     "",
                     time
                 )
@@ -126,9 +130,9 @@ class DangBaiActivity : AppCompatActivity() {
         } else {
             listImage.let { dataImage ->
                 val progressDialog = ProgressDialog(this)
-                progressDialog.setTitle("Uploading...")
+                progressDialog.setTitle("Đăng bài...")
                 progressDialog.show()
-                dataImage.forEachIndexed { index, image ->
+                dataImage.forEachIndexed { _, image ->
                     val ref = storageReference!!.child("images/" + UUID.randomUUID().toString())
                     ref.putFile(image)
                         .addOnSuccessListener {
@@ -140,29 +144,25 @@ class DangBaiActivity : AppCompatActivity() {
                                 Log.d(TAG, "uploadImage: $imageLink")
                                 upPost(
                                     PostModel(
-                                        post_id,
+                                        postId,
                                         SharePreferenceUtils.getAccountID(),
                                         "",
                                         binding.edtContent.text.toString(),
                                         imageLink,
-                                        0,
-                                        0,
-                                        "",
                                         time
                                     )
                                 )
                             }.addOnFailureListener {
-                                Log.d(TAG, "uploadImage: fail")
+                                Toast.makeText(this, "Có lỗi!", Toast.LENGTH_SHORT).show()
                             }
                         }
                         .addOnFailureListener { e ->
                             progressDialog.dismiss()
-                            Toast.makeText(this, "Failed " + e.message, Toast.LENGTH_SHORT)
-                                .show()
+                            Toast.makeText(this, "Có lỗi!", Toast.LENGTH_SHORT).show()
                         }
                         .addOnProgressListener { taskSnapshot ->
                             val progress = 100.0 * taskSnapshot.bytesTransferred / taskSnapshot.totalByteCount
-                            progressDialog.setMessage("Uploaded " + progress.toInt() + "%")
+                            progressDialog.setMessage("Đang tải " + progress.toInt() + "%")
                         }
                 }
 

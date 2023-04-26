@@ -12,24 +12,23 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.getValue
 import com.phamtruong.bepngon.databinding.FragmentHomeBinding
 import com.phamtruong.bepngon.model.PostModel
-import com.phamtruong.bepngon.model.ProfileModel
-import com.phamtruong.bepngon.ui.adapter.EventClickRecipeAdapterListener
-import com.phamtruong.bepngon.ui.adapter.RecipeAdapter
+import com.phamtruong.bepngon.ui.adapter.EventClickPostsAdapterListener
 import com.phamtruong.bepngon.ui.baidang.DangBaiActivity
 import com.phamtruong.bepngon.ui.chat.ChatActivity
 import com.phamtruong.bepngon.ui.personalpage.PersonalPageActivity
 import com.phamtruong.bepngon.util.DataHelper
-import com.phamtruong.bepngon.util.FBConstant
+import com.phamtruong.bepngon.sever.FBConstant
+import com.phamtruong.bepngon.ui.adapter.PostsAdapter
 import com.phamtruong.bepngon.util.showToast
 import com.phamtruong.bepngon.view.openActivity
 import com.phamtruong.bepngon.view.setOnSafeClick
 import com.phamtruong.bepngon.view.show
 import com.squareup.picasso.Picasso
 
-class HomeFragment : Fragment() , EventClickRecipeAdapterListener {
+class HomeFragment : Fragment() , EventClickPostsAdapterListener {
 
     lateinit var binding : FragmentHomeBinding
-    lateinit var adapter: RecipeAdapter
+    lateinit var adapter: PostsAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,7 +37,7 @@ class HomeFragment : Fragment() , EventClickRecipeAdapterListener {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-        adapter = RecipeAdapter(requireContext(), ArrayList<PostModel>(), this)
+        adapter = PostsAdapter(requireContext(), ArrayList<PostModel>(), this)
         binding.rcyBaiDang.adapter = adapter
 
         initListener()
@@ -74,7 +73,7 @@ class HomeFragment : Fragment() , EventClickRecipeAdapterListener {
         }
     }
 
-    override fun click(idTab: Int) {
+    override fun clickPost(post : PostModel) {
 
     }
 

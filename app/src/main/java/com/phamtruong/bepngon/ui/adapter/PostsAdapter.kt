@@ -8,30 +8,40 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ktx.getValue
 import com.phamtruong.bepngon.R
 import com.phamtruong.bepngon.model.PostModel
+import com.phamtruong.bepngon.model.ProfileModel
+import com.phamtruong.bepngon.sever.FBConstant
+import com.phamtruong.bepngon.sever.PostFBUtil
+import com.phamtruong.bepngon.ui.baidang.DetailBaiDangActivity
+import com.phamtruong.bepngon.ui.personalpage.WithoutPageActivity
+import com.phamtruong.bepngon.util.DataHelper
+import com.phamtruong.bepngon.util.SharePreferenceUtils
+import com.phamtruong.bepngon.util.showToast
+import com.phamtruong.bepngon.view.openActivity
 import com.phamtruong.bepngon.view.show
 import com.squareup.picasso.Picasso
 
-class RecipeAdapter(
+class PostsAdapter(
     var context: Context,
     private var listData: List<PostModel>,
-    val listener: EventClickRecipeAdapterListener
-) : RecyclerView.Adapter<RecipeAdapter.ViewHolder>() {
+    val listener: EventClickPostsAdapterListener
+) : RecyclerView.Adapter<PostsAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view){
         var imgAvatar: ImageView = view.findViewById(R.id.imgAvatar)
         var imgMore: ImageView = view.findViewById(R.id.imgMore)
         var imgLike: ImageView = view.findViewById(R.id.imgLike)
-        var imgDislike: ImageView = view.findViewById(R.id.imgDislike)
         var imgComment: ImageView = view.findViewById(R.id.imgComment)
 
         var txtName : TextView = view.findViewById(R.id.txtName)
         var txtTime : TextView = view.findViewById(R.id.txtTime)
         var txtContent : TextView = view.findViewById(R.id.txtContent)
         var numberLike : TextView = view.findViewById(R.id.numberLike)
-        var numberDislike : TextView = view.findViewById(R.id.numberDislike)
 
 
         var layoutImage : LinearLayout = view.findViewById(R.id.layoutImage)
@@ -39,6 +49,9 @@ class RecipeAdapter(
         var llImage02 : LinearLayout = view.findViewById(R.id.llImage02)
         var image02: ImageView = view.findViewById(R.id.image02)
         var image03: ImageView = view.findViewById(R.id.image03)
+
+
+        var viewRoot: LinearLayout = view.findViewById(R.id.viewRoot)
 
 
     }
@@ -52,8 +65,8 @@ class RecipeAdapter(
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val post = listData[position]
-        viewHolder.numberLike.text = post.like.toString()
-        viewHolder.numberDislike.text = post.disLike.toString()
+//        viewHolder.numberLike.text = post.like.toString()
+//        viewHolder.numberDislike.text = post.disLike.toString()
         viewHolder.txtContent.text = post.content
 
         if (post.img != ""){
@@ -61,8 +74,29 @@ class RecipeAdapter(
             Picasso.get().load(post.img).into(viewHolder.image01)
         }
 
-        viewHolder.imgLike.setOnClickListener {
+        FirebaseDatabase.getInstance().getReference(FBConstant.ROOT)
+            .child(FBConstant.PROFILE).child(post.accountId).get().addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val result = task.result
+                val profileModel = result.getValue<ProfileModel>()
+                if (profileModel != null) {
+                    viewHolder.txtName.text = profileModel.name
+                    Picasso.get().load(profileModel.avt).into(viewHolder.imgAvatar)
+                }
+            }
+        }
 
+//        viewHolder.imgLike.setOnClickListener {
+//
+//            PostFBUtil.insertPost(post)
+//        }
+
+        viewHolder.imgAvatar.setOnClickListener {
+            context.openActivity(WithoutPageActivity::class.java, bundleOf("idUser" to post.accountId))
+        }
+
+        viewHolder.viewRoot.setOnClickListener {
+            context.openActivity(DetailBaiDangActivity::class.java, bundleOf("post_data" to post.toJson()))
         }
     }
 
@@ -77,6 +111,6 @@ class RecipeAdapter(
 
 }
 
-interface EventClickRecipeAdapterListener {
-    fun click(idTab : Int)
+interface EventClickPostsAdapterListener {
+    fun clickPost(post : PostModel)
 }

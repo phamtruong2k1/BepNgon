@@ -17,19 +17,20 @@ import androidx.core.content.ContextCompat
 import com.google.android.gms.tasks.Task
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import com.phamtruong.bepngon.R
 import com.phamtruong.bepngon.databinding.FragmentCreateInfoBinding
-import com.phamtruong.bepngon.databinding.FragmentLogUpBinding
 import com.phamtruong.bepngon.databinding.LayoutBottomSheetMoreBinding
-import com.phamtruong.bepngon.model.AccountModel
 import com.phamtruong.bepngon.model.ProfileModel
-import com.phamtruong.bepngon.sever.account.AccountFirebaseUtil
+import com.phamtruong.bepngon.sever.account.AccountFBUtil
 import com.phamtruong.bepngon.ui.baidang.DangBaiActivity
 import com.phamtruong.bepngon.ui.main.MainActivity
 import com.phamtruong.bepngon.util.Constant
-import com.phamtruong.bepngon.util.FBConstant
+import com.phamtruong.bepngon.sever.FBConstant
 import com.phamtruong.bepngon.util.SharePreferenceUtils
 import com.phamtruong.bepngon.view.gone
+import com.phamtruong.bepngon.view.hide
 import com.phamtruong.bepngon.view.openActivity
 import com.phamtruong.bepngon.view.setOnSafeClick
 import com.phamtruong.bepngon.view.show
@@ -41,15 +42,19 @@ class CreateInfoFragment : Fragment() {
 
     lateinit var binding: FragmentCreateInfoBinding
 
+    var storageReference: StorageReference? = null
+
+    var storage: FirebaseStorage? = null
+    lateinit var profile: ProfileModel
+
+
     companion object {
         const val PICK_IMAGE_REQUEST = 12345
     }
 
-    var chooseNamorNu = true
     var ngayThangNam = ""
     var namSinh = 2023
 
-    lateinit var profile: ProfileModel
 
     private var filePath: Uri? = null
 
@@ -60,6 +65,8 @@ class CreateInfoFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        storage = FirebaseStorage.getInstance()
+        storageReference = storage?.reference
 
         profile = ProfileModel(
             SharePreferenceUtils.getAccountID(),
@@ -69,7 +76,6 @@ class CreateInfoFragment : Fragment() {
             true,
             Constant.URL_AVATAR_DEFAUT,
             "",
-            ""
         )
 
         binding = FragmentCreateInfoBinding.inflate(inflater, container, false)
@@ -78,9 +84,20 @@ class CreateInfoFragment : Fragment() {
         binding.toolBar.txtTitle.text = "Thông tin người dùng"
 
         binding.edtName.setText(profile.name)
-        binding.edtBirthDay.setText(profile.birthDay)
+        //binding.edtBirthDay.text = profile.birthDay
 
-        Picasso.get().load(profile.avt).into(binding.imgAvt)
+//        Picasso.get().load(profile.avt).into(binding.imgAvt)
+
+        binding.radioGroup.setOnCheckedChangeListener { _, checkedId ->
+            when (checkedId) {
+                R.id.rbNam -> {
+                    profile.gender = true
+                }
+                R.id.rbNu -> {
+                    profile.gender = false
+                }
+            }
+        }
 
         return binding.root
     }
@@ -89,10 +106,11 @@ class CreateInfoFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.txtNext.setOnClickListener {
-            addNewProfile(profile)
+            uploadImage()
         }
 
         binding.txtSkip.setOnClickListener {
+            binding.prgLoad.show()
             addNewProfile(
                 ProfileModel(
                     SharePreferenceUtils.getAccountID(),
@@ -102,7 +120,6 @@ class CreateInfoFragment : Fragment() {
                     true,
                     Constant.URL_AVATAR_DEFAUT,
                     "",
-                    ""
                 )
             )
         }
@@ -123,7 +140,12 @@ class CreateInfoFragment : Fragment() {
         if (requestCode == DangBaiActivity.PICK_IMAGE_REQUEST && resultCode == AppCompatActivity.RESULT_OK && data != null && data.data != null) {
             filePath = data.data
             try {
-                binding.imgAvt.setImageBitmap(MediaStore.Images.Media.getBitmap(requireContext().contentResolver, filePath))
+                binding.imgAvt.setImageBitmap(
+                    MediaStore.Images.Media.getBitmap(
+                        requireContext().contentResolver,
+                        filePath
+                    )
+                )
             } catch (e: IOException) {
                 e.printStackTrace()
             }
@@ -141,46 +163,52 @@ class CreateInfoFragment : Fragment() {
     }
 
     private fun uploadImage() {
-        /*if (listImage.size == 0) {
-            upPost()
-        } else {
-            listImage.let { dataImage ->
-                val progressDialog = ProgressDialog(this)
-                progressDialog.setTitle("Uploading...")
-                progressDialog.show()
-                dataImage.forEachIndexed { index, image ->
-                    val ref = storageReference!!.child("images/" + UUID.randomUUID().toString())
-                    ref.putFile(image)
-                        .addOnSuccessListener {
-                            progressDialog.dismiss();
-                            Toast.makeText(this, "Uploaded", Toast.LENGTH_SHORT).show();
-                            val downloadUri: Task<Uri> = it.storage.downloadUrl
-                            downloadUri.addOnSuccessListener { link ->
-                                val imageLink = link.toString()
-                                Log.d(Constant.TAG, "uploadImage: $imageLink")
-                            }.addOnFailureListener {
-                                Log.d(Constant.TAG, "uploadImage: fail")
-                            }
-                        }
-                        .addOnFailureListener { e ->
-                            progressDialog.dismiss()
-                            Toast.makeText(this, "Failed " + e.message, Toast.LENGTH_SHORT)
-                                .show()
-                        }
-                        .addOnProgressListener { taskSnapshot ->
-                            val progress =(index *(100.0/dataImage.size)) + 100.0 * taskSnapshot.bytesTransferred / taskSnapshot.totalByteCount / dataImage.size
-                            progressDialog.setMessage("Uploaded " + progress.toInt() + "%")
-                        }
+        binding.prgLoad.show()
+        val ref = storageReference!!.child("images/" + UUID.randomUUID().toString())
+        filePath?.let {
+            ref.putFile(it)
+                .addOnSuccessListener {
+                    val downloadUri: Task<Uri> = it.storage.downloadUrl
+                    downloadUri.addOnSuccessListener { link ->
+                        val imageLink = link.toString()
+                        Log.d(Constant.TAG, "uploadImage: $imageLink")
+                        profile.avt = imageLink
+                        profile.name = binding.edtName.text.toString()
+                        profile.birthDay = binding.edtBirthDay.text.toString()
+                        addNewProfile(profile)
+                    }.addOnFailureListener {
+                        Toast.makeText(requireContext(), "Có lỗi!", Toast.LENGTH_SHORT)
+                            .show()
+                        binding.prgLoad.hide()
+                    }
                 }
-                upPost()
-            }
-        }*/
+                .addOnFailureListener { e ->
+                    Toast.makeText(requireContext(), "Có lỗi!", Toast.LENGTH_SHORT)
+                        .show()
+                    binding.prgLoad.hide()
+                }
+                .addOnProgressListener { taskSnapshot ->
+
+                }
+        }?: kotlin.run {
+            profile.name = binding.edtName.text.toString()
+            profile.birthDay = binding.edtBirthDay.text.toString()
+            addNewProfile(profile)
+        }
+
     }
 
     private fun addNewProfile(profileModel: ProfileModel) {
-        AccountFirebaseUtil.mDatabase.child(FBConstant.PROFILE).child(SharePreferenceUtils.getAccountID())
-            .setValue(profileModel)
-        requireContext().openActivity(MainActivity::class.java, true)
+        AccountFBUtil.mDatabase.child(FBConstant.PROFILE).child(SharePreferenceUtils.getAccountID())
+            .setValue(profileModel).addOnSuccessListener {
+                requireContext().openActivity(MainActivity::class.java, true)
+                binding.prgLoad.hide()
+            }.addOnFailureListener {
+                Toast.makeText(requireContext(), "Có lỗi!", Toast.LENGTH_SHORT)
+                    .show()
+                binding.prgLoad.hide()
+            }
+
     }
 
     private val myCalendar = Calendar.getInstance()
@@ -244,10 +272,16 @@ class CreateInfoFragment : Fragment() {
         }
 
         moreBottomSheet.setOnDismissListener {
-            ngayThangNam = "${bottomSheetBinding.ngaySinh.value}/${bottomSheetBinding.thangSinh.value}/${bottomSheetBinding.namSinh.value}"
+            ngayThangNam =
+                "${bottomSheetBinding.ngaySinh.value}/${bottomSheetBinding.thangSinh.value}/${bottomSheetBinding.namSinh.value}"
             namSinh = bottomSheetBinding.namSinh.value
             binding.edtBirthDay.text = ngayThangNam
-            //binding.edtBirthDay.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+            binding.edtBirthDay.setTextColor(
+                ContextCompat.getColor(
+                    requireContext(),
+                    R.color.black
+                )
+            )
         }
 
         moreBottomSheet.show()

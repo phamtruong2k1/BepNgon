@@ -2,6 +2,7 @@ package com.phamtruong.bepngon.model
 
 import android.os.Parcelable
 import com.google.firebase.database.Exclude
+import com.google.gson.Gson
 import com.phamtruong.bepngon.util.Constant
 import kotlinx.android.parcel.Parcelize
 
@@ -14,10 +15,9 @@ data class ProfileModel(
     var gender: Boolean,
     var avt: String,
     var address: String,
-    var note: String,
 ) : Parcelable {
 
-    constructor() : this("", "", "", "", true, Constant.URL_AVATAR_DEFAUT, "", "") {}
+    constructor() : this("", "", "", "", true, Constant.URL_AVATAR_DEFAUT, "") {}
 
     @Exclude
     fun toMap(): Map<String, Any?> {
@@ -29,7 +29,16 @@ data class ProfileModel(
             "gender" to gender,
             "avt" to avt,
             "address" to address,
-            "note" to note
         )
+    }
+
+    companion object {
+        fun toPostModel(jsonData: String): ProfileModel? {
+            return Gson().fromJson(jsonData, ProfileModel::class.java)
+        }
+    }
+
+    fun toJson(): String {
+        return Gson().toJson(this)
     }
 }

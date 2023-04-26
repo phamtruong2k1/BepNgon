@@ -8,11 +8,8 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.phamtruong.bepngon.R
 import com.phamtruong.bepngon.databinding.FragmentLogUpBinding
-import com.phamtruong.bepngon.databinding.FragmentLoginBinding
-import com.phamtruong.bepngon.sever.account.AccountFirebaseUtil
-import com.phamtruong.bepngon.ui.main.MainActivity
+import com.phamtruong.bepngon.sever.account.AccountFBUtil
 import com.phamtruong.bepngon.util.showToast
-import com.phamtruong.bepngon.view.openActivity
 import com.phamtruong.bepngon.view.setOnSafeClick
 
 
@@ -43,7 +40,7 @@ class LogUpFragment : Fragment() {
             } else if (binding.edtXacNhan.text.toString().trim() != binding.edtMatKhau.text.toString().trim()){
                 requireContext().showToast("Xác nhận mật khẩu không đúng!")
             } else {
-                AccountFirebaseUtil.logUp(
+                AccountFBUtil.logUp(
                     requireContext(),
                     binding.edtTaiKhoan.text.toString().trim(),
                     binding.edtMatKhau.text.toString().trim()
