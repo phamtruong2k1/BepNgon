@@ -9,11 +9,6 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.tasks.Task
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.ktx.getValue
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.phamtruong.bepngon.databinding.ActivityDangBaiBinding
@@ -133,6 +128,7 @@ class DangBaiActivity : AppCompatActivity() {
                 progressDialog.setTitle("Đăng bài...")
                 progressDialog.show()
                 dataImage.forEachIndexed { _, image ->
+
                     val ref = storageReference!!.child("images/" + UUID.randomUUID().toString())
                     ref.putFile(image)
                         .addOnSuccessListener {

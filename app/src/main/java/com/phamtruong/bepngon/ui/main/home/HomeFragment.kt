@@ -1,16 +1,19 @@
 package com.phamtruong.bepngon.ui.main.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.getValue
 import com.phamtruong.bepngon.databinding.FragmentHomeBinding
+import com.phamtruong.bepngon.model.AccountModel
 import com.phamtruong.bepngon.model.PostModel
 import com.phamtruong.bepngon.ui.adapter.EventClickPostsAdapterListener
 import com.phamtruong.bepngon.ui.baidang.DangBaiActivity
@@ -25,7 +28,7 @@ import com.phamtruong.bepngon.view.setOnSafeClick
 import com.phamtruong.bepngon.view.show
 import com.squareup.picasso.Picasso
 
-class HomeFragment : Fragment() , EventClickPostsAdapterListener {
+class HomeFragment : Fragment() , EventClickPostsAdapterListener, SwipeRefreshLayout.OnRefreshListener  {
 
     lateinit var binding : FragmentHomeBinding
     lateinit var adapter: PostsAdapter
@@ -44,6 +47,8 @@ class HomeFragment : Fragment() , EventClickPostsAdapterListener {
 
         initView()
 
+        binding.swipLayout.setOnRefreshListener(this)
+
         return binding.root
     }
 
@@ -56,7 +61,7 @@ class HomeFragment : Fragment() , EventClickPostsAdapterListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        getPost()
+        getPostData()
     }
 
     private fun initListener() {
@@ -78,25 +83,25 @@ class HomeFragment : Fragment() , EventClickPostsAdapterListener {
     }
 
     private val mDatabase = FirebaseDatabase.getInstance().getReference(FBConstant.ROOT)
-    private fun getPost() {
-
-        mDatabase.child(FBConstant.POST_F).addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val listData = ArrayList<PostModel>()
-                for (postSnapshot in dataSnapshot.children) {
-                    postSnapshot.getValue<PostModel>()?.let {
-                        listData.add(
-                            it
-                        )
-                    }
+    private fun getPostData() {
+        mDatabase.child(FBConstant.POST_F).get().addOnSuccessListener {dataSnapshot->
+            val listData = ArrayList<PostModel>()
+            for (postSnapshot in dataSnapshot.children) {
+                postSnapshot.getValue<PostModel>()?.let {
+                    listData.add(
+                        it
+                    )
                 }
-                adapter.setListData(listData)
             }
+            adapter.setListData(listData)
+            binding.swipLayout.isRefreshing = false
+        }.addOnFailureListener {
+            requireContext().showToast("Lỗi kết nối!")
+        }
+    }
 
-            override fun onCancelled(databaseError: DatabaseError) {
-                requireContext().showToast("Lỗi kết nối!")
-            }
-        })
+    override fun onRefresh() {
+        getPostData()
     }
 
 }

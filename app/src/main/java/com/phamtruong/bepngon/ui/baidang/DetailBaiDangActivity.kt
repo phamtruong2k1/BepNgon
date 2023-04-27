@@ -17,6 +17,7 @@ import com.phamtruong.bepngon.sever.CommentFBUtil
 import com.phamtruong.bepngon.sever.FBConstant
 import com.phamtruong.bepngon.ui.adapter.CommentAdapter
 import com.phamtruong.bepngon.ui.adapter.EventClickCommentListener
+import com.phamtruong.bepngon.ui.personalpage.PersonalPageActivity
 import com.phamtruong.bepngon.ui.personalpage.WithoutPageActivity
 import com.phamtruong.bepngon.util.DataUtil
 import com.phamtruong.bepngon.util.SharePreferenceUtils
@@ -59,7 +60,15 @@ class DetailBaiDangActivity : AppCompatActivity() {
 
     private fun initListener() {
         binding.imgBack.setOnClickListener { finish() }
-        binding.imgAvatar.setOnClickListener { openActivity(WithoutPageActivity::class.java, bundleOf("idUser" to postModel?.accountId)) }
+        binding.imgAvatar.setOnClickListener {
+            if (postModel?.accountId == SharePreferenceUtils.getAccountID()) {
+                openActivity(
+                    PersonalPageActivity::class.java
+                )
+            } else {
+                openActivity(WithoutPageActivity::class.java, bundleOf("idUser" to postModel?.accountId))
+            }
+        }
 
         binding.imgSendComment.setOnClickListener {
             postComment()
@@ -87,9 +96,7 @@ class DetailBaiDangActivity : AppCompatActivity() {
             }
     }
 
-
-
-    fun listerComment(post : PostModel) {
+    private fun listerComment(post : PostModel) {
         val reference = FirebaseDatabase.getInstance().getReference(FBConstant.ROOT)
 
         val query: Query = reference.child(FBConstant.COMMENT_F).orderByChild("postId").equalTo(post.postId)

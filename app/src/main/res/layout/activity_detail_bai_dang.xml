@@ -196,7 +196,7 @@
                     android:id="@+id/imgLike"
                     android:layout_width="38dp"
                     android:layout_height="match_parent"
-                    android:src="@drawable/ic_like"
+                    android:src="@drawable/ic_heart"
                     android:padding="@dimen/_6sdp"/>
 
                 <TextView

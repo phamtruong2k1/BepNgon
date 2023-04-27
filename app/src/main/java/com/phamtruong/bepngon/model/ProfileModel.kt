@@ -11,13 +11,15 @@ data class ProfileModel(
     var profileId: String,
     var accountId: String,
     var name: String,
+    var avt: String,
     var birthDay: String,
     var gender: Boolean,
-    var avt: String,
+    val gmail: String,
+    val phoneNumber:  String,
     var address: String,
 ) : Parcelable {
 
-    constructor() : this("", "", "", "", true, Constant.URL_AVATAR_DEFAUT, "") {}
+    constructor() : this("", "", "", Constant.URL_AVATAR_DEFAUT, "",true,"", "","") {}
 
     @Exclude
     fun toMap(): Map<String, Any?> {
@@ -25,9 +27,11 @@ data class ProfileModel(
             "profileId" to profileId,
             "accountId" to accountId,
             "name" to name,
+            "avt" to avt,
             "birthDay" to birthDay,
             "gender" to gender,
-            "avt" to avt,
+            "gmail" to gmail,
+            "phoneNumber" to phoneNumber,
             "address" to address,
         )
     }

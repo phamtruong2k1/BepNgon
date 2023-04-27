@@ -36,16 +36,23 @@
                 android:paddingVertical="@dimen/_5sdp"
                 android:fontFamily="@font/inter_600"/>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rcyFriend"
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"
-                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                android:clipToPadding="false"
-                android:paddingBottom="30dp"
-                android:scrollbars="none"
-                app:spanCount="1"/>
+                android:layout_weight="1">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcyFriend"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    android:clipToPadding="false"
+                    android:paddingBottom="30dp"
+                    android:scrollbars="none"
+                    app:spanCount="1"/>
+
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
         </LinearLayout>
 

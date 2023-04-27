@@ -72,10 +72,12 @@ class CreateInfoFragment : Fragment() {
             SharePreferenceUtils.getAccountID(),
             SharePreferenceUtils.getAccountID(),
             SharePreferenceUtils.getUserName(),
-            "",
-            true,
             Constant.URL_AVATAR_DEFAUT,
             "",
+            true,
+            "",
+            "",
+            ""
         )
 
         binding = FragmentCreateInfoBinding.inflate(inflater, container, false)
@@ -116,10 +118,12 @@ class CreateInfoFragment : Fragment() {
                     SharePreferenceUtils.getAccountID(),
                     SharePreferenceUtils.getAccountID(),
                     SharePreferenceUtils.getUserName(),
-                    "",
-                    true,
                     Constant.URL_AVATAR_DEFAUT,
                     "",
+                    true,
+                    "",
+                    "",
+                    ""
                 )
             )
         }

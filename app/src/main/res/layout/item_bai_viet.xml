@@ -147,19 +147,33 @@
         android:layout_marginTop="@dimen/_4sdp"
         android:layout_marginBottom="@dimen/_4sdp">
 
-        <ImageView
+        <RelativeLayout
+            android:id="@+id/rlReaction"
             android:layout_marginStart="8dp"
-            android:id="@+id/imgLike"
             android:layout_width="38dp"
             android:layout_height="match_parent"
-            android:src="@drawable/ic_like"
-            android:padding="@dimen/_6sdp"/>
+            android:padding="@dimen/_6sdp">
+
+            <ImageView
+                android:id="@+id/imgHeart"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_heart" />
+
+            <ImageView
+                android:id="@+id/imgHeartFill"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_heart_fill"
+                android:visibility="gone"/>
+
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/numberLike"
             android:layout_width="@dimen/_35sdp"
             android:layout_height="match_parent"
-            android:text="100"
+            android:text="0"
             android:textColor="@color/black"
             android:textSize="@dimen/_12sdp"
             android:fontFamily="@font/inter_400"
