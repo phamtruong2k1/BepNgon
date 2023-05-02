@@ -2,6 +2,7 @@ package com.phamtruong.bepngon.ui.personalpage
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.core.os.bundleOf
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.Query
@@ -14,6 +15,9 @@ import com.phamtruong.bepngon.sever.ProfileFBListener
 import com.phamtruong.bepngon.sever.ProfileFBUtil
 import com.phamtruong.bepngon.ui.adapter.EventClickPostsAdapterListener
 import com.phamtruong.bepngon.ui.adapter.PostsAdapter
+import com.phamtruong.bepngon.ui.chat.ChatActivity
+import com.phamtruong.bepngon.util.SharePreferenceUtils
+import com.phamtruong.bepngon.view.openActivity
 import com.phamtruong.bepngon.view.setOnSafeClick
 import com.phamtruong.bepngon.view.show
 import com.squareup.picasso.Picasso
@@ -44,6 +48,19 @@ class WithoutPageActivity : AppCompatActivity() , SwipeRefreshLayout.OnRefreshLi
         getDataUser()
 
         binding.swipLayout.setOnRefreshListener(this)
+
+        initListener()
+    }
+
+    private fun initListener() {
+        binding.llChat.setOnClickListener {
+            openActivity(ChatActivity::class.java,
+                bundleOf(
+                    "idUser" to SharePreferenceUtils.getAccountID(),
+                    "idYour" to idUser,
+                )
+            )
+        }
     }
 
     private fun getDataUser() {

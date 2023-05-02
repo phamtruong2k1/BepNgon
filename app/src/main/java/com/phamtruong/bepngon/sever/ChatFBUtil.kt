@@ -11,22 +11,6 @@ import com.phamtruong.bepngon.model.chat.RoomChatModel
 
 object ChatFBUtil {
 
-    fun insertRoomChat(roomChatModel: RoomChatModel) {
-        val mDatabase = FirebaseDatabase.getInstance().getReference(FBConstant.CHAT_F)
-        mDatabase.child(FBConstant.ROOM_F).child(
-            roomChatModel.room_id
-        ).setValue(roomChatModel)
-    }
-
-    fun insertMessage(messageModel: MessageModel) {
-        val mDatabase = FirebaseDatabase.getInstance().getReference(FBConstant.CHAT_F)
-        mDatabase.child(FBConstant.MESSAGE)
-            .child(messageModel.room_id)
-            .child(messageModel.message_id)
-            .setValue(messageModel)
-    }
-
-
     fun getAllRoom(listener: FBListRoomListener) {
         val mDatabase = FirebaseDatabase.getInstance().getReference(FBConstant.CHAT_F)
         mDatabase.child(FBConstant.ROOM_F).addValueEventListener(object : ValueEventListener {
