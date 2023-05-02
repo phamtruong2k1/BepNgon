@@ -1,10 +1,9 @@
-package com.phamtruong.bepngon.sever.account
+package com.phamtruong.bepngon.sever
 
 import android.content.Context
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.getValue
 import com.phamtruong.bepngon.model.AccountModel
-import com.phamtruong.bepngon.sever.FBConstant
 import com.phamtruong.bepngon.util.SharePreferenceUtils
 import com.phamtruong.bepngon.util.showToast
 import java.math.BigInteger

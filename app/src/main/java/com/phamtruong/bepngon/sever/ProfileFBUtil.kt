@@ -3,7 +3,6 @@ package com.phamtruong.bepngon.sever
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.getValue
 import com.phamtruong.bepngon.model.ProfileModel
-import com.phamtruong.bepngon.sever.account.AccountFBUtil
 
 object ProfileFBUtil {
 

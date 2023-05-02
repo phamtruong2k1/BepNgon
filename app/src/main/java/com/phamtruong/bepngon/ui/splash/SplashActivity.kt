@@ -11,7 +11,7 @@ import androidx.navigation.fragment.NavHostFragment
 import com.google.firebase.database.ktx.getValue
 import com.phamtruong.bepngon.databinding.ActivitySplashBinding
 import com.phamtruong.bepngon.model.AccountModel
-import com.phamtruong.bepngon.sever.account.AccountFBUtil
+import com.phamtruong.bepngon.sever.AccountFBUtil
 import com.phamtruong.bepngon.ui.main.MainActivity
 import com.phamtruong.bepngon.ui.sign.SignActivity
 import com.phamtruong.bepngon.util.SharePreferenceUtils

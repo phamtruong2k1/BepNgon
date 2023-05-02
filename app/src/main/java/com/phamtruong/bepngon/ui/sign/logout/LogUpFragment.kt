@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.phamtruong.bepngon.R
 import com.phamtruong.bepngon.databinding.FragmentLogUpBinding
-import com.phamtruong.bepngon.sever.account.AccountFBUtil
+import com.phamtruong.bepngon.sever.AccountFBUtil
 import com.phamtruong.bepngon.util.showToast
 import com.phamtruong.bepngon.view.setOnSafeClick
 

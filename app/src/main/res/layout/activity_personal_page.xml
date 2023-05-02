@@ -197,6 +197,19 @@
 
                     </LinearLayout>
 
+                    <TextView
+                        android:id="@+id/btnChange"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_30sdp"
+                        android:gravity="center"
+                        android:layout_marginHorizontal="@dimen/_16sdp"
+                        android:text="Chỉnh sửa thông tin"
+                        android:layout_marginVertical="@dimen/_12sdp"
+                        android:background="@drawable/bg_btn_change_infor"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_12ssp"
+                        android:fontFamily="@font/inter_600"/>
+
                 </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView

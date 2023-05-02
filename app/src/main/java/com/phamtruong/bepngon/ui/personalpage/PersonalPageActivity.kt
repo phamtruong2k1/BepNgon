@@ -22,6 +22,7 @@ import com.phamtruong.bepngon.ui.adapter.PostsAdapter
 import com.phamtruong.bepngon.util.DataHelper
 import com.phamtruong.bepngon.util.SharePreferenceUtils
 import com.phamtruong.bepngon.util.showToast
+import com.phamtruong.bepngon.view.openActivity
 import com.phamtruong.bepngon.view.setOnSafeClick
 import com.phamtruong.bepngon.view.show
 import com.squareup.picasso.Picasso
@@ -47,6 +48,10 @@ class PersonalPageActivity : AppCompatActivity() , SwipeRefreshLayout.OnRefreshL
         DataHelper.profileUser.observe(this){
             updateUiProfile(it)
             getPostData()
+        }
+
+        binding.btnChange.setOnSafeClick {
+            openActivity(ProfileActivity::class.java)
         }
 
         binding.swipLayout.setOnRefreshListener(this)

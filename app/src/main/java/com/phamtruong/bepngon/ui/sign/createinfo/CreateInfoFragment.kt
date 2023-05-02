@@ -1,7 +1,6 @@
 package com.phamtruong.bepngon.ui.sign.createinfo
 
 import android.annotation.SuppressLint
-import android.app.ProgressDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -23,7 +22,7 @@ import com.phamtruong.bepngon.R
 import com.phamtruong.bepngon.databinding.FragmentCreateInfoBinding
 import com.phamtruong.bepngon.databinding.LayoutBottomSheetMoreBinding
 import com.phamtruong.bepngon.model.ProfileModel
-import com.phamtruong.bepngon.sever.account.AccountFBUtil
+import com.phamtruong.bepngon.sever.AccountFBUtil
 import com.phamtruong.bepngon.ui.baidang.DangBaiActivity
 import com.phamtruong.bepngon.ui.main.MainActivity
 import com.phamtruong.bepngon.util.Constant
@@ -34,7 +33,6 @@ import com.phamtruong.bepngon.view.hide
 import com.phamtruong.bepngon.view.openActivity
 import com.phamtruong.bepngon.view.setOnSafeClick
 import com.phamtruong.bepngon.view.show
-import com.squareup.picasso.Picasso
 import java.io.IOException
 import java.util.*
 

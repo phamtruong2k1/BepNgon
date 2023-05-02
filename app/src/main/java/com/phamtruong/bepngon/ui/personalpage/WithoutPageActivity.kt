@@ -12,10 +12,8 @@ import com.phamtruong.bepngon.model.ProfileModel
 import com.phamtruong.bepngon.sever.FBConstant
 import com.phamtruong.bepngon.sever.ProfileFBListener
 import com.phamtruong.bepngon.sever.ProfileFBUtil
-import com.phamtruong.bepngon.sever.account.AccountFBUtil
 import com.phamtruong.bepngon.ui.adapter.EventClickPostsAdapterListener
 import com.phamtruong.bepngon.ui.adapter.PostsAdapter
-import com.phamtruong.bepngon.util.SharePreferenceUtils
 import com.phamtruong.bepngon.view.setOnSafeClick
 import com.phamtruong.bepngon.view.show
 import com.squareup.picasso.Picasso
