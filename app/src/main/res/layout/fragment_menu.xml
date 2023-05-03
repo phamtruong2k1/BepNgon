@@ -25,7 +25,7 @@
             android:layout_height="@dimen/_120sdp"
             android:layout_gravity="center"
             android:scaleType="centerCrop"
-            app:civ_border_color="#595959"
+            app:civ_border_color="@color/color_primary"
             app:civ_border_width="3dp"
             android:src="@drawable/ic_default_profile"/>
 
@@ -49,6 +49,7 @@
             android:layout_marginBottom="@dimen/_12sdp"
             android:layout_marginHorizontal="@dimen/_16sdp"
             android:background="@drawable/bg_btn_ll_profile"
+            android:backgroundTint="#F6673A"
             >
             <TextView
                 android:layout_width="match_parent"
@@ -56,7 +57,7 @@
                 android:text="Trang cá nhân"
                 android:gravity="center"
                 android:fontFamily="@font/inter_600"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="@dimen/_12sdp"/>
 
         </LinearLayout>
@@ -332,9 +333,10 @@
             android:text="Đăng xuất"
             android:layout_marginVertical="@dimen/_12sdp"
             android:background="@drawable/bg_btn_ll_profile"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="@dimen/_12ssp"
-            android:fontFamily="@font/inter_600"/>
+            android:fontFamily="@font/inter_600"
+            android:backgroundTint="#686463"/>
 
     </LinearLayout>
 

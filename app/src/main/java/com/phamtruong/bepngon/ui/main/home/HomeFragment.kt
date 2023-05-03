@@ -22,6 +22,7 @@ import com.phamtruong.bepngon.ui.personalpage.PersonalPageActivity
 import com.phamtruong.bepngon.util.DataHelper
 import com.phamtruong.bepngon.sever.FBConstant
 import com.phamtruong.bepngon.ui.adapter.PostsAdapter
+import com.phamtruong.bepngon.ui.chat.RoomChatActivity
 import com.phamtruong.bepngon.util.showToast
 import com.phamtruong.bepngon.view.openActivity
 import com.phamtruong.bepngon.view.setOnSafeClick
@@ -74,7 +75,7 @@ class HomeFragment : Fragment() , EventClickPostsAdapterListener, SwipeRefreshLa
         }
 
         binding.toolBar.imgChat.setOnClickListener {
-            requireContext().openActivity(ChatActivity::class.java)
+            requireContext().openActivity(RoomChatActivity::class.java)
         }
     }
 

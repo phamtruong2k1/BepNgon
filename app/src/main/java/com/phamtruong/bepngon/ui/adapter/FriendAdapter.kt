@@ -45,14 +45,15 @@ class FriendAdapter(
         }
 
         viewHolder.imgAvatar.setOnClickListener {
-            listener.clickAvatarFriend(friend)
+            listener.clickAvatarFriend(friend.accountId)
         }
     }
 
 
     @SuppressLint("NotifyDataSetChanged")
     fun setListData(arr : ArrayList<ProfileModel>) {
-        listData = arr
+        listData.clear()
+        listData.addAll(arr)
         notifyDataSetChanged()
     }
 
@@ -62,5 +63,5 @@ class FriendAdapter(
 
 interface EventClickFriendAdapterListener {
     fun clickMoreFriend(friend : ProfileModel)
-    fun clickAvatarFriend(friend : ProfileModel)
+    fun clickAvatarFriend(accountID : String)
 }

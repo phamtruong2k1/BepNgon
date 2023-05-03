@@ -126,9 +126,9 @@ class DetailBaiDangActivity : AppCompatActivity() {
 
     private fun postComment() {
         if (binding.edtComment.text.toString().trim().isNotEmpty()) {
-            CommentFBUtil.insertComment(
+            insertComment(
                 CommentModel(
-                    DataUtil.getIdByTime(),
+                    DataUtil.getTime(),
                     SharePreferenceUtils.getAccountID(),
                     postModel!!.postId,
                     binding.edtComment.text.toString(),
@@ -137,6 +137,13 @@ class DetailBaiDangActivity : AppCompatActivity() {
             )
             binding.edtComment.setText("")
         }
+    }
+
+    fun insertComment(commentModel: CommentModel) {
+        val mDatabase = FirebaseDatabase.getInstance().getReference(FBConstant.ROOT)
+        mDatabase.child(FBConstant.COMMENT_F).child(
+            commentModel.commentId
+        ).setValue(commentModel)
     }
 
 }

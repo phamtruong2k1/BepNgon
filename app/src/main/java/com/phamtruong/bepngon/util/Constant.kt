@@ -4,7 +4,7 @@ object Constant {
 
     const val TAG = "truongpa"
 
-    const val URL_AVATAR_DEFAUT = "https://firebasestorage.googleapis.com/v0/b/bepngon-63eb8.appspot.com/o/Group%207.png?alt=media&token=af51bbf3-ef70-4ba5-bc6c-e16b5f65597e"
+    const val URL_AVATAR_DEFAUT = "https://firebasestorage.googleapis.com/v0/b/bepngon-63eb8.appspot.com/o/Group%207.png?alt=media&token=ee3bab49-ed33-41ad-9695-8f54ad895fb9"
 
 
 

@@ -73,14 +73,13 @@ class PersonalPageActivity : AppCompatActivity() , SwipeRefreshLayout.OnRefreshL
 
     private val mDatabase = FirebaseDatabase.getInstance().getReference(FBConstant.ROOT)
     private fun getPostData() {
-        val query: Query =
-            mDatabase.child(FBConstant.POST_F).orderByChild("accountId").equalTo(SharePreferenceUtils.getAccountID())
-        query.addListenerForSingleValueEvent(object : ValueEventListener{
+        mDatabase.child(FBConstant.POST_F).addListenerForSingleValueEvent(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
                     val listData = ArrayList<PostModel>()
                     for (postSnapshot in snapshot.children) {
                         postSnapshot.getValue<PostModel>()?.let {
+                            if (it.accountId == SharePreferenceUtils.getAccountID())
                             listData.add(
                                 it
                             )

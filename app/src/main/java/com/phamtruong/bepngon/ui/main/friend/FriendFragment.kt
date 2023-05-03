@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -18,7 +19,11 @@ import com.phamtruong.bepngon.model.ProfileModel
 import com.phamtruong.bepngon.ui.adapter.EventClickFriendAdapterListener
 import com.phamtruong.bepngon.ui.adapter.FriendAdapter
 import com.phamtruong.bepngon.sever.FBConstant
+import com.phamtruong.bepngon.ui.personalpage.PersonalPageActivity
+import com.phamtruong.bepngon.ui.personalpage.WithoutPageActivity
+import com.phamtruong.bepngon.util.SharePreferenceUtils
 import com.phamtruong.bepngon.util.showToast
+import com.phamtruong.bepngon.view.openActivity
 
 class FriendFragment : Fragment(), EventClickFriendAdapterListener {
 
@@ -56,8 +61,17 @@ class FriendFragment : Fragment(), EventClickFriendAdapterListener {
 
     }
 
-    override fun clickAvatarFriend(friend: ProfileModel) {
-
+    override fun clickAvatarFriend(accountID : String) {
+        if (accountID == SharePreferenceUtils.getAccountID()) {
+            requireContext().openActivity(
+                PersonalPageActivity::class.java
+            )
+        } else {
+            requireContext().openActivity(
+                WithoutPageActivity::class.java,
+                bundleOf("idUser" to accountID)
+            )
+        }
     }
 
     private val mDatabase = FirebaseDatabase.getInstance().getReference(FBConstant.ROOT)

@@ -36,7 +36,7 @@ import com.squareup.picasso.Picasso
 
 class PostsAdapter(
     var context: Context,
-    private var listData: List<PostModel>,
+    private var listData: ArrayList<PostModel>,
     val listener: EventClickPostsAdapterListener
 ) : RecyclerView.Adapter<PostsAdapter.ViewHolder>() {
 
@@ -202,7 +202,8 @@ class PostsAdapter(
 
     @SuppressLint("NotifyDataSetChanged")
     fun setListData(arr: List<PostModel>) {
-        listData = arr
+        listData.clear()
+        listData.addAll(arr)
         notifyDataSetChanged()
     }
 

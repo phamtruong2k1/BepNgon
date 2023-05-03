@@ -77,16 +77,12 @@ class WithoutPageActivity : AppCompatActivity() , SwipeRefreshLayout.OnRefreshLi
 
     private val mDatabase = FirebaseDatabase.getInstance().getReference(FBConstant.ROOT)
     private fun getPostData() {
-        val query: Query =
-            mDatabase.child(FBConstant.POST_F).orderByChild("accountId").equalTo(
-                idUser
-            )
-        query.get().addOnSuccessListener { dataSnapshot->
+        mDatabase.child(FBConstant.POST_F).get().addOnSuccessListener { dataSnapshot->
             if (dataSnapshot.exists()) {
                 val listData = ArrayList<PostModel>()
                 for (postSnapshot in dataSnapshot.children) {
                     postSnapshot.getValue<PostModel>()?.let {
-                        listData.add(
+                        if (it.accountId == idUser)listData.add(
                             it
                         )
                     }

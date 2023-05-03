@@ -28,6 +28,7 @@ import com.phamtruong.bepngon.ui.main.MainActivity
 import com.phamtruong.bepngon.util.Constant
 import com.phamtruong.bepngon.sever.FBConstant
 import com.phamtruong.bepngon.util.SharePreferenceUtils
+import com.phamtruong.bepngon.util.showToast
 import com.phamtruong.bepngon.view.gone
 import com.phamtruong.bepngon.view.hide
 import com.phamtruong.bepngon.view.openActivity
@@ -45,7 +46,6 @@ class CreateInfoFragment : Fragment() {
     var storage: FirebaseStorage? = null
     lateinit var profile: ProfileModel
 
-
     companion object {
         const val PICK_IMAGE_REQUEST = 12345
     }
@@ -53,9 +53,7 @@ class CreateInfoFragment : Fragment() {
     var ngayThangNam = ""
     var namSinh = 2023
 
-
     private var filePath: Uri? = null
-
 
     val mDatabase = FirebaseDatabase.getInstance().getReference(FBConstant.ROOT)
 
@@ -83,10 +81,6 @@ class CreateInfoFragment : Fragment() {
         binding.toolBar.imgChat.gone()
         binding.toolBar.txtTitle.text = "Thông tin người dùng"
 
-        binding.edtName.setText(profile.name)
-        //binding.edtBirthDay.text = profile.birthDay
-
-//        Picasso.get().load(profile.avt).into(binding.imgAvt)
 
         binding.radioGroup.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
@@ -106,7 +100,12 @@ class CreateInfoFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.txtNext.setOnClickListener {
-            uploadImage()
+            if (binding.edtName.text.toString().trim().isEmpty()) {
+                requireContext().showToast("Tên không được trống!")
+            } else {
+                uploadImage()
+            }
+
         }
 
         binding.txtSkip.setOnClickListener {
@@ -158,10 +157,7 @@ class CreateInfoFragment : Fragment() {
         val intent = Intent()
         intent.type = "image/*"
         intent.action = Intent.ACTION_GET_CONTENT
-        startActivityForResult(
-            Intent.createChooser(intent, "Select Picture"),
-            DangBaiActivity.PICK_IMAGE_REQUEST
-        )
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), DangBaiActivity.PICK_IMAGE_REQUEST)
     }
 
     private fun uploadImage() {
@@ -176,7 +172,11 @@ class CreateInfoFragment : Fragment() {
                         Log.d(Constant.TAG, "uploadImage: $imageLink")
                         profile.avt = imageLink
                         profile.name = binding.edtName.text.toString()
-                        profile.birthDay = binding.edtBirthDay.text.toString()
+                        if (isChooseDate) {
+                            profile.birthDay = binding.edtBirthDay.text.toString()
+                        } else {
+                            profile.birthDay = ""
+                        }
                         addNewProfile(profile)
                     }.addOnFailureListener {
                         Toast.makeText(requireContext(), "Có lỗi!", Toast.LENGTH_SHORT)
@@ -213,6 +213,7 @@ class CreateInfoFragment : Fragment() {
 
     }
 
+    private var isChooseDate = false
     private val myCalendar = Calendar.getInstance()
     private fun showBottomSheet() {
         val bottomSheetBinding = LayoutBottomSheetMoreBinding.inflate(layoutInflater)
@@ -284,6 +285,7 @@ class CreateInfoFragment : Fragment() {
                     R.color.black
                 )
             )
+            isChooseDate = true
         }
 
         moreBottomSheet.show()

@@ -18,12 +18,14 @@ import com.phamtruong.bepngon.sever.FirebaseDatabaseUtil
 import com.phamtruong.bepngon.ui.adapter.EventClickImageAdapterListener
 import com.phamtruong.bepngon.ui.adapter.ImagePostAdapter
 import com.phamtruong.bepngon.util.Constant.TAG
+import com.phamtruong.bepngon.util.DataHelper
 import com.phamtruong.bepngon.util.DataUtil
 import com.phamtruong.bepngon.util.SharePreferenceUtils
 import com.phamtruong.bepngon.util.showToast
 import com.phamtruong.bepngon.view.gone
 import com.phamtruong.bepngon.view.hide
 import com.phamtruong.bepngon.view.show
+import com.squareup.picasso.Picasso
 import java.io.IOException
 import java.util.*
 
@@ -62,6 +64,11 @@ class DangBaiActivity : AppCompatActivity() {
             }
         })
 
+        DataHelper.profileUser.observe(this){
+            Picasso.get().load(it.avt).into(binding.imgAvatar)
+            binding.txtName.text = it.name
+        }
+
         binding.rcyImage.adapter = adapter
 
         storage = FirebaseStorage.getInstance()
@@ -78,7 +85,12 @@ class DangBaiActivity : AppCompatActivity() {
             chooseImage()
         }
         binding.txtDangBai.setOnClickListener {
-            uploadImage()
+            if (binding.edtTag.text.toString().trim().isEmpty()) {
+                showToast("Nhập tiêu đề!")
+            } else {
+                uploadImage()
+            }
+
         }
     }
 
@@ -116,7 +128,7 @@ class DangBaiActivity : AppCompatActivity() {
                 PostModel(
                     postId,
                     SharePreferenceUtils.getAccountID(),
-                    "",
+                    binding.edtTag.text.toString(),
                     binding.edtContent.text.toString(),
                     "",
                     time
@@ -132,8 +144,7 @@ class DangBaiActivity : AppCompatActivity() {
                     val ref = storageReference!!.child("images/" + UUID.randomUUID().toString())
                     ref.putFile(image)
                         .addOnSuccessListener {
-                            progressDialog.dismiss();
-                            Toast.makeText(this, "Uploaded", Toast.LENGTH_SHORT).show()
+                            progressDialog.dismiss()
                             val downloadUri: Task<Uri> = it.storage.downloadUrl
                             downloadUri.addOnSuccessListener { link ->
                                 val imageLink = link.toString()
@@ -142,12 +153,13 @@ class DangBaiActivity : AppCompatActivity() {
                                     PostModel(
                                         postId,
                                         SharePreferenceUtils.getAccountID(),
-                                        "",
+                                        binding.edtTag.text.toString(),
                                         binding.edtContent.text.toString(),
                                         imageLink,
                                         time
                                     )
                                 )
+                                showToast("Đăng thành công!")
                             }.addOnFailureListener {
                                 Toast.makeText(this, "Có lỗi!", Toast.LENGTH_SHORT).show()
                             }

@@ -236,7 +236,11 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Bình luận"/>
+                android:text="Bình luận"
+                android:textColor="@color/black"
+                android:layout_marginStart="@dimen/_4sdp"
+                android:textSize="@dimen/_12sdp"
+                android:fontFamily="@font/inter_500"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rcyComment"
@@ -246,7 +250,9 @@
                 android:clipToPadding="false"
                 android:paddingBottom="30dp"
                 android:scrollbars="none"
-                app:spanCount="1"/>
+                app:spanCount="1"
+                android:paddingHorizontal="@dimen/_4sdp"
+                tools:listitem="@layout/item_comment"/>
 
         </LinearLayout>
 

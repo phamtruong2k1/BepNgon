@@ -26,7 +26,7 @@
             android:gravity="center_vertical"
             android:paddingLeft="@dimen/_8sdp"
             android:text="Trang chủ"
-            android:textColor="@color/color_primary"
+            android:textColor="@color/black"
             android:fontFamily="@font/inter_700"
             android:textSize="@dimen/_16sdp"/>
 

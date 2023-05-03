@@ -43,7 +43,8 @@ class ImagePostAdapter(
 
     @SuppressLint("NotifyDataSetChanged")
     fun setListData(arr : ArrayList<Uri>) {
-        listData = arr
+        listData.clear()
+        listData.addAll(arr)
         notifyDataSetChanged()
     }
 
