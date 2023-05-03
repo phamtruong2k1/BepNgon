@@ -33,8 +33,6 @@ class FriendFragment : Fragment(), EventClickFriendAdapterListener {
 
     private lateinit var database: DatabaseReference
 
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

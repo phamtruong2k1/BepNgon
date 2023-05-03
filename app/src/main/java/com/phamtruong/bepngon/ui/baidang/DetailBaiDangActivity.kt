@@ -3,6 +3,7 @@ package com.phamtruong.bepngon.ui.baidang
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -13,6 +14,7 @@ import com.phamtruong.bepngon.databinding.ActivityDetailBaiDangBinding
 import com.phamtruong.bepngon.model.CommentModel
 import com.phamtruong.bepngon.model.PostModel
 import com.phamtruong.bepngon.model.ProfileModel
+import com.phamtruong.bepngon.model.ReactionModel
 import com.phamtruong.bepngon.sever.CommentFBUtil
 import com.phamtruong.bepngon.sever.FBConstant
 import com.phamtruong.bepngon.ui.adapter.CommentAdapter
@@ -21,6 +23,7 @@ import com.phamtruong.bepngon.ui.personalpage.PersonalPageActivity
 import com.phamtruong.bepngon.ui.personalpage.WithoutPageActivity
 import com.phamtruong.bepngon.util.DataUtil
 import com.phamtruong.bepngon.util.SharePreferenceUtils
+import com.phamtruong.bepngon.view.gone
 import com.phamtruong.bepngon.view.openActivity
 import com.phamtruong.bepngon.view.show
 import com.squareup.picasso.Picasso
@@ -77,6 +80,7 @@ class DetailBaiDangActivity : AppCompatActivity() {
 
     private fun getPost(postData : PostModel) {
         binding.txtContent.text = postData.content
+        binding.txtTime.text = DataUtil.showTime(postData.create_time)
 
         if (postData.img != ""){
             binding.layoutImage.show()
@@ -120,8 +124,83 @@ class DetailBaiDangActivity : AppCompatActivity() {
         })
     }
 
-    private fun getComment(postData : PostModel) {
+    private fun getComment(post : PostModel) {
+        binding.rlReaction.setOnClickListener {
+            if (binding.imgHeart.isVisible) {
+                val reactionModel = ReactionModel(
+                    DataUtil.getIdByTime(),
+                    SharePreferenceUtils.getAccountID(),
+                    post.postId,
+                    DataUtil.getTime()
+                )
+                FirebaseDatabase.getInstance().getReference(FBConstant.ROOT)
+                    .child(FBConstant.REACTION_F).child(
+                        reactionModel.reactionId
+                    ).setValue(reactionModel).addOnSuccessListener {
+                        binding.imgHeart.gone()
+                        binding.imgHeartFill.show()
+                    }
 
+            } else {
+                val query2: Query = FirebaseDatabase.getInstance().getReference(FBConstant.ROOT)
+                    .child(FBConstant.REACTION_F)
+                    .orderByChild("accountId").equalTo(SharePreferenceUtils.getAccountID())
+                query2.addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            for (appleSnapshot in dataSnapshot.children) {
+                                val reactionModel = appleSnapshot.getValue<ReactionModel>()
+                                if (reactionModel?.postId == post.postId) {
+                                    appleSnapshot.ref.removeValue()
+                                    binding.imgHeart.show()
+                                    binding.imgHeartFill.gone()
+                                    return
+                                }
+                            }
+
+                        }
+                    }
+                    override fun onCancelled(databaseError: DatabaseError) {}
+                })
+            }
+        }
+
+        val query2: Query = FirebaseDatabase.getInstance().getReference(FBConstant.ROOT)
+            .child(FBConstant.REACTION_F)
+            .orderByChild("accountId").equalTo(SharePreferenceUtils.getAccountID())
+        query2.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    for (appleSnapshot in dataSnapshot.children) {
+                        val reactionModel = appleSnapshot.getValue<ReactionModel>()
+                        if (reactionModel?.postId == post.postId) {
+                            binding.imgHeart.gone()
+                            binding.imgHeartFill.show()
+                            return
+                        }
+                    }
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {}
+        })
+
+
+        val reference = FirebaseDatabase.getInstance().getReference(FBConstant.ROOT)
+
+        val query: Query =
+            reference.child(FBConstant.REACTION_F).orderByChild("postId").equalTo(post.postId)
+        query.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    binding.numberLike.text = String.format("%d", dataSnapshot.childrenCount)
+                } else {
+                    binding.numberLike.text = "0"
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {}
+        })
     }
 
     private fun postComment() {

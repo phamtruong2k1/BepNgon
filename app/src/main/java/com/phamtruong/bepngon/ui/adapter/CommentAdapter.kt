@@ -18,6 +18,7 @@ import com.phamtruong.bepngon.sever.ProfileFBListener
 import com.phamtruong.bepngon.sever.ProfileFBUtil
 import com.phamtruong.bepngon.ui.personalpage.PersonalPageActivity
 import com.phamtruong.bepngon.ui.personalpage.WithoutPageActivity
+import com.phamtruong.bepngon.util.DataUtil
 import com.phamtruong.bepngon.util.SharePreferenceUtils
 import com.phamtruong.bepngon.view.gone
 import com.phamtruong.bepngon.view.openActivity
@@ -54,7 +55,7 @@ class CommentAdapter(
 //            listener.click(comment)
 //        }
 
-        viewHolder.txtTime.text = comment.create_time
+        viewHolder.txtTime.text = DataUtil.showTime(comment.create_time)
 
 //        if (comment.accountId == SharePreferenceUtils.getAccountID()) {
 //            viewHolder.imgMore.show()

@@ -78,7 +78,9 @@ class PostsAdapter(
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val post = listData[position]
 
-        viewHolder.txtContent.text = post.content
+        viewHolder.txtContent.text = DataUtil.cutTextLong(post.content, 256)
+
+        viewHolder.txtTime.text = DataUtil.showTime(post.create_time)
 
         if (post.img != "") {
             viewHolder.layoutImage.show()
@@ -153,7 +155,8 @@ class PostsAdapter(
                             return
                         }
                     }
-
+                    viewHolder.imgHeart.show()
+                    viewHolder.imgHeartFill.gone()
                 }
             }
 

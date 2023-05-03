@@ -33,14 +33,15 @@
         <entry key="..\:/BepNgon/app/src/main/res/layout/activity_personal_page.xml" value="0.264" />
         <entry key="..\:/BepNgon/app/src/main/res/layout/activity_profile.xml" value="0.264" />
         <entry key="..\:/BepNgon/app/src/main/res/layout/activity_room_chat.xml" value="0.3625" />
-        <entry key="..\:/BepNgon/app/src/main/res/layout/activity_search.xml" value="0.3484375" />
+        <entry key="..\:/BepNgon/app/src/main/res/layout/activity_save_posst.xml" value="0.19322916666666667" />
+        <entry key="..\:/BepNgon/app/src/main/res/layout/activity_search.xml" value="0.4" />
         <entry key="..\:/BepNgon/app/src/main/res/layout/activity_sign.xml" value="0.2" />
         <entry key="..\:/BepNgon/app/src/main/res/layout/activity_splash.xml" value="0.2" />
         <entry key="..\:/BepNgon/app/src/main/res/layout/activity_without_page.xml" value="0.2265625" />
         <entry key="..\:/BepNgon/app/src/main/res/layout/fragment_create_info.xml" value="0.264" />
         <entry key="..\:/BepNgon/app/src/main/res/layout/fragment_flowed.xml" value="0.1847879083373964" />
         <entry key="..\:/BepNgon/app/src/main/res/layout/fragment_friend.xml" value="0.3625" />
-        <entry key="..\:/BepNgon/app/src/main/res/layout/fragment_home.xml" value="0.3234924623115578" />
+        <entry key="..\:/BepNgon/app/src/main/res/layout/fragment_home.xml" value="0.30737365368682684" />
         <entry key="..\:/BepNgon/app/src/main/res/layout/fragment_log_up.xml" value="0.264" />
         <entry key="..\:/BepNgon/app/src/main/res/layout/fragment_login.xml" value="0.2" />
         <entry key="..\:/BepNgon/app/src/main/res/layout/fragment_menu.xml" value="0.4" />

@@ -5,8 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.phamtruong.bepngon.R
-import com.phamtruong.bepngon.databinding.FragmentNoteBinding
 import com.phamtruong.bepngon.databinding.FragmentNotificationBinding
 
 class NotificationFragment : Fragment() {
@@ -26,8 +24,6 @@ class NotificationFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
 
     }
     
