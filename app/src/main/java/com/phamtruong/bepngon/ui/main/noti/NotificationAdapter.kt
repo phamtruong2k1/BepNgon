@@ -12,6 +12,7 @@ import com.phamtruong.bepngon.R
 import com.phamtruong.bepngon.model.NotificationModel
 import com.phamtruong.bepngon.model.ProfileModel
 import com.phamtruong.bepngon.ui.adapter.FriendAdapter
+import com.phamtruong.bepngon.util.DataUtil
 import com.squareup.picasso.Picasso
 
 class NotificationAdapter(
@@ -40,7 +41,7 @@ class NotificationAdapter(
 
         viewHolder.txtName.text = noti.name
         viewHolder.txtContent.text = noti.content
-        viewHolder.txtTime.text = noti.create_time
+        viewHolder.txtTime.text = DataUtil.showTime(noti.create_time)
     }
 
 

@@ -42,7 +42,7 @@ data class NotificationModel(
     }
 
     override fun compareTo(other: NotificationModel): Int {
-        return if (create_time > other.create_time) 1
-        else 0
+        return if (create_time > other.create_time) -1
+        else 1
     }
 }

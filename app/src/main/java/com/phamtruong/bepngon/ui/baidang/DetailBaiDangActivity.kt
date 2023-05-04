@@ -12,15 +12,17 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.getValue
 import com.phamtruong.bepngon.databinding.ActivityDetailBaiDangBinding
 import com.phamtruong.bepngon.model.CommentModel
+import com.phamtruong.bepngon.model.NotificationModel
 import com.phamtruong.bepngon.model.PostModel
 import com.phamtruong.bepngon.model.ProfileModel
 import com.phamtruong.bepngon.model.ReactionModel
-import com.phamtruong.bepngon.sever.CommentFBUtil
 import com.phamtruong.bepngon.sever.FBConstant
+import com.phamtruong.bepngon.sever.FirebaseDatabaseUtil
 import com.phamtruong.bepngon.ui.adapter.CommentAdapter
 import com.phamtruong.bepngon.ui.adapter.EventClickCommentListener
 import com.phamtruong.bepngon.ui.personalpage.PersonalPageActivity
 import com.phamtruong.bepngon.ui.personalpage.WithoutPageActivity
+import com.phamtruong.bepngon.util.DataHelper
 import com.phamtruong.bepngon.util.DataUtil
 import com.phamtruong.bepngon.util.SharePreferenceUtils
 import com.phamtruong.bepngon.view.gone
@@ -139,6 +141,7 @@ class DetailBaiDangActivity : AppCompatActivity() {
                     ).setValue(reactionModel).addOnSuccessListener {
                         binding.imgHeart.gone()
                         binding.imgHeartFill.show()
+                        addNotification(postModel!!, "Đã thích một bài viết của bạn.")
                     }
 
             } else {
@@ -203,6 +206,24 @@ class DetailBaiDangActivity : AppCompatActivity() {
         })
     }
 
+    private fun addNotification(post: PostModel, content : String) {
+        if (post.accountId == SharePreferenceUtils.getAccountID())
+            return
+        val notifi = NotificationModel(
+            DataUtil.ConvertToMD5(DataUtil.getTime()),
+            post.accountId,
+            post.postId,
+            DataHelper.profileUser.value?.avt?: "",
+            DataHelper.profileUser.value?.name?: "",
+            content,
+            DataUtil.getTime()
+        )
+        FirebaseDatabase.getInstance().getReference(FirebaseDatabaseUtil.ROOT)
+            .child(FBConstant.NOTI_F).child(post.accountId)
+            .child(notifi.create_time)
+            .setValue(notifi)
+    }
+
     private fun postComment() {
         if (binding.edtComment.text.toString().trim().isNotEmpty()) {
             insertComment(
@@ -215,6 +236,7 @@ class DetailBaiDangActivity : AppCompatActivity() {
                 )
             )
             binding.edtComment.setText("")
+            addNotification(postModel!!, "Đã bình luận một bài viết của bạn.")
         }
     }
 
