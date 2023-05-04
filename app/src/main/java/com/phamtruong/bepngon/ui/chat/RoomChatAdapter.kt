@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.phamtruong.bepngon.R
@@ -14,6 +15,7 @@ import com.phamtruong.bepngon.model.chat.RoomChatModel
 import com.phamtruong.bepngon.sever.ProfileFBListener
 import com.phamtruong.bepngon.sever.ProfileFBUtil
 import com.phamtruong.bepngon.util.SharePreferenceUtils
+import com.phamtruong.bepngon.view.setOnSafeClick
 import com.squareup.picasso.Picasso
 
 class RoomChatAdapter(
@@ -27,6 +29,7 @@ class RoomChatAdapter(
         var txtName: TextView = view.findViewById(R.id.txtName)
         var txtContent: TextView = view.findViewById(R.id.txtContent)
         var txtTime: TextView = view.findViewById(R.id.txtTime)
+        var llView: LinearLayout = view.findViewById(R.id.llView)
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
@@ -48,6 +51,10 @@ class RoomChatAdapter(
         showInforRoom(viewHolder.imAvatar, viewHolder.txtName, accountId)
 
         showLastMess(viewHolder.txtContent, message.room_id)
+
+        viewHolder.llView.setOnSafeClick {
+            listener.click(message)
+        }
 
     }
 

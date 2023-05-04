@@ -8,7 +8,7 @@
     android:layout_marginVertical="3dp">
 
     <TextView
-        android:id="@+id/txtName_received"
+        android:id="@+id/txtTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="aaaa"

@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.phamtruong.bepngon.R
 import com.phamtruong.bepngon.model.chat.MessageModel
+import com.phamtruong.bepngon.util.DataUtil
 import com.phamtruong.bepngon.util.SharePreferenceUtils
 
 class ChatAdapter(
@@ -41,7 +42,7 @@ class ChatAdapter(
     }
 
     override fun getItemViewType(position: Int): Int {
-        return if (listData.get(position).accountId.equals(SharePreferenceUtils.getAccountID()))
+        return if (listData[position].accountId == SharePreferenceUtils.getAccountID())
             ViewType.TYPE_ONE.type
         else
             ViewType.TYPE_TWO.type
@@ -51,6 +52,7 @@ class ChatAdapter(
         fun bind(item: MessageModel) {
             with(itemView) {
                 this.findViewById<TextView>(R.id.txtMsg_send).text = item.content
+                this.findViewById<TextView>(R.id.txtTime).text = DataUtil.showTime(item.crete_time)
             }
 
         }
@@ -60,6 +62,7 @@ class ChatAdapter(
         fun bind(item: MessageModel) {
             with(itemView) {
                 this.findViewById<TextView>(R.id.txtMsg_received).text = item.content
+                this.findViewById<TextView>(R.id.txtTime).text = DataUtil.showTime(item.crete_time)
             }
         }
     }

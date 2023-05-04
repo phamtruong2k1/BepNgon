@@ -1,17 +1,26 @@
 package com.phamtruong.bepngon.ui.chat
 
 import android.os.Bundle
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.getValue
 import com.phamtruong.bepngon.databinding.ActivityChatBinding
+import com.phamtruong.bepngon.model.ProfileModel
 import com.phamtruong.bepngon.model.chat.MessageModel
 import com.phamtruong.bepngon.model.chat.RoomChatModel
 import com.phamtruong.bepngon.sever.FBConstant
+import com.phamtruong.bepngon.sever.ProfileFBListener
+import com.phamtruong.bepngon.sever.ProfileFBUtil
+import com.phamtruong.bepngon.ui.personalpage.WithoutPageActivity
 import com.phamtruong.bepngon.util.DataUtil
+import com.phamtruong.bepngon.view.openActivity
+import com.squareup.picasso.Picasso
 
 class ChatActivity : AppCompatActivity() {
 
@@ -60,6 +69,7 @@ class ChatActivity : AppCompatActivity() {
                         }
                     }
                     adapter.setListData(listData)
+                    binding.msgShow.scrollToPosition(adapter.itemCount-1)
                     if (listData.size > 0 && !isStatusRoom) {
                         insertRoom(true)
                     }
@@ -85,6 +95,17 @@ class ChatActivity : AppCompatActivity() {
                 )
             }
         }
+
+        binding.back.setOnClickListener {
+            onBackPressed()
+        }
+
+        binding.imAvatar.setOnClickListener {
+            openActivity(
+                WithoutPageActivity::class.java,
+                bundleOf("idUser" to idYour)
+            )
+        }
     }
 
 
@@ -98,7 +119,18 @@ class ChatActivity : AppCompatActivity() {
             account1 = idYour
             account2 = idUser
         }
+        showInforRoom(binding.imAvatar, binding.txtName, idYour)
         insertRoom()
+    }
+
+    private fun showInforRoom(imAvatar: ImageView, txtName: TextView, accountId: String) {
+        ProfileFBUtil.getProfile(accountId, object : ProfileFBListener {
+            override fun actionSuccess(profileModel: ProfileModel) {
+                Picasso.get().load(profileModel.avt).into(imAvatar)
+                txtName.text = profileModel.name
+            }
+            override fun actionFail() {}
+        })
     }
 
     private var isStatusRoom = false
@@ -118,6 +150,7 @@ class ChatActivity : AppCompatActivity() {
             .child(messageModel.message_id)
             .setValue(messageModel).addOnSuccessListener {
                 insertRoom(true)
+                binding.edtMessage.setText("")
             }
     }
 

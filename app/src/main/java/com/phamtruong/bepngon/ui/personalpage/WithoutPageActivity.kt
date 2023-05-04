@@ -60,7 +60,28 @@ class WithoutPageActivity : AppCompatActivity() , SwipeRefreshLayout.OnRefreshLi
         binding.swipLayout.setOnRefreshListener(this)
 
         initListener()
+
+        //initData()
     }
+
+    /*private fun initData() {
+        mDatabase.child(FBConstant.FOLLOW_F).orderByChild("accountId")
+            .equalTo(SharePreferenceUtils.getAccountID())
+            .addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        adapter.setListData(ArrayList())
+                        binding.rcySavePost.removeAllViews()
+                        for (postSnapshot in dataSnapshot.children) {
+                            postSnapshot.getValue<SaveModel>()?.let {
+                                getPostData(it.postId)
+                            }
+                        }
+                    }
+                }
+                override fun onCancelled(databaseError: DatabaseError) {}
+            })
+    }*/
 
     private fun initListener() {
         binding.llChat.setOnClickListener {
@@ -70,6 +91,14 @@ class WithoutPageActivity : AppCompatActivity() , SwipeRefreshLayout.OnRefreshLi
                     "idYour" to idUser,
                 )
             )
+        }
+
+        binding.llFollow.setOnClickListener {
+
+        }
+
+        binding.llFollowed.setOnClickListener {
+
         }
     }
 

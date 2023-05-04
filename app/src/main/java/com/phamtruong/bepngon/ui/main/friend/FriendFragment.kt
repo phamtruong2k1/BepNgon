@@ -80,6 +80,7 @@ class FriendFragment : Fragment(), EventClickFriendAdapterListener {
                 val listData = ArrayList<ProfileModel>()
                 for (postSnapshot in dataSnapshot.children) {
                     postSnapshot.getValue<ProfileModel>()?.let {
+                        if (it.accountId != SharePreferenceUtils.getAccountID())
                         listData.add(
                             it
                         )

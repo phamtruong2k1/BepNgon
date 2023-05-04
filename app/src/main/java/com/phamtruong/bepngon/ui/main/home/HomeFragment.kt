@@ -71,7 +71,7 @@ class HomeFragment : Fragment() , EventClickPostsAdapterListener, SwipeRefreshLa
         DataHelper.profileUser.observe(viewLifecycleOwner){
             Picasso.get().load(it.avt).into(binding.imgAvt)
         }
-        //binding.toolBar.imgChat.show()
+        binding.toolBar.imgChat.show()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

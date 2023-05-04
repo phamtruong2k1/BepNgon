@@ -2,6 +2,7 @@ package com.phamtruong.bepngon.ui.chat
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.core.os.bundleOf
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -11,6 +12,7 @@ import com.phamtruong.bepngon.databinding.ActivityRoomChatBinding
 import com.phamtruong.bepngon.model.chat.RoomChatModel
 import com.phamtruong.bepngon.sever.FBConstant
 import com.phamtruong.bepngon.util.SharePreferenceUtils
+import com.phamtruong.bepngon.view.openActivity
 
 class RoomChatActivity : AppCompatActivity() {
 
@@ -24,9 +26,23 @@ class RoomChatActivity : AppCompatActivity() {
 
         adapter = RoomChatAdapter(this, ArrayList(), object : RoomChatAdapterListener{
             override fun click(roomChatModel: RoomChatModel) {
-
+                val idUser = if (roomChatModel.accountId_1 != SharePreferenceUtils.getAccountID()){
+                    roomChatModel.accountId_1
+                } else {
+                    roomChatModel.accountId_2
+                }
+                openActivity(ChatActivity::class.java,
+                    bundleOf(
+                        "idUser" to SharePreferenceUtils.getAccountID(),
+                        "idYour" to idUser,
+                    )
+                )
             }
         })
+
+        binding.back.setOnClickListener {
+            onBackPressed()
+        }
 
         binding.msgShow.adapter = adapter
 
