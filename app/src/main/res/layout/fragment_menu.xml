@@ -102,11 +102,50 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/llRandom"
+                android:visibility="invisible"
+                android:id="@+id/llBmi"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/_12sdp"
+                android:background="@drawable/bg_btn_ll_profile"
+                android:paddingVertical="@dimen/_4sdp"
+                android:paddingStart="@dimen/_12sdp"
+                android:paddingEnd="@dimen/_4sdp"
+                android:orientation="vertical">
+
+                <ImageView
+                android:layout_width="@dimen/_29sdp"
+                android:layout_weight="1"
+                android:layout_gravity="left"
+                android:layout_height="0dp"
+                android:src="@drawable/ic_bmi"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_18sdp"
+                    android:text="Chỉ số BMI"
+                    android:fontFamily="@font/inter_500"
+                    android:textSize="@dimen/_12sdp"
+                    android:textColor="@color/black"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_60sdp"
+            android:layout_marginTop="@dimen/_18sdp"
+            android:layout_marginHorizontal="@dimen/_16sdp">
+
+            <LinearLayout
+                android:id="@+id/llRandom"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="@dimen/_12sdp"
                 android:background="@drawable/bg_btn_ll_profile"
                 android:paddingVertical="@dimen/_4sdp"
                 android:paddingStart="@dimen/_12sdp"
@@ -124,43 +163,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_18sdp"
                     android:text="Random"
-                    android:fontFamily="@font/inter_500"
-                    android:textSize="@dimen/_12sdp"
-                    android:textColor="@color/black"/>
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_60sdp"
-            android:layout_marginTop="@dimen/_18sdp"
-            android:layout_marginHorizontal="@dimen/_16sdp">
-
-            <LinearLayout
-                android:id="@+id/llBmi"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="@dimen/_12sdp"
-                android:background="@drawable/bg_btn_ll_profile"
-                android:paddingVertical="@dimen/_4sdp"
-                android:paddingStart="@dimen/_12sdp"
-                android:paddingEnd="@dimen/_4sdp"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="@dimen/_29sdp"
-                    android:layout_weight="1"
-                    android:layout_gravity="left"
-                    android:layout_height="0dp"
-                    android:src="@drawable/ic_bmi"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_18sdp"
-                    android:text="Chỉ số BMI"
                     android:fontFamily="@font/inter_500"
                     android:textSize="@dimen/_12sdp"
                     android:textColor="@color/black"/>

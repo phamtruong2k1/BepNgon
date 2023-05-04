@@ -9,6 +9,7 @@ import com.phamtruong.bepngon.base.BaseFragment
 import com.phamtruong.bepngon.databinding.FragmentMenuBinding
 import com.phamtruong.bepngon.model.ProfileModel
 import com.phamtruong.bepngon.ui.personalpage.PersonalPageActivity
+import com.phamtruong.bepngon.ui.save.SavePostActivity
 import com.phamtruong.bepngon.ui.sign.SignActivity
 import com.phamtruong.bepngon.util.DataHelper
 import com.phamtruong.bepngon.util.SharePreferenceUtils
@@ -54,6 +55,10 @@ class MenuFragment : BaseFragment<FragmentMenuBinding>() {
 
         binding.llPersonalPage.setOnClickListener {
             requireContext().openActivity(PersonalPageActivity::class.java)
+        }
+
+        binding.llSaved.setOnClickListener {
+            requireContext().openActivity(SavePostActivity::class.java)
         }
     }
 

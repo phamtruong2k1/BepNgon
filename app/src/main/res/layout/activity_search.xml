@@ -15,7 +15,7 @@
         <include
             android:id="@+id/toolBar"
             android:orientation="horizontal"
-            layout="@layout/layout_tool_bar_main"/>
+            layout="@layout/layout_tool_bar"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -35,7 +35,7 @@
                 android:textSize="@dimen/_12ssp"
                 android:fontFamily="@font/inter_400"
                 android:gravity="center_vertical"
-                android:background="@drawable/bg_ban_co_mon_gi_nao"/>
+                android:background="@drawable/bg_ban_co_mon_gi_nao" />
 
             <ImageView
                 android:id="@+id/imgAvt"

@@ -37,14 +37,14 @@ class SavePostActivity : AppCompatActivity() , EventClickPostsAdapterListener {
     private fun initData() {
         mDatabase.child(FBConstant.POST_F).get().addOnSuccessListener { dataSnapshot->
             val listData = ArrayList<PostModel>()
-//            for (postSnapshot in dataSnapshot.children) {
-//                postSnapshot.getValue<PostModel>()?.let {
+            for (postSnapshot in dataSnapshot.children) {
+                postSnapshot.getValue<PostModel>()?.let {
 //                    if (DataUtil.checkSearch(it.tag, data))
-//                        listData.add(
-//                            it
-//                        )
-//                }
-//            }
+                        listData.add(
+                            it
+                        )
+                }
+            }
             adapter.setListData(listData)
         }.addOnFailureListener {
             //showToast("Lỗi kết nối!")

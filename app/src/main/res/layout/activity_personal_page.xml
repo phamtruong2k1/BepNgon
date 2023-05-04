@@ -10,7 +10,7 @@
 
     <include
         android:id="@+id/toolBar"
-        layout="@layout/layout_tool_bar_main"/>
+        layout="@layout/layout_tool_bar"/>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipLayout"
