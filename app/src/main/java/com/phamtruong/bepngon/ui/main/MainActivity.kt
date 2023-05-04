@@ -43,13 +43,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                 R.id.menu_home
             }
         }
+
+        getDataProfileUser()
     }
 
     private var numberMenu = 0
 
     @SuppressLint("ClickableViewAccessibility")
     override fun initCreate() {
-        getDataProfileUser()
         val adapter = TabViewMainAdapter(this@MainActivity, supportFragmentManager)
         binding.viewPagerMain.adapter = adapter
         binding.btNaviMain.setOnNavigationItemSelectedListener(BottomNavigationView.OnNavigationItemSelectedListener { item ->
@@ -111,6 +112,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                 val result = task.result
                 val profileModel = result.getValue<ProfileModel>()
                 if (profileModel != null) {
+                    if (profileModel != DataHelper.profileUser.value )
                     DataHelper.profileUser.postValue(profileModel)
                 } else {
                     showToast("Có lỗi kết nối!")
