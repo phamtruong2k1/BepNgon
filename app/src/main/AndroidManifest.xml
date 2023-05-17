@@ -20,6 +20,22 @@
         android:theme="@style/Theme.BepNgon"
         tools:targetApi="31">
         <activity
+            android:name=".ui.tienich.chedoan.CheDoAnActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.tienich.bmi.ChiSoBmiActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.tienich.random.RandomActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.admin.MainAdminActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".ui.save.SavePostActivity"
             android:exported="true"
             android:screenOrientation="portrait" />

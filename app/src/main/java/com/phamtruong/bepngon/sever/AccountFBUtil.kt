@@ -57,6 +57,7 @@ object AccountFBUtil {
                             id,
                             useName,
                             password,
+                            "user",
                             false
                         )
                     )

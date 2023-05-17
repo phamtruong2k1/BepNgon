@@ -12,6 +12,7 @@ import com.google.firebase.database.ktx.getValue
 import com.phamtruong.bepngon.databinding.ActivitySplashBinding
 import com.phamtruong.bepngon.model.AccountModel
 import com.phamtruong.bepngon.sever.AccountFBUtil
+import com.phamtruong.bepngon.ui.admin.MainAdminActivity
 import com.phamtruong.bepngon.ui.main.MainActivity
 import com.phamtruong.bepngon.ui.sign.SignActivity
 import com.phamtruong.bepngon.util.SharePreferenceUtils
@@ -31,14 +32,11 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         checkLogin()
     }
 
     private fun checkLogin() {
-
         val id = SharePreferenceUtils.getAccountID()
-
         AccountFBUtil.mDatabase.child(ACCOUNT).child(id).get()
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {

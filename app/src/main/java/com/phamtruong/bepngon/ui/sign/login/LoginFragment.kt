@@ -10,6 +10,7 @@ import com.phamtruong.bepngon.R
 import com.phamtruong.bepngon.databinding.FragmentLoginBinding
 import com.phamtruong.bepngon.ui.main.MainActivity
 import com.phamtruong.bepngon.sever.AccountFBUtil
+import com.phamtruong.bepngon.ui.admin.MainAdminActivity
 import com.phamtruong.bepngon.util.showToast
 import com.phamtruong.bepngon.view.openActivity
 import com.phamtruong.bepngon.view.setOnSafeClick
@@ -42,7 +43,7 @@ class LoginFragment : Fragment() {
                     binding.edtTaiKhoan.text.toString().trim(),
                     binding.edtMatKhau.text.toString().trim()
                 ) {
-                    requireContext().openActivity(MainActivity::class.java, true)
+                    requireContext().openActivity(MainAdminActivity::class.java, true)
                 }
             }
         }

@@ -11,6 +11,9 @@ import com.phamtruong.bepngon.model.ProfileModel
 import com.phamtruong.bepngon.ui.personalpage.PersonalPageActivity
 import com.phamtruong.bepngon.ui.save.SavePostActivity
 import com.phamtruong.bepngon.ui.sign.SignActivity
+import com.phamtruong.bepngon.ui.tienich.bmi.ChiSoBmiActivity
+import com.phamtruong.bepngon.ui.tienich.chedoan.CheDoAnActivity
+import com.phamtruong.bepngon.ui.tienich.random.RandomActivity
 import com.phamtruong.bepngon.util.DataHelper
 import com.phamtruong.bepngon.util.SharePreferenceUtils
 import com.phamtruong.bepngon.view.openActivity
@@ -59,6 +62,18 @@ class MenuFragment : BaseFragment<FragmentMenuBinding>() {
 
         binding.llSaved.setOnClickListener {
             requireContext().openActivity(SavePostActivity::class.java)
+        }
+
+        binding.llRandom.setOnClickListener {
+            requireContext().openActivity(RandomActivity::class.java)
+        }
+
+        binding.llCheDoAn.setOnClickListener {
+            requireContext().openActivity(CheDoAnActivity::class.java)
+        }
+
+        binding.llBmi.setOnClickListener {
+            requireContext().openActivity(ChiSoBmiActivity::class.java)
         }
     }
 

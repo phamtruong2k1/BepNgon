@@ -1,6 +1,11 @@
 package com.phamtruong.bepngon.ui.baidang
 
+import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.view.ViewGroup
+import android.view.Window
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
@@ -10,6 +15,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.Query
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.getValue
+import com.phamtruong.bepngon.R
 import com.phamtruong.bepngon.databinding.ActivityDetailBaiDangBinding
 import com.phamtruong.bepngon.model.CommentModel
 import com.phamtruong.bepngon.model.NotificationModel
@@ -119,11 +125,26 @@ class DetailBaiDangActivity : AppCompatActivity() {
                     }
 
                     adapterComment.setListData(listData)
+
+                    showDialog()
                 }
             }
 
             override fun onCancelled(databaseError: DatabaseError) {}
         })
+    }
+
+    private fun showDialog() {
+        val dialog = Dialog(this@DetailBaiDangActivity)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.setContentView(R.layout.layout_dialog_report_post)
+        dialog.window?.setLayout(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+
+        dialog.show()
     }
 
     private fun getComment(post : PostModel) {

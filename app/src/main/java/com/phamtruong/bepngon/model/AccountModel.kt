@@ -10,10 +10,11 @@ data class AccountModel(
     val account_id: String,
     val userName: String,
     val password: String,
+    val role : String = "user",
     val status: Boolean
 ) : Parcelable {
 
-    constructor() : this("", "", "",false) {}
+    constructor() : this("", "", "","user",false) {}
 
     @Exclude
     fun toMap(): Map<String, Any?> {
@@ -21,6 +22,7 @@ data class AccountModel(
             "account_id" to account_id,
             "userName" to userName,
             "password" to password,
+            "role" to role,
             "status" to status
         )
     }

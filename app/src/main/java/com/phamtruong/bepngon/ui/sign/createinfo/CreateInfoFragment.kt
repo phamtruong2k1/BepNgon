@@ -6,13 +6,13 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import com.google.android.gms.tasks.Task
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.database.FirebaseDatabase
@@ -23,10 +23,10 @@ import com.phamtruong.bepngon.databinding.FragmentCreateInfoBinding
 import com.phamtruong.bepngon.databinding.LayoutBottomSheetMoreBinding
 import com.phamtruong.bepngon.model.ProfileModel
 import com.phamtruong.bepngon.sever.AccountFBUtil
-import com.phamtruong.bepngon.ui.baidang.DangBaiActivity
-import com.phamtruong.bepngon.ui.main.MainActivity
-import com.phamtruong.bepngon.util.Constant
 import com.phamtruong.bepngon.sever.FBConstant
+import com.phamtruong.bepngon.ui.admin.MainAdminActivity
+import com.phamtruong.bepngon.ui.baidang.DangBaiActivity
+import com.phamtruong.bepngon.util.Constant
 import com.phamtruong.bepngon.util.SharePreferenceUtils
 import com.phamtruong.bepngon.util.showToast
 import com.phamtruong.bepngon.view.gone
@@ -203,7 +203,7 @@ class CreateInfoFragment : Fragment() {
     private fun addNewProfile(profileModel: ProfileModel) {
         AccountFBUtil.mDatabase.child(FBConstant.PROFILE).child(SharePreferenceUtils.getAccountID())
             .setValue(profileModel).addOnSuccessListener {
-                requireContext().openActivity(MainActivity::class.java, true)
+                requireContext().openActivity(MainAdminActivity::class.java, true)
                 binding.prgLoad.hide()
             }.addOnFailureListener {
                 Toast.makeText(requireContext(), "Có lỗi!", Toast.LENGTH_SHORT)
