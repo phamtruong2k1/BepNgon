@@ -52,7 +52,7 @@ class FriendFragment : Fragment(), EventClickFriendAdapterListener {
 
         binding = FragmentFriendBinding.inflate(inflater, container, false)
 
-        binding.toolBar.txtTitle.text = "Người dùng"
+        binding.toolBar.txtTitle.text = "Bạn bè"
 
         adapter = FriendAdapter(requireContext(), ArrayList<ProfileModel>(), this)
 

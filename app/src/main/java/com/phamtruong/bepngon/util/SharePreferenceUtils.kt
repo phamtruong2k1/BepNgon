@@ -37,4 +37,12 @@ object SharePreferenceUtils {
         pre.edit().putString("account_password", data).apply()
     }
 
+    fun getRole() : String {
+        return pre.getString("account_role", "user").toString()
+    }
+
+    fun setRole(data: String?) {
+        pre.edit().putString("account_role", data).apply()
+    }
+
 }

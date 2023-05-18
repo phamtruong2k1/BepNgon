@@ -13,6 +13,7 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.getValue
 import com.phamtruong.bepngon.databinding.ActivityWithoutPageBinding
 import com.phamtruong.bepngon.databinding.LayoutBottomSheetPostBinding
+import com.phamtruong.bepngon.model.FollowModel
 import com.phamtruong.bepngon.model.PostModel
 import com.phamtruong.bepngon.model.ProfileModel
 import com.phamtruong.bepngon.model.ReactionModel
@@ -61,27 +62,29 @@ class WithoutPageActivity : AppCompatActivity() , SwipeRefreshLayout.OnRefreshLi
 
         initListener()
 
-        //initData()
+        initData()
     }
 
-    /*private fun initData() {
+    private fun initData() {
         mDatabase.child(FBConstant.FOLLOW_F).orderByChild("accountId")
             .equalTo(SharePreferenceUtils.getAccountID())
             .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     if (dataSnapshot.exists()) {
-                        adapter.setListData(ArrayList())
-                        binding.rcySavePost.removeAllViews()
                         for (postSnapshot in dataSnapshot.children) {
-                            postSnapshot.getValue<SaveModel>()?.let {
-                                getPostData(it.postId)
+                            postSnapshot.getValue<FollowModel>()?.let {
+                                if (it.account_follow_id == idUser) {
+                                    binding.llFollowed.show()
+                                    binding.llFollow.gone()
+                                    return
+                                }
                             }
                         }
                     }
                 }
                 override fun onCancelled(databaseError: DatabaseError) {}
             })
-    }*/
+    }
 
     private fun initListener() {
         binding.llChat.setOnClickListener {
@@ -94,11 +97,34 @@ class WithoutPageActivity : AppCompatActivity() , SwipeRefreshLayout.OnRefreshLi
         }
 
         binding.llFollow.setOnClickListener {
-
+            val followModel = FollowModel(
+                DataUtil.getIdByTime(),
+                SharePreferenceUtils.getAccountID(),
+                idUser,
+                DataUtil.getTime()
+            )
+            mDatabase.child(FBConstant.FOLLOW_F).child(followModel.followId).setValue(followModel)
         }
 
         binding.llFollowed.setOnClickListener {
-
+            mDatabase.child(FBConstant.FOLLOW_F).orderByChild("accountId")
+                .equalTo(SharePreferenceUtils.getAccountID())
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            for (postSnapshot in dataSnapshot.children) {
+                                val data = postSnapshot.getValue<FollowModel>()
+                                if (data?.account_follow_id == idUser) {
+                                    dataSnapshot.ref.removeValue()
+                                    binding.llFollowed.gone()
+                                    binding.llFollow.show()
+                                    return
+                                }
+                            }
+                        }
+                    }
+                    override fun onCancelled(databaseError: DatabaseError) {}
+                })
         }
     }
 

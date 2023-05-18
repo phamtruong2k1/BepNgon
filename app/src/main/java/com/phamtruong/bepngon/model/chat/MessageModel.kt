@@ -11,10 +11,11 @@ data class MessageModel(
     val room_id: String,
     val accountId: String,
     val content: String,
+    var seen : Boolean,
     val crete_time : String
 ) : Parcelable {
 
-    constructor() : this("","", "", "","") {}
+    constructor() : this("","", "", "",false,"") {}
 
     @Exclude
     fun toMap(): Map<String, Any?> {
@@ -23,6 +24,7 @@ data class MessageModel(
             "room_id" to room_id,
             "accountId" to accountId,
             "content" to content,
+            "seen" to seen,
             "crete_time" to crete_time
         )
     }

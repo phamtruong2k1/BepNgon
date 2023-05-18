@@ -90,6 +90,7 @@ class ChatActivity : AppCompatActivity() {
                         idRoom,
                         idUser,
                         binding.edtMessage.text.toString(),
+                        false,
                         DataUtil.getTime()
                     )
                 )
