@@ -119,6 +119,17 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/txtTag"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="okla"
+                    android:fontFamily="@font/inter_600"
+                    android:textSize="@dimen/_12sdp"
+                    android:paddingBottom="@dimen/_4sdp"
+                    android:textColor="@color/black"
+                    android:paddingHorizontal="@dimen/_8sdp"/>
+
+                <TextView
                     android:id="@+id/txtContent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

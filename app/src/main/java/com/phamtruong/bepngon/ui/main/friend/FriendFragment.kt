@@ -91,7 +91,7 @@ class FriendFragment : Fragment(), EventClickFriendAdapterListener {
                 val listData = ArrayList<ProfileModel>()
                 for (postSnapshot in dataSnapshot.children) {
                     postSnapshot.getValue<ProfileModel>()?.let {
-                        //if (it.accountId != SharePreferenceUtils.getAccountID())
+                        if (it.accountId != SharePreferenceUtils.getAccountID())
                         listData.add(
                             it
                         )
@@ -99,7 +99,7 @@ class FriendFragment : Fragment(), EventClickFriendAdapterListener {
                 }
                 adapter.setListData(listData)
 
-                showBottomSheet()
+                //showBottomSheet()
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
@@ -108,7 +108,7 @@ class FriendFragment : Fragment(), EventClickFriendAdapterListener {
         })
     }
 
-    private fun showBottomSheet() {
+    /*private fun showBottomSheet() {
         val bottomSheetBinding = LayoutBottomSheetManageNguoiDungBinding.inflate(layoutInflater)
         val moreBottomSheet =
             BottomSheetDialog(requireContext())
@@ -116,5 +116,5 @@ class FriendFragment : Fragment(), EventClickFriendAdapterListener {
 
 
         moreBottomSheet.show()
-    }
+    }*/
 }

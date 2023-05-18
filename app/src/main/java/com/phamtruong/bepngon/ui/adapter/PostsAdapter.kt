@@ -54,6 +54,7 @@ class PostsAdapter(
         var txtName: TextView = view.findViewById(R.id.txtName)
         var txtTime: TextView = view.findViewById(R.id.txtTime)
         var txtContent: TextView = view.findViewById(R.id.txtContent)
+        var txtTag: TextView = view.findViewById(R.id.txtTag)
         var numberLike: TextView = view.findViewById(R.id.numberLike)
 
 
@@ -85,6 +86,8 @@ class PostsAdapter(
         val post = listData[position]
 
         viewHolder.txtContent.text = DataUtil.cutTextLong(post.content, 256)
+
+        viewHolder.txtTag.text = DataUtil.cutTextLong(post.tag, 256)
 
         viewHolder.txtTime.text = DataUtil.showTime(post.create_time)
 

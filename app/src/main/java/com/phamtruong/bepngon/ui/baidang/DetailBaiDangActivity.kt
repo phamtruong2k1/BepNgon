@@ -89,6 +89,7 @@ class DetailBaiDangActivity : AppCompatActivity() {
     private fun getPost(postData : PostModel) {
         binding.txtContent.text = postData.content
         binding.txtTime.text = DataUtil.showTime(postData.create_time)
+        binding.txtTag.text = postData.tag
 
         if (postData.img != ""){
             binding.layoutImage.show()

@@ -177,7 +177,7 @@
                 android:paddingVertical="@dimen/_4sdp"
                 android:paddingStart="@dimen/_12sdp"
                 android:paddingEnd="@dimen/_4sdp"
-                android:visibility="gone"
+                android:visibility="invisible"
                 android:orientation="vertical">
 
                 <ImageView
@@ -239,6 +239,30 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/_1sdp"
             android:background="#EAE7E7"/>
+
+        <LinearLayout
+            android:id="@+id/llChangePassword"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginHorizontal="@dimen/_16sdp">
+
+            <ImageView
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_more_lock"
+                android:padding="@dimen/_8sdp"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text="Đổi mật khẩu"
+                android:textColor="@color/black"
+                android:gravity="center_vertical"
+                android:textSize="@dimen/_12ssp"
+                android:fontFamily="@font/inter_600"/>
+
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/llHelp"

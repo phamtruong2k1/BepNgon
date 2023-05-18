@@ -42,15 +42,21 @@ class MenuFragment : BaseFragment<FragmentMenuBinding>() {
     }
 
     private fun initListener() {
+
         binding.btnLogout.setOnClickListener {
             SharePreferenceUtils.setAccountID(null)
             SharePreferenceUtils.setUserName(null)
             SharePreferenceUtils.setPassword(null)
             requireContext().openActivity(SignActivity::class.java, true)
         }
+
         binding.llHelp.setOnClickListener { support(requireContext()) }
 
         binding.llFeedback.setOnClickListener { feedBack(requireContext()) }
+
+        binding.llChangePassword.setOnClickListener {
+            /*requireContext().openActivity(PersonalPageActivity::class.java)*/
+        }
 
         binding.llPolicy.setOnClickListener {
             /*requireContext().openActivity(PersonalPageActivity::class.java)*/

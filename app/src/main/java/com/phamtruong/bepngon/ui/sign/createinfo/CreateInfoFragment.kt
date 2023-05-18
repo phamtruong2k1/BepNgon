@@ -24,8 +24,8 @@ import com.phamtruong.bepngon.databinding.LayoutBottomSheetMoreBinding
 import com.phamtruong.bepngon.model.ProfileModel
 import com.phamtruong.bepngon.sever.AccountFBUtil
 import com.phamtruong.bepngon.sever.FBConstant
-import com.phamtruong.bepngon.ui.admin.MainAdminActivity
 import com.phamtruong.bepngon.ui.baidang.DangBaiActivity
+import com.phamtruong.bepngon.ui.main.MainActivity
 import com.phamtruong.bepngon.util.Constant
 import com.phamtruong.bepngon.util.SharePreferenceUtils
 import com.phamtruong.bepngon.util.showToast
@@ -203,7 +203,7 @@ class CreateInfoFragment : Fragment() {
     private fun addNewProfile(profileModel: ProfileModel) {
         AccountFBUtil.mDatabase.child(FBConstant.PROFILE).child(SharePreferenceUtils.getAccountID())
             .setValue(profileModel).addOnSuccessListener {
-                requireContext().openActivity(MainAdminActivity::class.java, true)
+                requireContext().openActivity(MainActivity::class.java, true)
                 binding.prgLoad.hide()
             }.addOnFailureListener {
                 Toast.makeText(requireContext(), "Có lỗi!", Toast.LENGTH_SHORT)
