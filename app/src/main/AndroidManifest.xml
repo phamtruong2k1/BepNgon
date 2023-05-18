@@ -20,6 +20,10 @@
         android:theme="@style/Theme.BepNgon"
         tools:targetApi="31">
         <activity
+            android:name=".ui.tienich.policy.PolicyActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".ui.tienich.chedoan.CheDoAnActivity"
             android:exported="true"
             android:screenOrientation="portrait" />

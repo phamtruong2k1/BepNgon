@@ -97,7 +97,7 @@ class MenuFragment : BaseFragment<FragmentMenuBinding>() {
         val data =
             Uri.parse("mailto:?SUBJECT=$FeedBack&body=&to=$EMAIL")
         mailIntent.data = data
-        context.startActivity(Intent.createChooser(mailIntent, "Send mail..."))
+        context.startActivity(Intent.createChooser(mailIntent, "Gửi mail..."))
     }
 
     private fun feedBack(context: Context) {
@@ -105,7 +105,7 @@ class MenuFragment : BaseFragment<FragmentMenuBinding>() {
         val data =
             Uri.parse("mailto:?SUBJECT=$FeedBack&body=&to=$EMAIL")
         mailIntent.data = data
-        context.startActivity(Intent.createChooser(mailIntent, "Send mail..."))
+        context.startActivity(Intent.createChooser(mailIntent, "Gửi mail..."))
     }
 
 

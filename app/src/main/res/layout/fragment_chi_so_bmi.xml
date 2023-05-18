@@ -38,7 +38,6 @@
             android:textStyle="bold" />
 
         <ImageView
-            android:id="@+id/imgSearchChat"
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
@@ -52,31 +51,72 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:textColor="@color/black"
+        android:fontFamily="@font/inter_500"
+        android:textSize="@dimen/_14sdp"
+        android:paddingVertical="@dimen/_8sdp"
         android:text="Nhập chiều cao và cân nặng"/>
 
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_45sdp"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/_12sdp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Chiều cao(cm):"
+            android:fontFamily="@font/inter_500"
+            android:textSize="@dimen/_14ssp"
+            android:textColor="@color/black"/>
+
+        <EditText
+            android:id="@+id/edtChieuCao"
+            android:layout_width="0dp"
+            android:layout_weight="1.2"
+            android:layout_height="wrap_content"
+            android:hint="Chiều cao"
+            android:fontFamily="@font/inter_500"
+            android:inputType="number"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_14ssp"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_45sdp"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/_12sdp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Cân nặng(kg):"
+            android:textColor="@color/black"
+            android:fontFamily="@font/inter_500"
+            android:textSize="@dimen/_14ssp"/>
+
+        <EditText
+            android:id="@+id/edtCanNang"
+            android:layout_width="0dp"
+            android:layout_weight="1.2"
+            android:layout_height="wrap_content"
+            android:hint="Cân nặng"
+            android:fontFamily="@font/inter_500"
+            android:inputType="number"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_14ssp"/>
+
+    </LinearLayout>
+
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Chiều cao(cm):"/>
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Chiều cao"
-        android:inputType="number"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Cân nặng(Kg):"/>
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Cân nặng"
-        android:inputType="numberDecimal"/>
-
-    <TextView
+        android:id="@+id/txtTinh"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -87,5 +127,19 @@
         android:paddingVertical="@dimen/_8sdp"
         android:background="@drawable/bg_btn_color_app"
         android:text="Tính toán"/>
+
+
+    <TextView
+        android:layout_marginTop="@dimen/_28ssp"
+        android:layout_marginHorizontal="@dimen/_12sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_boder_white"
+        android:paddingHorizontal="@dimen/_4sdp"
+        android:gravity="center_horizontal"
+        android:textColor="@color/black"
+        android:fontFamily="@font/inter_400"
+        android:paddingVertical="@dimen/_4sdp"
+        android:text="- BMI (Body mass Index) là chỉ số được tính từ chiều cao và cân nặng, là một chỉ số đáng tin cậy về sự mập ốm của một người."/>
 
 </LinearLayout>

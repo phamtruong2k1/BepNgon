@@ -22,4 +22,9 @@
     <color name="bg_gray">#F2F2F2</color>
 
     <color name="bg_all_more">#F2F2F2</color>
+
+
+    <color name="bmi_1">#0D61F1</color>
+    <color name="bmi_2">#0FC302</color>
+    <color name="bmi_3">#FA0101</color>
 </resources>
