@@ -51,6 +51,16 @@
         <entry key="..\:/BepNgon/app/src/main/res/layout/activity_sign.xml" value="0.2" />
         <entry key="..\:/BepNgon/app/src/main/res/layout/activity_splash.xml" value="0.2" />
         <entry key="..\:/BepNgon/app/src/main/res/layout/activity_without_page.xml" value="0.264" />
+        <entry key="..\:/BepNgon/app/src/main/res/layout/adults_mode_eat.xml" value="0.22864583333333333" />
+        <entry key="..\:/BepNgon/app/src/main/res/layout/benh_gout.xml" value="0.22864583333333333" />
+        <entry key="..\:/BepNgon/app/src/main/res/layout/benh_huyet_ap_cao.xml" value="0.22864583333333333" />
+        <entry key="..\:/BepNgon/app/src/main/res/layout/benh_huyet_ap_thap.xml" value="0.22864583333333333" />
+        <entry key="..\:/BepNgon/app/src/main/res/layout/benh_mau_nhiem_mo.xml" value="0.22864583333333333" />
+        <entry key="..\:/BepNgon/app/src/main/res/layout/benh_tieu_duong.xml" value="0.22864583333333333" />
+        <entry key="..\:/BepNgon/app/src/main/res/layout/benh_tim_mach.xml" value="0.22864583333333333" />
+        <entry key="..\:/BepNgon/app/src/main/res/layout/benh_viem_da_day.xml" value="0.22864583333333333" />
+        <entry key="..\:/BepNgon/app/src/main/res/layout/children_mode_eat.xml" value="0.22864583333333333" />
+        <entry key="..\:/BepNgon/app/src/main/res/layout/erderly_mode_eat.xml" value="0.22864583333333333" />
         <entry key="..\:/BepNgon/app/src/main/res/layout/fragment_chi_so_bmi.xml" value="0.40751043115438107" />
         <entry key="..\:/BepNgon/app/src/main/res/layout/fragment_choose_che_do.xml" value="0.264" />
         <entry key="..\:/BepNgon/app/src/main/res/layout/fragment_create_info.xml" value="0.264" />
@@ -59,7 +69,7 @@
         <entry key="..\:/BepNgon/app/src/main/res/layout/fragment_home.xml" value="0.30737365368682684" />
         <entry key="..\:/BepNgon/app/src/main/res/layout/fragment_log_up.xml" value="0.264" />
         <entry key="..\:/BepNgon/app/src/main/res/layout/fragment_login.xml" value="0.2" />
-        <entry key="..\:/BepNgon/app/src/main/res/layout/fragment_menu.xml" value="0.4" />
+        <entry key="..\:/BepNgon/app/src/main/res/layout/fragment_menu.xml" value="0.12" />
         <entry key="..\:/BepNgon/app/src/main/res/layout/fragment_note.xml" value="0.18072916666666666" />
         <entry key="..\:/BepNgon/app/src/main/res/layout/fragment_notification.xml" value="0.536" />
         <entry key="..\:/BepNgon/app/src/main/res/layout/fragment_search.xml" value="0.1921921921921922" />
