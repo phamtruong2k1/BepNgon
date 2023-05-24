@@ -20,21 +20,26 @@
         android:roundIcon="@drawable/logo_splash"
         android:supportsRtl="true"
         android:theme="@style/Theme.BepNgon"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".ui.tienich.policy.PolicyActivity"
+            android:name=".ui.change.ChangePasswordActivity"
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.tienich.chedoan.CheDoAnActivity"
+            android:name="com.phamtruong.bepngon.ui.user.tienich.policy.PolicyActivity"
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.tienich.bmi.ChiSoBmiActivity"
+            android:name="com.phamtruong.bepngon.ui.user.tienich.chedoan.CheDoAnActivity"
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.tienich.random.RandomActivity"
+            android:name="com.phamtruong.bepngon.ui.user.tienich.bmi.ChiSoBmiActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.phamtruong.bepngon.ui.user.tienich.random.RandomActivity"
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity
@@ -42,7 +47,7 @@
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.save.SavePostActivity"
+            android:name="com.phamtruong.bepngon.ui.user.save.SavePostActivity"
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity
@@ -50,7 +55,7 @@
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.main.search.SearchActivity"
+            android:name="com.phamtruong.bepngon.ui.user.main.search.SearchActivity"
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity
@@ -82,7 +87,7 @@
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.main.MainActivity"
+            android:name="com.phamtruong.bepngon.ui.user.main.MainActivity"
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity

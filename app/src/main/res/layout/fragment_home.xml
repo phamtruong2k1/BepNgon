@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/color_line_bg"
     android:orientation="vertical"
-    tools:context=".ui.main.home.HomeFragment">
+    tools:context=".ui.user.main.home.HomeFragment">
 
     <include
         android:id="@+id/toolBar"

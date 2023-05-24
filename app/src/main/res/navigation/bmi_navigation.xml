@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/chiSoBmiFragment"
-        android:name="com.phamtruong.bepngon.ui.tienich.bmi.ChiSoBmiFragment"
+        android:name="com.phamtruong.bepngon.ui.user.tienich.bmi.ChiSoBmiFragment"
         android:label="fragment_chi_so_bmi"
         tools:layout="@layout/fragment_chi_so_bmi" >
         <action
@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/thapDinhDuongFragment"
-        android:name="com.phamtruong.bepngon.ui.tienich.bmi.ThapDinhDuongFragment"
+        android:name="com.phamtruong.bepngon.ui.user.tienich.bmi.ThapDinhDuongFragment"
         android:label="fragment_thap_dinh_duong"
         tools:layout="@layout/fragment_thap_dinh_duong" >
 

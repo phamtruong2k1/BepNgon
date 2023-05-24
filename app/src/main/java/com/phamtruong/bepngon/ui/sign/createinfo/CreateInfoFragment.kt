@@ -25,7 +25,7 @@ import com.phamtruong.bepngon.model.ProfileModel
 import com.phamtruong.bepngon.sever.AccountFBUtil
 import com.phamtruong.bepngon.sever.FBConstant
 import com.phamtruong.bepngon.ui.baidang.DangBaiActivity
-import com.phamtruong.bepngon.ui.main.MainActivity
+import com.phamtruong.bepngon.ui.user.main.MainActivity
 import com.phamtruong.bepngon.util.Constant
 import com.phamtruong.bepngon.util.SharePreferenceUtils
 import com.phamtruong.bepngon.util.showToast

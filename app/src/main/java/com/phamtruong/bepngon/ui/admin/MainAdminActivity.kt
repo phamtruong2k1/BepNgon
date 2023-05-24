@@ -1,11 +1,8 @@
 package com.phamtruong.bepngon.ui.admin
 
 import android.annotation.SuppressLint
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import android.os.Handler
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.widget.Toast
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.database.FirebaseDatabase
@@ -13,17 +10,13 @@ import com.google.firebase.database.ktx.getValue
 import com.phamtruong.bepngon.R
 import com.phamtruong.bepngon.base.BaseActivity
 import com.phamtruong.bepngon.databinding.ActivityMainAdminBinding
-import com.phamtruong.bepngon.databinding.ActivityMainBinding
 import com.phamtruong.bepngon.model.ProfileModel
 import com.phamtruong.bepngon.sever.FBConstant
-import com.phamtruong.bepngon.ui.main.TabViewMainAdapter
-import com.phamtruong.bepngon.ui.main.search.SearchActivity
+import com.phamtruong.bepngon.ui.user.main.search.SearchActivity
 import com.phamtruong.bepngon.util.DataHelper
 import com.phamtruong.bepngon.util.SharePreferenceUtils
 import com.phamtruong.bepngon.util.showToast
-import com.phamtruong.bepngon.view.gone
 import com.phamtruong.bepngon.view.openActivity
-import com.phamtruong.bepngon.view.show
 
 class MainAdminActivity : BaseActivity<ActivityMainAdminBinding>() {
 
@@ -55,7 +48,7 @@ class MainAdminActivity : BaseActivity<ActivityMainAdminBinding>() {
 
     @SuppressLint("ClickableViewAccessibility")
     override fun initCreate() {
-        val adapter = TabViewMainAdapter(this@MainAdminActivity, supportFragmentManager)
+        val adapter = TabAdminAdapter(this@MainAdminActivity, supportFragmentManager)
         binding.viewPagerMain.adapter = adapter
         binding.btNaviMain.setOnNavigationItemSelectedListener(BottomNavigationView.OnNavigationItemSelectedListener { item ->
             when (item.itemId) {

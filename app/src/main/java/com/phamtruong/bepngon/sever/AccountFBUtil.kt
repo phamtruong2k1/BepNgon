@@ -19,7 +19,7 @@ object AccountFBUtil {
         return BigInteger(1, md.digest(input.toByteArray())).toString(16).padStart(32, '0')
     }
 
-    fun logIn(context: Context, useName : String, password : String, actionSuccess : () -> Unit) {
+    fun logIn(context: Context, useName : String, password : String, actionSuccess : () -> Unit, adminSuccess : () -> Unit) {
         val id = convertToMD5(useName)
         mDatabase.child(FBConstant.ACCOUNT).child(id).get().addOnCompleteListener { task ->
             if (task.isSuccessful) {
@@ -30,7 +30,11 @@ object AccountFBUtil {
                         SharePreferenceUtils.setAccountID(account.account_id)
                         SharePreferenceUtils.setUserName(account.userName)
                         SharePreferenceUtils.setPassword(account.password)
-                        actionSuccess()
+                        if (account.role == "admin") {
+                            adminSuccess()
+                        } else {
+                            actionSuccess()
+                        }
                     } else {
                         context.showToast("Thông tin đăng nhập không đúng!")
                     }

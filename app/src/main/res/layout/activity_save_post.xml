@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_line_bg"
-    tools:context=".ui.save.SavePostActivity"
+    tools:context=".ui.user.save.SavePostActivity"
     android:orientation="vertical">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"

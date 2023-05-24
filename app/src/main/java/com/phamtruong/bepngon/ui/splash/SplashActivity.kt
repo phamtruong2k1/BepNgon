@@ -6,14 +6,12 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.NavController
-import androidx.navigation.fragment.NavHostFragment
 import com.google.firebase.database.ktx.getValue
 import com.phamtruong.bepngon.databinding.ActivitySplashBinding
 import com.phamtruong.bepngon.model.AccountModel
 import com.phamtruong.bepngon.sever.AccountFBUtil
 import com.phamtruong.bepngon.ui.admin.MainAdminActivity
-import com.phamtruong.bepngon.ui.main.MainActivity
+import com.phamtruong.bepngon.ui.user.main.MainActivity
 import com.phamtruong.bepngon.ui.sign.SignActivity
 import com.phamtruong.bepngon.util.SharePreferenceUtils
 
@@ -21,12 +19,10 @@ import com.phamtruong.bepngon.util.SharePreferenceUtils
 class SplashActivity : AppCompatActivity() {
 
     lateinit var binding: ActivitySplashBinding
-    companion object{
+
+    companion object {
         const val ACCOUNT = "account"
     }
-
-    private lateinit var navController: NavController
-    private var navHostFragment: NavHostFragment? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,7 +43,11 @@ class SplashActivity : AppCompatActivity() {
                             && account.userName == SharePreferenceUtils.getUserName()
                         ) {
                             SharePreferenceUtils.setAccountID(account.account_id)
-                            startMain()
+                            if (account.role == "admin") {
+                                startAdminMain()
+                            } else {
+                                startMain()
+                            }
                         } else {
                             startLogin()
                         }
@@ -57,12 +57,19 @@ class SplashActivity : AppCompatActivity() {
                 }
             }.addOnFailureListener {
                 startLogin()
-        }
+            }
     }
 
-    private fun startMain(timeDelay: Long = 1000L) {
+    private fun startMain(timeDelay: Long = 500L) {
         Handler(Looper.getMainLooper()).postDelayed({
             startActivity(Intent(this@SplashActivity, MainActivity::class.java))
+            finish()
+        }, timeDelay)
+    }
+
+    private fun startAdminMain(timeDelay: Long = 500L) {
+        Handler(Looper.getMainLooper()).postDelayed({
+            startActivity(Intent(this@SplashActivity, MainAdminActivity::class.java))
             finish()
         }, timeDelay)
     }

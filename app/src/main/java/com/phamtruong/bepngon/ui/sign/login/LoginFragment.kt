@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.phamtruong.bepngon.R
 import com.phamtruong.bepngon.databinding.FragmentLoginBinding
-import com.phamtruong.bepngon.ui.main.MainActivity
+import com.phamtruong.bepngon.ui.user.main.MainActivity
 import com.phamtruong.bepngon.sever.AccountFBUtil
 import com.phamtruong.bepngon.ui.admin.MainAdminActivity
 import com.phamtruong.bepngon.util.showToast
@@ -17,7 +17,7 @@ import com.phamtruong.bepngon.view.setOnSafeClick
 
 class LoginFragment : Fragment() {
 
-    lateinit var binding : FragmentLoginBinding
+    lateinit var binding: FragmentLoginBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,18 +33,19 @@ class LoginFragment : Fragment() {
 
     private fun initListener() {
         binding.llSignIn.setOnSafeClick {
-            if (binding.edtTaiKhoan.text.toString().trim().isEmpty()){
+            if (binding.edtTaiKhoan.text.toString().trim().isEmpty()) {
                 requireContext().showToast("Tài khoản trống!")
-            } else if (binding.edtMatKhau.text.toString().trim().isEmpty()){
+            } else if (binding.edtMatKhau.text.toString().trim().isEmpty()) {
                 requireContext().showToast("Mật khẩu khoản trống!")
             } else {
                 AccountFBUtil.logIn(
                     requireContext(),
                     binding.edtTaiKhoan.text.toString().trim(),
-                    binding.edtMatKhau.text.toString().trim()
-                ) {
-                    requireContext().openActivity(MainAdminActivity::class.java, true)
-                }
+                    binding.edtMatKhau.text.toString().trim(), {
+                        requireContext().openActivity(MainActivity::class.java, true)
+                    }, {
+                        requireContext().openActivity(MainAdminActivity::class.java, true)
+                    })
             }
         }
 

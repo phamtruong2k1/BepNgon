@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fillViewport="true"
-    tools:context=".ui.main.menu.MenuFragment"
+    tools:context=".ui.user.main.menu.MenuFragment"
     android:background="#F6F7FA">
 
     <LinearLayout

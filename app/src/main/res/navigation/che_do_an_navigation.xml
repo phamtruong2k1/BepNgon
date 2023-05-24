@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/chooseCheDoFragment"
-        android:name="com.phamtruong.bepngon.ui.tienich.chedoan.ChooseCheDoFragment"
+        android:name="com.phamtruong.bepngon.ui.user.tienich.chedoan.ChooseCheDoFragment"
         android:label="fragment_choose_che_do"
         tools:layout="@layout/fragment_choose_che_do" >
         <action
@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/showCheDoAnFragment"
-        android:name="com.phamtruong.bepngon.ui.tienich.chedoan.ShowCheDoAnFragment"
+        android:name="com.phamtruong.bepngon.ui.user.tienich.chedoan.ShowCheDoAnFragment"
         android:label="fragment_show_che_do_an"
         tools:layout="@layout/fragment_show_che_do_an" >
 
