@@ -264,6 +264,12 @@
 
         </LinearLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:background="#EAE7E7"
+            android:visibility="visible"/>
+
         <LinearLayout
             android:id="@+id/llHelp"
             android:layout_width="match_parent"

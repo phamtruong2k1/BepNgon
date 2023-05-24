@@ -23,6 +23,7 @@
         <entry key="..\:/BepNgon/app/src/main/res/drawable/bg_item_che_do_an.xml" value="0.158" />
         <entry key="..\:/BepNgon/app/src/main/res/drawable/bg_msg_received.xml" value="0.291" />
         <entry key="..\:/BepNgon/app/src/main/res/drawable/bg_msg_send.xml" value="0.273" />
+        <entry key="..\:/BepNgon/app/src/main/res/drawable/ic_account_setup.xml" value="0.2205" />
         <entry key="..\:/BepNgon/app/src/main/res/drawable/ic_baseline_arrow_back_ios_new_24.xml" value="0.25" />
         <entry key="..\:/BepNgon/app/src/main/res/drawable/ic_cancel_x.xml" value="0.3" />
         <entry key="..\:/BepNgon/app/src/main/res/drawable/ic_default_profile.xml" value="0.25" />
@@ -71,6 +72,7 @@
         <entry key="..\:/BepNgon/app/src/main/res/layout/fragment_log_up.xml" value="0.264" />
         <entry key="..\:/BepNgon/app/src/main/res/layout/fragment_login.xml" value="0.2" />
         <entry key="..\:/BepNgon/app/src/main/res/layout/fragment_menu.xml" value="0.3474025974025974" />
+        <entry key="..\:/BepNgon/app/src/main/res/layout/fragment_menu_admin.xml" value="0.32760416666666664" />
         <entry key="..\:/BepNgon/app/src/main/res/layout/fragment_note.xml" value="0.18072916666666666" />
         <entry key="..\:/BepNgon/app/src/main/res/layout/fragment_notification.xml" value="0.536" />
         <entry key="..\:/BepNgon/app/src/main/res/layout/fragment_search.xml" value="0.1921921921921922" />

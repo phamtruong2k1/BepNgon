@@ -85,27 +85,6 @@ class MainAdminActivity : BaseActivity<ActivityMainAdminBinding>() {
             }
             true
         })
-
-        binding.viewPagerMain.setOnTouchListener { view, motionEvent ->
-            when(motionEvent.action) {
-                MotionEvent.ACTION_DOWN -> {
-
-                }
-
-                MotionEvent.ACTION_MOVE -> {
-
-                }
-
-                MotionEvent.ACTION_UP -> {
-
-                }
-
-                MotionEvent.ACTION_CANCEL -> {
-
-                }
-            }
-            true
-        }
     }
 
     private val mDatabase = FirebaseDatabase.getInstance().getReference(FBConstant.ROOT)
@@ -124,14 +103,6 @@ class MainAdminActivity : BaseActivity<ActivityMainAdminBinding>() {
             }
         }.addOnFailureListener {
             showToast("Có lỗi kết nối!")
-        }
-    }
-
-    fun showBottomNavigation(isShow : Boolean = true) {
-        if (isShow) {
-            binding.btNaviMain.show()
-        } else {
-            binding.btNaviMain.gone()
         }
     }
 

@@ -6,14 +6,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.phamtruong.bepngon.R
+import com.phamtruong.bepngon.base.BaseFragment
+import com.phamtruong.bepngon.databinding.FragmentMenuAdminBinding
+import com.phamtruong.bepngon.databinding.FragmentMenuBinding
 
-class MenuAdminFragment : Fragment() {
+class MenuAdminFragment : BaseFragment<FragmentMenuAdminBinding>() {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_menu_admin, container, false)
+
+
+    override fun initViewCreated() {
+
+    }
+
+    override fun inflateLayout(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): FragmentMenuAdminBinding {
+        return FragmentMenuAdminBinding.inflate(inflater)
     }
 }

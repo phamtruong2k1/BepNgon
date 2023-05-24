@@ -45,4 +45,8 @@ object SharePreferenceUtils {
         pre.edit().putString("account_role", data).apply()
     }
 
+    fun isAdmin() : Boolean {
+        return getRole() == "admin"
+    }
+
 }
