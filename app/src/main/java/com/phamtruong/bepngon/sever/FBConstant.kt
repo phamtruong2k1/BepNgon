@@ -15,5 +15,7 @@ object FBConstant {
     const val ROOM_F = "room"
     const val MESSAGE = "message"
 
+    const val REPORT_F = "report"
+
     const val REQ_ONE_TAP = 1111
 }

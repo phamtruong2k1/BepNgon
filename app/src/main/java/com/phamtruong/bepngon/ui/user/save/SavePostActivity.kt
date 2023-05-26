@@ -18,6 +18,7 @@ import com.phamtruong.bepngon.sever.FBConstant
 import com.phamtruong.bepngon.sever.FirebaseDatabaseUtil
 import com.phamtruong.bepngon.ui.adapter.EventClickPostsAdapterListener
 import com.phamtruong.bepngon.ui.adapter.PostsAdapter
+import com.phamtruong.bepngon.util.AdminHelper
 import com.phamtruong.bepngon.util.DataUtil
 import com.phamtruong.bepngon.util.SharePreferenceUtils
 import com.phamtruong.bepngon.view.gone
@@ -95,6 +96,12 @@ class SavePostActivity : AppCompatActivity() , EventClickPostsAdapterListener {
             bottomSheetBinding.llReport.show()
         }
 
+        if (SharePreferenceUtils.isAdmin()) {
+            bottomSheetBinding.llDelete.show()
+            bottomSheetBinding.llReport.gone()
+            bottomSheetBinding.llSave.gone()
+        }
+
         val querySave: Query = FirebaseDatabase.getInstance().getReference(FBConstant.ROOT)
             .child(FBConstant.SAVE_F)
             .orderByChild("accountId").equalTo(SharePreferenceUtils.getAccountID())
@@ -123,9 +130,16 @@ class SavePostActivity : AppCompatActivity() , EventClickPostsAdapterListener {
             FirebaseDatabase.getInstance().getReference(FirebaseDatabaseUtil.ROOT)
                 .child(FBConstant.POST_F).child(post.postId).removeValue().addOnSuccessListener {
                     moreBottomSheet.dismiss()
-                    //adapter.removeItemAt(position)
-                    initData()
+                    adapter.notifyItemRemoved(position)
                 }
+        }
+
+        bottomSheetBinding.llReport.setOnClickListener {
+            moreBottomSheet.dismiss()
+            AdminHelper.showDialogReport(
+                this@SavePostActivity,
+                post.postId
+            )
         }
 
         bottomSheetBinding.llSave.setOnClickListener {

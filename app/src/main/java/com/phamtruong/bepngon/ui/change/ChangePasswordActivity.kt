@@ -2,9 +2,12 @@ package com.phamtruong.bepngon.ui.change
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.google.firebase.database.FirebaseDatabase
 import com.phamtruong.bepngon.R
 import com.phamtruong.bepngon.databinding.ActivityChangePasswordBinding
 import com.phamtruong.bepngon.databinding.ActivityProfileBinding
+import com.phamtruong.bepngon.model.AccountModel
+import com.phamtruong.bepngon.sever.FBConstant
 import com.phamtruong.bepngon.util.SharePreferenceUtils
 import com.phamtruong.bepngon.util.showToast
 
@@ -34,8 +37,20 @@ class ChangePasswordActivity : AppCompatActivity() {
                 showToast("Mật khẩu cũ không giống!")
             } else {
 
+                val account = AccountModel(
+                    SharePreferenceUtils.getAccountID(),
+                    SharePreferenceUtils.getUserName(),
+                    binding.edtConfirmNewPass.text.toString().trim(),
+                    SharePreferenceUtils.getRole(),
+                    false
+                )
 
-                showToast("Ok la!")
+                FirebaseDatabase.getInstance().getReference(FBConstant.ROOT).child(FBConstant.ACCOUNT)
+                    .child(SharePreferenceUtils.getAccountID()).setValue(account)
+
+                showToast("Đổi thành công!")
+
+                SharePreferenceUtils.setPassword(account.password)
                 onBackPressed()
             }
         }

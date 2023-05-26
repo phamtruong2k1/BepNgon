@@ -43,6 +43,7 @@ class SplashActivity : AppCompatActivity() {
                             && account.userName == SharePreferenceUtils.getUserName()
                         ) {
                             SharePreferenceUtils.setAccountID(account.account_id)
+                            SharePreferenceUtils.setRole(account.role)
                             if (account.role == "admin") {
                                 startAdminMain()
                             } else {

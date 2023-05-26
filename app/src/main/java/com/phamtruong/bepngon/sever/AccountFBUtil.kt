@@ -30,6 +30,7 @@ object AccountFBUtil {
                         SharePreferenceUtils.setAccountID(account.account_id)
                         SharePreferenceUtils.setUserName(account.userName)
                         SharePreferenceUtils.setPassword(account.password)
+                        SharePreferenceUtils.setRole(account.role)
                         if (account.role == "admin") {
                             adminSuccess()
                         } else {

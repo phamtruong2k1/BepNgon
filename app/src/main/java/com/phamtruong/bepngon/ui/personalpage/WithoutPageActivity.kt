@@ -115,7 +115,7 @@ class WithoutPageActivity : AppCompatActivity() , SwipeRefreshLayout.OnRefreshLi
                             for (postSnapshot in dataSnapshot.children) {
                                 val data = postSnapshot.getValue<FollowModel>()
                                 if (data?.account_follow_id == idUser) {
-                                    dataSnapshot.ref.removeValue()
+                                    postSnapshot.ref.removeValue()
                                     binding.llFollowed.gone()
                                     binding.llFollow.show()
                                     return

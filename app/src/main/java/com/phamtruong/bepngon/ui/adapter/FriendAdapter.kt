@@ -10,13 +10,16 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ktx.getValue
 import com.phamtruong.bepngon.R
 import com.phamtruong.bepngon.model.ProfileModel
+import com.phamtruong.bepngon.sever.FBConstant
 import com.squareup.picasso.Picasso
 
 class FriendAdapter(
     var context: Context,
-    private var listData: ArrayList<ProfileModel>,
+    private var listData: ArrayList<String>,
     val listener: EventClickFriendAdapterListener
 ) : RecyclerView.Adapter<FriendAdapter.ViewHolder>() {
 
@@ -36,22 +39,38 @@ class FriendAdapter(
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val friend = listData[position]
 
-        Picasso.get().load(friend.avt).into(viewHolder.imgAvatar)
 
-        viewHolder.txtName.text = friend.name
+        getDataProfile(friend, viewHolder.imgAvatar, viewHolder.txtName)
 
         viewHolder.imgMore.setOnClickListener {
             listener.clickMoreFriend(friend)
         }
 
         viewHolder.imgAvatar.setOnClickListener {
-            listener.clickAvatarFriend(friend.accountId)
+            listener.clickAvatarFriend(friend)
+        }
+    }
+
+    private fun getDataProfile(accountID: String, imgAvatar : ImageView, txtName : TextView) {
+        FirebaseDatabase.getInstance().getReference(FBConstant.ROOT).child(FBConstant.PROFILE).child(accountID).get().addOnCompleteListener{ task->
+            if (task.isSuccessful) {
+                val result = task.result
+                val post = result.getValue<ProfileModel>()
+                post?.let {
+                    Picasso.get().load(it.avt).into(imgAvatar)
+
+                    txtName.text = it.name
+                }
+            }
+
+        }.addOnFailureListener {
+
         }
     }
 
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setListData(arr : ArrayList<ProfileModel>) {
+    fun setListData(arr : ArrayList<String>) {
         listData.clear()
         listData.addAll(arr)
         notifyDataSetChanged()
@@ -62,6 +81,6 @@ class FriendAdapter(
 }
 
 interface EventClickFriendAdapterListener {
-    fun clickMoreFriend(friend : ProfileModel)
+    fun clickMoreFriend(accountID : String)
     fun clickAvatarFriend(accountID : String)
 }

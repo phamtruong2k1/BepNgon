@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.phamtruong.bepngon.ui.user.main.home.HomeFragment
-import com.phamtruong.bepngon.ui.user.main.search.SearchFragment
+import com.phamtruong.bepngon.ui.search.SearchFragment
 
 class TabAdminAdapter (private val myContext: Context, fm: FragmentManager) : FragmentPagerAdapter(fm) {
 

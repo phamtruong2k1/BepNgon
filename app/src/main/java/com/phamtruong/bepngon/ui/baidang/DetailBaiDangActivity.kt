@@ -126,26 +126,11 @@ class DetailBaiDangActivity : AppCompatActivity() {
                     }
 
                     adapterComment.setListData(listData)
-
-                    showDialog()
                 }
             }
 
             override fun onCancelled(databaseError: DatabaseError) {}
         })
-    }
-
-    private fun showDialog() {
-        val dialog = Dialog(this@DetailBaiDangActivity)
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        dialog.setContentView(R.layout.layout_dialog_report_post)
-        dialog.window?.setLayout(
-            ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT
-        )
-
-        dialog.show()
     }
 
     private fun getComment(post : PostModel) {

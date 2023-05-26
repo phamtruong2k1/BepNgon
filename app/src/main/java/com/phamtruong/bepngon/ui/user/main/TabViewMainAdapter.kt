@@ -8,7 +8,7 @@ import com.phamtruong.bepngon.ui.user.main.friend.FriendFragment
 import com.phamtruong.bepngon.ui.user.main.home.HomeFragment
 import com.phamtruong.bepngon.ui.user.main.menu.MenuFragment
 import com.phamtruong.bepngon.ui.user.main.noti.NotificationFragment
-import com.phamtruong.bepngon.ui.user.main.search.SearchFragment
+import com.phamtruong.bepngon.ui.search.SearchFragment
 
 class TabViewMainAdapter (private val myContext: Context, fm: FragmentManager) : FragmentPagerAdapter(fm) {
 

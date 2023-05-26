@@ -24,6 +24,7 @@ import com.phamtruong.bepngon.sever.ProfileFBListener
 import com.phamtruong.bepngon.sever.ProfileFBUtil
 import com.phamtruong.bepngon.ui.adapter.EventClickPostsAdapterListener
 import com.phamtruong.bepngon.ui.adapter.PostsAdapter
+import com.phamtruong.bepngon.util.AdminHelper
 import com.phamtruong.bepngon.util.DataHelper
 import com.phamtruong.bepngon.util.DataUtil
 import com.phamtruong.bepngon.util.SharePreferenceUtils
@@ -136,6 +137,12 @@ class PersonalPageActivity : AppCompatActivity() , SwipeRefreshLayout.OnRefreshL
             bottomSheetBinding.llReport.show()
         }
 
+        if (SharePreferenceUtils.isAdmin()) {
+            bottomSheetBinding.llDelete.show()
+            bottomSheetBinding.llReport.gone()
+            bottomSheetBinding.llSave.gone()
+        }
+
         val querySave: Query = FirebaseDatabase.getInstance().getReference(FBConstant.ROOT)
             .child(FBConstant.SAVE_F)
             .orderByChild("accountId").equalTo(SharePreferenceUtils.getAccountID())
@@ -166,6 +173,14 @@ class PersonalPageActivity : AppCompatActivity() , SwipeRefreshLayout.OnRefreshL
                     moreBottomSheet.dismiss()
                     adapter.notifyItemRemoved(position)
                 }
+        }
+
+        bottomSheetBinding.llReport.setOnClickListener {
+            moreBottomSheet.dismiss()
+            AdminHelper.showDialogReport(
+                this@PersonalPageActivity,
+                post.postId
+            )
         }
 
         bottomSheetBinding.llSave.setOnClickListener {

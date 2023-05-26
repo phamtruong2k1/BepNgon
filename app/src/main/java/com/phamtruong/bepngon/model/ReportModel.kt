@@ -6,22 +6,22 @@ import com.google.gson.Gson
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class NotificationModel(
-    val notification_id: String,
+data class ReportModel(
+    val report_id: String,
     val account_id: String,
     val post_Id: String,
     val img: String,
     val name: String,
     val content: String,
     val create_time: String
-) : Parcelable, Comparable<NotificationModel> {
+) : Parcelable, Comparable<ReportModel> {
 
     constructor() : this("", "", "","","","","") {}
 
     @Exclude
     fun toMap(): Map<String, Any?> {
         return mapOf(
-            "notification_id" to notification_id,
+            "report_id" to report_id,
             "account_id" to account_id,
             "post_Id" to post_Id,
             "img" to img,
@@ -32,8 +32,8 @@ data class NotificationModel(
     }
 
     companion object {
-        fun toNotificationModel(jsonData: String): NotificationModel? {
-            return Gson().fromJson(jsonData, NotificationModel::class.java)
+        fun toReportModel(jsonData: String): ReportModel? {
+            return Gson().fromJson(jsonData, ReportModel::class.java)
         }
     }
 
@@ -41,7 +41,7 @@ data class NotificationModel(
         return Gson().toJson(this)
     }
 
-    override fun compareTo(other: NotificationModel): Int {
+    override fun compareTo(other: ReportModel): Int {
         return if (create_time > other.create_time) -1
         else 1
     }

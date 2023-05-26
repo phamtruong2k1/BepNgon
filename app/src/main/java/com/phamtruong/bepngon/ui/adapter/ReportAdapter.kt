@@ -1,4 +1,4 @@
-package com.phamtruong.bepngon.ui.user.main.noti
+package com.phamtruong.bepngon.ui.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -16,6 +16,7 @@ import com.phamtruong.bepngon.R
 import com.phamtruong.bepngon.model.NotificationModel
 import com.phamtruong.bepngon.model.PostModel
 import com.phamtruong.bepngon.model.ProfileModel
+import com.phamtruong.bepngon.model.ReportModel
 import com.phamtruong.bepngon.sever.FBConstant
 import com.phamtruong.bepngon.ui.baidang.DetailBaiDangActivity
 import com.phamtruong.bepngon.util.DataUtil
@@ -23,10 +24,10 @@ import com.phamtruong.bepngon.util.showToast
 import com.phamtruong.bepngon.view.openActivity
 import com.squareup.picasso.Picasso
 
-class NotificationAdapter(
+class ReportAdapter(
     var context: Context,
-    private var listData: ArrayList<NotificationModel>
-) : RecyclerView.Adapter<NotificationAdapter.ViewHolder>() {
+    private var listData: ArrayList<ReportModel>
+) : RecyclerView.Adapter<ReportAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view){
         var imgAvatar: ImageView = view.findViewById(R.id.imgAvatar)
@@ -38,7 +39,7 @@ class NotificationAdapter(
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(viewGroup.context)
-            .inflate(R.layout.item_notification, viewGroup, false)
+            .inflate(R.layout.item_report, viewGroup, false)
 
         return ViewHolder(view)
     }
@@ -49,7 +50,7 @@ class NotificationAdapter(
         Picasso.get().load(noti.img).into(viewHolder.imgAvatar)
 
         viewHolder.txtName.text = noti.name
-        viewHolder.txtContent.text = noti.content
+        viewHolder.txtContent.text = "Đã báo cáo 1 bài viết: "+noti.content
         viewHolder.txtTime.text = DataUtil.showTime(noti.create_time)
 
         viewHolder.llView.setOnClickListener {
@@ -83,7 +84,7 @@ class NotificationAdapter(
 
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setListData(arr : ArrayList<NotificationModel>) {
+    fun setListData(arr : ArrayList<ReportModel>) {
         listData.clear()
         listData.addAll(arr)
         notifyDataSetChanged()

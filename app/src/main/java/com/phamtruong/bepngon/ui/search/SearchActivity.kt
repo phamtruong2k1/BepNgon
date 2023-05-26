@@ -1,4 +1,4 @@
-package com.phamtruong.bepngon.ui.user.main.search
+package com.phamtruong.bepngon.ui.search
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -19,6 +19,7 @@ import com.phamtruong.bepngon.sever.FBConstant
 import com.phamtruong.bepngon.sever.FirebaseDatabaseUtil
 import com.phamtruong.bepngon.ui.adapter.EventClickPostsAdapterListener
 import com.phamtruong.bepngon.ui.adapter.PostsAdapter
+import com.phamtruong.bepngon.util.AdminHelper
 import com.phamtruong.bepngon.util.DataUtil
 import com.phamtruong.bepngon.util.SharePreferenceUtils
 import com.phamtruong.bepngon.view.gone
@@ -96,6 +97,12 @@ class SearchActivity : AppCompatActivity() , EventClickPostsAdapterListener {
             bottomSheetBinding.llReport.show()
         }
 
+        if (SharePreferenceUtils.isAdmin()) {
+            bottomSheetBinding.llDelete.show()
+            bottomSheetBinding.llReport.gone()
+            bottomSheetBinding.llSave.gone()
+        }
+
         val querySave: Query = FirebaseDatabase.getInstance().getReference(FBConstant.ROOT)
             .child(FBConstant.SAVE_F)
             .orderByChild("accountId").equalTo(SharePreferenceUtils.getAccountID())
@@ -126,6 +133,14 @@ class SearchActivity : AppCompatActivity() , EventClickPostsAdapterListener {
                     moreBottomSheet.dismiss()
                     adapter.notifyItemRemoved(position)
                 }
+        }
+
+        bottomSheetBinding.llReport.setOnClickListener {
+            moreBottomSheet.dismiss()
+            AdminHelper.showDialogReport(
+                this@SearchActivity,
+                post.postId
+            )
         }
 
         bottomSheetBinding.llSave.setOnClickListener {

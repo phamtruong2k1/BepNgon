@@ -1,4 +1,4 @@
-package com.phamtruong.bepngon.ui.user.main.search
+package com.phamtruong.bepngon.ui.search
 
 import android.os.Bundle
 import android.view.LayoutInflater

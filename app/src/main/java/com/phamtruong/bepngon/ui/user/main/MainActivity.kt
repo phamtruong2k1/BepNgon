@@ -12,7 +12,7 @@ import com.phamtruong.bepngon.R
 import com.phamtruong.bepngon.base.BaseActivity
 import com.phamtruong.bepngon.databinding.ActivityMainBinding
 import com.phamtruong.bepngon.model.ProfileModel
-import com.phamtruong.bepngon.ui.user.main.search.SearchActivity
+import com.phamtruong.bepngon.ui.search.SearchActivity
 import com.phamtruong.bepngon.util.DataHelper
 import com.phamtruong.bepngon.sever.FBConstant
 import com.phamtruong.bepngon.util.SharePreferenceUtils
