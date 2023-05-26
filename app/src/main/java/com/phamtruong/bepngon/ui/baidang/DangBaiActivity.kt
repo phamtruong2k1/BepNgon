@@ -182,6 +182,12 @@ class DangBaiActivity : AppCompatActivity() {
         FirebaseDatabaseUtil.mDatabase.child(FBConstant.POST_F).child(
             post.postId
         ).setValue(post).addOnCompleteListener{
+            val data = Intent()
+
+            data.putExtra("post", post.toJson())
+
+            setResult(RESULT_OK, data)
+
             finish()
             showToast("Đăng thành công.")
         }.addOnFailureListener {

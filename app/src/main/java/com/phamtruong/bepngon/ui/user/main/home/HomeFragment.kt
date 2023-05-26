@@ -1,9 +1,15 @@
 package com.phamtruong.bepngon.ui.user.main.home
 
+import android.R.attr
+import android.app.Activity.RESULT_OK
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -18,15 +24,15 @@ import com.phamtruong.bepngon.databinding.LayoutBottomSheetPostBinding
 import com.phamtruong.bepngon.model.PostModel
 import com.phamtruong.bepngon.model.ReactionModel
 import com.phamtruong.bepngon.model.SaveModel
-import com.phamtruong.bepngon.ui.adapter.EventClickPostsAdapterListener
-import com.phamtruong.bepngon.ui.baidang.DangBaiActivity
-import com.phamtruong.bepngon.ui.personalpage.PersonalPageActivity
-import com.phamtruong.bepngon.util.DataHelper
 import com.phamtruong.bepngon.sever.FBConstant
 import com.phamtruong.bepngon.sever.FirebaseDatabaseUtil
+import com.phamtruong.bepngon.ui.adapter.EventClickPostsAdapterListener
 import com.phamtruong.bepngon.ui.adapter.PostsAdapter
+import com.phamtruong.bepngon.ui.baidang.DangBaiActivity
 import com.phamtruong.bepngon.ui.chat.RoomChatActivity
+import com.phamtruong.bepngon.ui.personalpage.PersonalPageActivity
 import com.phamtruong.bepngon.util.AdminHelper
+import com.phamtruong.bepngon.util.DataHelper
 import com.phamtruong.bepngon.util.DataUtil
 import com.phamtruong.bepngon.util.SharePreferenceUtils
 import com.phamtruong.bepngon.util.showToast
@@ -36,7 +42,7 @@ import com.phamtruong.bepngon.view.setOnSafeClick
 import com.phamtruong.bepngon.view.show
 import com.squareup.picasso.Picasso
 import java.util.*
-import kotlin.collections.ArrayList
+
 
 class HomeFragment : Fragment() , EventClickPostsAdapterListener, SwipeRefreshLayout.OnRefreshListener  {
 
@@ -66,6 +72,9 @@ class HomeFragment : Fragment() , EventClickPostsAdapterListener, SwipeRefreshLa
         DataHelper.profileUser.observe(viewLifecycleOwner){
             Picasso.get().load(it.avt).into(binding.imgAvt)
         }
+        if (SharePreferenceUtils.isAdmin()) {
+            binding.llUser.gone()
+        }
         binding.toolBar.imgChat.show()
     }
 
@@ -74,9 +83,23 @@ class HomeFragment : Fragment() , EventClickPostsAdapterListener, SwipeRefreshLa
         getPostData()
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 289) {
+            if (resultCode == RESULT_OK) {
+                val post = PostModel.toPostModel(data?.getStringExtra("post").toString())
+                post?.let {
+                    adapter.addFirstData(it)
+                }
+            }
+        }
+    }
+
+    var isLoading = false
+
     private fun initListener() {
         binding.txtDangBai.setOnSafeClick {
-            requireContext().openActivity(DangBaiActivity::class.java)
+            startActivityForResult(Intent(requireContext(), DangBaiActivity::class.java), 289)
         }
 
         binding.imgAvt.setOnClickListener {
@@ -181,7 +204,6 @@ class HomeFragment : Fragment() , EventClickPostsAdapterListener, SwipeRefreshLa
                                 return
                             }
                         }
-
                     }
                 }
                 override fun onCancelled(databaseError: DatabaseError) {}

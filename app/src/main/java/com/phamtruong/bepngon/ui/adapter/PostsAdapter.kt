@@ -242,9 +242,22 @@ class PostsAdapter(
         notifyDataSetChanged()
     }
 
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun addFirstData(arr: PostModel) {
+        listData.add(0, arr)
+        notifyDataSetChanged()
+    }
+
     @SuppressLint("NotifyDataSetChanged")
     fun addData(arr: PostModel) {
         listData.add(arr)
+        notifyDataSetChanged()
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun addListData(arr: List<PostModel>) {
+        listData.addAll(arr)
         notifyDataSetChanged()
     }
 

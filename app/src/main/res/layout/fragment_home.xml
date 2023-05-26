@@ -20,6 +20,7 @@
         android:layout_weight="1">
 
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedSV"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -29,6 +30,8 @@
                 android:orientation="vertical">
 
                 <LinearLayout
+                    android:id="@+id/llUser"
+                    android:visibility="visible"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_40sdp"
                     android:background="@color/white">
@@ -69,7 +72,7 @@
                     android:layout_weight="1"
                     app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                     android:clipToPadding="false"
-                    android:paddingBottom="30dp"
+                    android:paddingBottom="10dp"
                     android:scrollbars="none"
                     tools:listitem="@layout/item_bai_viet"
                     app:spanCount="1"/>
