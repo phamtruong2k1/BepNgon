@@ -99,8 +99,10 @@ class HomeFragment : Fragment() , EventClickPostsAdapterListener, SwipeRefreshLa
 
         if (boolean) {
             bottomSheetBinding.llDelete.show()
+            bottomSheetBinding.llReport.gone()
         } else {
             bottomSheetBinding.llDelete.gone()
+            bottomSheetBinding.llReport.show()
         }
 
         val querySave: Query = FirebaseDatabase.getInstance().getReference(FBConstant.ROOT)

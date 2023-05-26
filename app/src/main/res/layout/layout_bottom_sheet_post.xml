@@ -86,7 +86,31 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/_12sdp"
                 android:fontFamily="@font/inter_400"
-                android:text="Bỏ lưu bài viết"/>
+                android:text="Xóa bài viết"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llReport"
+            android:layout_marginBottom="@dimen/_8sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_25sdp"
+                android:src="@drawable/ic_baseline_report_24"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp"
+                android:fontFamily="@font/inter_400"
+                android:text="Báo cáo bài viết"/>
 
         </LinearLayout>
 
