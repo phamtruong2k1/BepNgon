@@ -14,6 +14,7 @@ import com.phamtruong.bepngon.ui.admin.MainAdminActivity
 import com.phamtruong.bepngon.ui.user.main.MainActivity
 import com.phamtruong.bepngon.ui.sign.SignActivity
 import com.phamtruong.bepngon.util.SharePreferenceUtils
+import com.phamtruong.bepngon.util.showToast
 
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
@@ -44,7 +45,9 @@ class SplashActivity : AppCompatActivity() {
                         ) {
                             SharePreferenceUtils.setAccountID(account.account_id)
                             SharePreferenceUtils.setRole(account.role)
-                            if (account.role == "admin") {
+                            if (account.status) {
+                                startLogin()
+                            } else if (account.role == "admin") {
                                 startAdminMain()
                             } else {
                                 startMain()

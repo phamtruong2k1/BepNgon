@@ -1,5 +1,8 @@
 package com.phamtruong.bepngon.ui.sign.login
 
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,6 +14,7 @@ import com.phamtruong.bepngon.databinding.FragmentLoginBinding
 import com.phamtruong.bepngon.ui.user.main.MainActivity
 import com.phamtruong.bepngon.sever.AccountFBUtil
 import com.phamtruong.bepngon.ui.admin.MainAdminActivity
+import com.phamtruong.bepngon.ui.user.main.menu.MenuFragment
 import com.phamtruong.bepngon.util.showToast
 import com.phamtruong.bepngon.view.openActivity
 import com.phamtruong.bepngon.view.setOnSafeClick
@@ -52,6 +56,19 @@ class LoginFragment : Fragment() {
         binding.txtSignUp.setOnSafeClick {
             findNavController().navigate(R.id.action_loginFragment_to_logUpFragment)
         }
+
+        binding.txtHelp.setOnClickListener {
+            support(requireContext())
+        }
+
+    }
+
+    private fun support(context: Context) {
+        val mailIntent = Intent(Intent.ACTION_VIEW)
+        val data =
+            Uri.parse("mailto:?SUBJECT=${MenuFragment.FeedBack}&body=&to=${MenuFragment.EMAIL}")
+        mailIntent.data = data
+        context.startActivity(Intent.createChooser(mailIntent, "Gửi mail..."))
     }
 
 }

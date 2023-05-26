@@ -106,4 +106,37 @@
 
     </LinearLayout>
 
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_400"
+            android:text="Bạn cần trợ giúp?"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12sdp" />
+
+        <TextView
+            android:id="@+id/txtHelp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_600"
+            android:paddingVertical="@dimen/_5sdp"
+            android:paddingStart="@dimen/_5sdp"
+            android:paddingLeft="@dimen/_5sdp"
+            android:text="Trợ giúp"
+            android:textColor="@color/color_blue"
+            android:textSize="@dimen/_12sdp" />
+
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

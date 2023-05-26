@@ -31,7 +31,9 @@ object AccountFBUtil {
                         SharePreferenceUtils.setUserName(account.userName)
                         SharePreferenceUtils.setPassword(account.password)
                         SharePreferenceUtils.setRole(account.role)
-                        if (account.role == "admin") {
+                        if (account.status) {
+                            context.showToast("Tài khoản của bạn đang bị khóa!")
+                        } else if (account.role == "admin") {
                             adminSuccess()
                         } else {
                             actionSuccess()
