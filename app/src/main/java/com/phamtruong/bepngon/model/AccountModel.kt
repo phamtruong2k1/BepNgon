@@ -11,7 +11,7 @@ data class AccountModel(
     val userName: String,
     val password: String,
     val role : String = "user",
-    val status: Boolean
+    var status: Boolean
 ) : Parcelable {
 
     constructor() : this("", "", "","user",false) {}

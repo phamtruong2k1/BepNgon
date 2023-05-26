@@ -45,6 +45,7 @@ class FriendFragment : Fragment(), EventClickFriendAdapterListener, SwipeRefresh
         binding = FragmentFriendBinding.inflate(inflater, container, false)
 
         binding.toolBar.txtTitle.text = "Bạn bè"
+
         binding.toolBar.imgSearch.show()
 
         adapter = FriendAdapter(requireContext(), ArrayList<String>(), this)
@@ -54,7 +55,10 @@ class FriendFragment : Fragment(), EventClickFriendAdapterListener, SwipeRefresh
         binding.swipLayout.setOnRefreshListener(this)
 
         binding.toolBar.imgSearch.setOnClickListener {
-            requireContext().openActivity(SearchUserActivity::class.java)
+            requireContext().openActivity(
+                SearchUserActivity::class.java,
+                bundleOf("action" to "friend")
+            )
         }
 
         return binding.root

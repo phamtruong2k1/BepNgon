@@ -44,7 +44,7 @@ object DataUtil {
     fun checkSearch(text1 : String, text2 : String) : Boolean {
         val data1 = deAccent(text1.trim())
         val data2 = deAccent(text2.trim())
-        return data1.contains(data2)
+        return data1.lowercase().contains(data2.lowercase())
     }
 
     fun deAccent(str: String): String {

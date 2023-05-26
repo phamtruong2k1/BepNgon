@@ -3,16 +3,19 @@ package com.phamtruong.bepngon.ui.adapter
 import android.annotation.SuppressLint
 import android.content.Context
 import android.net.Uri
+import android.os.Build
 import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.getValue
 import com.phamtruong.bepngon.R
+import com.phamtruong.bepngon.model.AccountModel
 import com.phamtruong.bepngon.model.ProfileModel
 import com.phamtruong.bepngon.sever.FBConstant
 import com.squareup.picasso.Picasso
@@ -20,13 +23,14 @@ import com.squareup.picasso.Picasso
 class FriendAdapter(
     var context: Context,
     private var listData: ArrayList<String>,
-    val listener: EventClickFriendAdapterListener
+    private val listener: EventClickFriendAdapterListener
 ) : RecyclerView.Adapter<FriendAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view){
         var imgAvatar: ImageView = view.findViewById(R.id.imgAvatar)
         var imgMore: ImageView = view.findViewById(R.id.imgMore)
         var txtName: TextView = view.findViewById(R.id.txtName)
+        var txtStatus: TextView = view.findViewById(R.id.txtStatus)
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
@@ -36,11 +40,12 @@ class FriendAdapter(
         return ViewHolder(view)
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val friend = listData[position]
 
 
-        getDataProfile(friend, viewHolder.imgAvatar, viewHolder.txtName)
+        getDataProfile(friend, viewHolder.imgAvatar, viewHolder.txtName, viewHolder.txtStatus)
 
         viewHolder.imgMore.setOnClickListener {
             listener.clickMoreFriend(friend)
@@ -51,7 +56,8 @@ class FriendAdapter(
         }
     }
 
-    private fun getDataProfile(accountID: String, imgAvatar : ImageView, txtName : TextView) {
+    @RequiresApi(Build.VERSION_CODES.M)
+    private fun getDataProfile(accountID: String, imgAvatar : ImageView, txtName : TextView, txtStatus : TextView) {
         FirebaseDatabase.getInstance().getReference(FBConstant.ROOT).child(FBConstant.PROFILE).child(accountID).get().addOnCompleteListener{ task->
             if (task.isSuccessful) {
                 val result = task.result
@@ -60,6 +66,25 @@ class FriendAdapter(
                     Picasso.get().load(it.avt).into(imgAvatar)
 
                     txtName.text = it.name
+                }
+            }
+
+        }.addOnFailureListener {
+
+        }
+
+        FirebaseDatabase.getInstance().getReference(FBConstant.ROOT).child(FBConstant.ACCOUNT).child(accountID).get().addOnCompleteListener{ task->
+            if (task.isSuccessful) {
+                val result = task.result
+                val post = result.getValue<AccountModel>()
+                post?.let {
+                    if (it.status) {
+                        txtStatus.text = "Đã khóa"
+                        txtStatus.setTextColor(context.getColor(R.color.khoa_khoa))
+                    } else {
+                        txtStatus.text = "Hoạt động"
+                        txtStatus.setTextColor(context.getColor(R.color.hoatdong_khoa))
+                    }
                 }
             }
 

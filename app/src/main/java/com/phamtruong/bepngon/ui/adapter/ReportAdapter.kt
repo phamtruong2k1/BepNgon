@@ -54,11 +54,11 @@ class ReportAdapter(
         viewHolder.txtTime.text = DataUtil.showTime(noti.create_time)
 
         viewHolder.llView.setOnClickListener {
-            clickNoti(noti.post_Id)
+            clickNoti(noti.post_Id, noti)
         }
     }
 
-    private fun clickNoti(postId : String) {
+    private fun clickNoti(postId : String, reportModel: ReportModel) {
 
         FirebaseDatabase.getInstance().getReference(FBConstant.ROOT).child(FBConstant.POST_F).child(postId).get().addOnCompleteListener{ task->
             if (task.isSuccessful) {
@@ -67,7 +67,8 @@ class ReportAdapter(
                 if (post != null) {
                     context.openActivity(
                         DetailBaiDangActivity::class.java,
-                        bundleOf("post_data" to post.toJson())
+                        bundleOf("post_data" to post.toJson(),
+                            "report_data" to reportModel.toJson())
                     )
                 } else {
                     context.showToast("Bài viết không còn!")

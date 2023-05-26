@@ -17,7 +17,6 @@ import com.phamtruong.bepngon.sever.FirebaseDatabaseUtil
 
 object AdminHelper {
 
-
     fun showDialogReport(context: Context, postId : String) {
         val dialog = Dialog(context)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -48,6 +47,7 @@ object AdminHelper {
                 FirebaseDatabase.getInstance().getReference(FirebaseDatabaseUtil.ROOT)
                     .child(FBConstant.REPORT_F).child(report.report_id)
                     .setValue(report)
+                context.showToast("Gửi báo cáo thành công!")
                 dialog.dismiss()
             }
         }

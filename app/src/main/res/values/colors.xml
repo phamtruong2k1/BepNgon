@@ -27,4 +27,10 @@
     <color name="bmi_1">#0D61F1</color>
     <color name="bmi_2">#0FC302</color>
     <color name="bmi_3">#FA0101</color>
+
+
+    <color name="hoatdong_khoa">#373434</color>
+    <color name="khoa_khoa">#E62B2B</color>
+
+
 </resources>

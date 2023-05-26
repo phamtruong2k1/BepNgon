@@ -11,6 +11,7 @@ import com.google.firebase.database.ktx.getValue
 import com.phamtruong.bepngon.databinding.ActivityRoomChatBinding
 import com.phamtruong.bepngon.model.chat.RoomChatModel
 import com.phamtruong.bepngon.sever.FBConstant
+import com.phamtruong.bepngon.ui.SearchUserActivity
 import com.phamtruong.bepngon.util.SharePreferenceUtils
 import com.phamtruong.bepngon.view.openActivity
 
@@ -42,6 +43,13 @@ class RoomChatActivity : AppCompatActivity() {
 
         binding.back.setOnClickListener {
             onBackPressed()
+        }
+
+        binding.imgSearchChat.setOnClickListener {
+            openActivity(
+                SearchUserActivity::class.java,
+                bundleOf("action" to "chat")
+            )
         }
 
         binding.msgShow.adapter = adapter

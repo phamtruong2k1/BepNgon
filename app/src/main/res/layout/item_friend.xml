@@ -36,11 +36,11 @@
             android:fontFamily="@font/inter_600"/>
 
         <TextView
+            android:id="@+id/txtStatus"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.8"
-            android:text="17h:33p"
-            android:visibility="invisible"
+            android:visibility="visible"
             android:gravity="center_vertical"
             android:textSize="@dimen/_10sdp"
             android:textColor="#373434"

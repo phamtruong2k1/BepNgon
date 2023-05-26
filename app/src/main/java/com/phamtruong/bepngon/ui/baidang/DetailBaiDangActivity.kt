@@ -9,6 +9,7 @@ import android.view.Window
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -17,17 +18,21 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.getValue
 import com.phamtruong.bepngon.R
 import com.phamtruong.bepngon.databinding.ActivityDetailBaiDangBinding
+import com.phamtruong.bepngon.databinding.LayoutBottomSheetPostBinding
 import com.phamtruong.bepngon.model.CommentModel
 import com.phamtruong.bepngon.model.NotificationModel
 import com.phamtruong.bepngon.model.PostModel
 import com.phamtruong.bepngon.model.ProfileModel
 import com.phamtruong.bepngon.model.ReactionModel
+import com.phamtruong.bepngon.model.ReportModel
+import com.phamtruong.bepngon.model.SaveModel
 import com.phamtruong.bepngon.sever.FBConstant
 import com.phamtruong.bepngon.sever.FirebaseDatabaseUtil
 import com.phamtruong.bepngon.ui.adapter.CommentAdapter
 import com.phamtruong.bepngon.ui.adapter.EventClickCommentListener
 import com.phamtruong.bepngon.ui.personalpage.PersonalPageActivity
 import com.phamtruong.bepngon.ui.personalpage.WithoutPageActivity
+import com.phamtruong.bepngon.util.AdminHelper
 import com.phamtruong.bepngon.util.DataHelper
 import com.phamtruong.bepngon.util.DataUtil
 import com.phamtruong.bepngon.util.SharePreferenceUtils
@@ -42,6 +47,7 @@ class DetailBaiDangActivity : AppCompatActivity() {
     lateinit var binding : ActivityDetailBaiDangBinding
 
     private var postModel : PostModel? = null
+    private var reportModel : ReportModel? = null
 
     lateinit var adapterComment : CommentAdapter
 
@@ -51,6 +57,7 @@ class DetailBaiDangActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         postModel = PostModel.toPostModel(intent.getStringExtra("post_data").toString())
+        reportModel = ReportModel.toReportModel(intent.getStringExtra("report_data").toString())
 
         adapterComment = CommentAdapter(this@DetailBaiDangActivity, ArrayList(), object : EventClickCommentListener{
             override fun click(commentModel: CommentModel) {
@@ -64,9 +71,27 @@ class DetailBaiDangActivity : AppCompatActivity() {
             listerComment(it)
         }
 
+        reportModel?.let { noti ->
+            binding.lineReport.show()
+            binding.llReport.show()
+            Picasso.get().load(noti.img).into(binding.imgAvatarReport)
+
+            binding.txtNameReport.text = noti.name
+            binding.txtContentReport.text = "Đã báo cáo bài viết: "+noti.content
+            binding.txtTimeReport.text = DataUtil.showTime(noti.create_time)
+        }
+
         binding.rcyComment.adapter = adapterComment
 
+
         initListener()
+
+
+        if (SharePreferenceUtils.isAdmin()) {
+            binding.llComment.gone()
+        } else {
+            binding.llComment.show()
+        }
     }
 
     private fun initListener() {
@@ -84,6 +109,112 @@ class DetailBaiDangActivity : AppCompatActivity() {
         binding.imgSendComment.setOnClickListener {
             postComment()
         }
+
+        binding.imgMore.setOnClickListener {
+            postModel?.let { post ->
+                showBottomSheet(post.accountId == SharePreferenceUtils.getAccountID(), post)
+            }
+        }
+
+    }
+
+    private fun showBottomSheet(boolean: Boolean, post : PostModel) {
+        val bottomSheetBinding = LayoutBottomSheetPostBinding.inflate(layoutInflater)
+        val moreBottomSheet =
+            BottomSheetDialog(this)
+        moreBottomSheet.setContentView(bottomSheetBinding.root)
+
+        if (boolean) {
+            bottomSheetBinding.llDelete.show()
+            bottomSheetBinding.llReport.gone()
+        } else {
+            bottomSheetBinding.llDelete.gone()
+            bottomSheetBinding.llReport.show()
+        }
+
+        if (SharePreferenceUtils.isAdmin()) {
+            bottomSheetBinding.llDelete.show()
+            bottomSheetBinding.llReport.gone()
+            bottomSheetBinding.llSave.gone()
+        }
+
+        val querySave: Query = FirebaseDatabase.getInstance().getReference(FBConstant.ROOT)
+            .child(FBConstant.SAVE_F)
+            .orderByChild("accountId").equalTo(SharePreferenceUtils.getAccountID())
+        querySave.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    for (appleSnapshot in dataSnapshot.children) {
+                        val reactionModel = appleSnapshot.getValue<ReactionModel>()
+                        if (reactionModel?.postId == post.postId) {
+                            bottomSheetBinding.llSave.gone()
+                            bottomSheetBinding.llSaved.show()
+                            return
+                        }
+                    }
+                    bottomSheetBinding.llSave.show()
+                    bottomSheetBinding.llSaved.gone()
+                }
+            }
+            override fun onCancelled(databaseError: DatabaseError) {
+                bottomSheetBinding.llSave.show()
+                bottomSheetBinding.llSaved.gone()
+            }
+        })
+
+        bottomSheetBinding.llDelete.setOnClickListener {
+            FirebaseDatabase.getInstance().getReference(FirebaseDatabaseUtil.ROOT)
+                .child(FBConstant.POST_F).child(post.postId).removeValue().addOnSuccessListener {
+                    moreBottomSheet.dismiss()
+                    onBackPressed()
+                }
+        }
+
+        bottomSheetBinding.llReport.setOnClickListener {
+            moreBottomSheet.dismiss()
+            AdminHelper.showDialogReport(
+                this,
+                post.postId
+            )
+        }
+
+        bottomSheetBinding.llSave.setOnClickListener {
+            val saveModel = SaveModel(
+                DataUtil.ConvertToMD5(DataUtil.getTime()),
+                SharePreferenceUtils.getAccountID(),
+                post.postId,
+                DataUtil.getTime()
+            )
+            FirebaseDatabase.getInstance().getReference(FirebaseDatabaseUtil.ROOT)
+                .child(FBConstant.SAVE_F)
+                .child(saveModel.saveId).setValue(saveModel).addOnSuccessListener {
+                    moreBottomSheet.dismiss()
+                }
+        }
+
+        bottomSheetBinding.llSaved.setOnClickListener {
+            val query2: Query = FirebaseDatabase.getInstance().getReference(FBConstant.ROOT)
+                .child(FBConstant.SAVE_F)
+                .orderByChild("accountId").equalTo(SharePreferenceUtils.getAccountID())
+            query2.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        for (appleSnapshot in dataSnapshot.children) {
+                            val reactionModel = appleSnapshot.getValue<ReactionModel>()
+                            if (reactionModel?.postId == post.postId) {
+                                appleSnapshot.ref.removeValue()
+                                moreBottomSheet.dismiss()
+                                return
+                            }
+                        }
+
+                    }
+                }
+                override fun onCancelled(databaseError: DatabaseError) {}
+            })
+        }
+
+        moreBottomSheet.show()
     }
 
     private fun getPost(postData : PostModel) {
