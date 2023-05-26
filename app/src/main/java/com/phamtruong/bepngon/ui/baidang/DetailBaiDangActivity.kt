@@ -83,6 +83,12 @@ class DetailBaiDangActivity : AppCompatActivity() {
 
         binding.rcyComment.adapter = adapterComment
 
+        binding.image01.setOnClickListener {
+            openActivity(ShowAnhActivity::class.java,
+
+            bundleOf("link" to postModel?.let {it.img} ))
+        }
+
 
         initListener()
 
