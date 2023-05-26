@@ -54,6 +54,7 @@
         android:divider="@android:color/transparent"
         android:paddingBottom="30dp"
         android:scrollbars="none"
+        android:background="@color/gray4"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

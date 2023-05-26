@@ -9,11 +9,20 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.getValue
 import com.phamtruong.bepngon.R
+import com.phamtruong.bepngon.model.CommentModel
 import com.phamtruong.bepngon.model.ProfileModel
+import com.phamtruong.bepngon.model.chat.MessageModel
 import com.phamtruong.bepngon.model.chat.RoomChatModel
+import com.phamtruong.bepngon.sever.FBConstant
 import com.phamtruong.bepngon.sever.ProfileFBListener
 import com.phamtruong.bepngon.sever.ProfileFBUtil
+import com.phamtruong.bepngon.util.DataUtil
 import com.phamtruong.bepngon.util.SharePreferenceUtils
 import com.phamtruong.bepngon.view.setOnSafeClick
 import com.squareup.picasso.Picasso
@@ -50,7 +59,7 @@ class RoomChatAdapter(
 
         showInforRoom(viewHolder.imAvatar, viewHolder.txtName, accountId)
 
-        showLastMess(viewHolder.txtContent, message.room_id)
+        showLastMess(viewHolder.txtContent, viewHolder.txtTime, message.room_id)
 
         viewHolder.llView.setOnSafeClick {
             listener.click(message)
@@ -68,8 +77,27 @@ class RoomChatAdapter(
         })
     }
 
-    private fun showLastMess(textView: TextView, roomId : String) {
+    private fun showLastMess(txtContent: TextView, txtTime: TextView, roomId : String) {
+        FirebaseDatabase.getInstance().getReference(FBConstant.CHAT_F).child(FBConstant.MESSAGE)
+            .child(roomId).limitToLast(1).addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        for (issue in dataSnapshot.children) {
+                            issue.getValue<MessageModel>()?.let {
+                                if (it.accountId == SharePreferenceUtils.getAccountID()) {
+                                    txtContent.text = "Bạn: " + it.content
+                                } else {
+                                    txtContent.text = it.content
+                                }
 
+                                txtTime.text = DataUtil.showTime(it.crete_time)
+                            }
+                        }
+                    }
+                }
+
+                override fun onCancelled(databaseError: DatabaseError) {}
+            })
     }
 
 

@@ -18,6 +18,7 @@ import com.phamtruong.bepngon.sever.FBConstant
 import com.phamtruong.bepngon.sever.ProfileFBListener
 import com.phamtruong.bepngon.sever.ProfileFBUtil
 import com.phamtruong.bepngon.ui.personalpage.WithoutPageActivity
+import com.phamtruong.bepngon.util.Constant
 import com.phamtruong.bepngon.util.DataUtil
 import com.phamtruong.bepngon.view.openActivity
 import com.squareup.picasso.Picasso
@@ -102,10 +103,12 @@ class ChatActivity : AppCompatActivity() {
         }
 
         binding.imAvatar.setOnClickListener {
-            openActivity(
-                WithoutPageActivity::class.java,
-                bundleOf("idUser" to idYour)
-            )
+            if (idYour != Constant.ID_ADMIN) {
+                openActivity(
+                    WithoutPageActivity::class.java,
+                    bundleOf("idUser" to idYour)
+                )
+            }
         }
     }
 
