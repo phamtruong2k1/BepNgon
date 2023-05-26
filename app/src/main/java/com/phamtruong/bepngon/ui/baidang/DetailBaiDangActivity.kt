@@ -36,6 +36,7 @@ import com.phamtruong.bepngon.util.AdminHelper
 import com.phamtruong.bepngon.util.DataHelper
 import com.phamtruong.bepngon.util.DataUtil
 import com.phamtruong.bepngon.util.SharePreferenceUtils
+import com.phamtruong.bepngon.util.showToast
 import com.phamtruong.bepngon.view.gone
 import com.phamtruong.bepngon.view.openActivity
 import com.phamtruong.bepngon.view.show
@@ -370,17 +371,22 @@ class DetailBaiDangActivity : AppCompatActivity() {
 
     private fun postComment() {
         if (binding.edtComment.text.toString().trim().isNotEmpty()) {
-            insertComment(
-                CommentModel(
-                    DataUtil.getTime(),
-                    SharePreferenceUtils.getAccountID(),
-                    postModel!!.postId,
-                    binding.edtComment.text.toString(),
-                    DataUtil.getTime()
+            if (DataUtil.checkSpam(binding.edtComment.text.toString().trim())) {
+                showToast("Nội dụng bình luận vi phạm chính sách!")
+            } else {
+                insertComment(
+                    CommentModel(
+                        DataUtil.getTime(),
+                        SharePreferenceUtils.getAccountID(),
+                        postModel!!.postId,
+                        binding.edtComment.text.toString(),
+                        DataUtil.getTime()
+                    )
                 )
-            )
-            binding.edtComment.setText("")
-            addNotification(postModel!!, "Đã bình luận một bài viết của bạn.")
+                binding.edtComment.setText("")
+                addNotification(postModel!!, "Đã bình luận một bài viết của bạn.")
+            }
+
         }
     }
 

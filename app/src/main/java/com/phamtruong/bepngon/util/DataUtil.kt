@@ -52,4 +52,22 @@ object DataUtil {
         val pattern: Pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+")
         return pattern.matcher(nfdNormalizedString).replaceAll("")
     }
+
+    fun checkSpam(string: String): Boolean {
+        val data  = string.lowercase()
+        val list = listOf<String>(
+            "vl",
+            "vcl",
+            "dm",
+            "dmm",
+            "cmm",
+            "clgt",
+            "ngu"
+        )
+        list.forEach {
+            if (data.contains(it))
+                return true
+        }
+        return false
+    }
 }
